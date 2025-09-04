@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriCare | Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.36),
+                0 4px 8px rgba(0, 0, 0, 0.1),
+                0 4px 8px rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            transition: all 0.5s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 40px 0 rgba(0, 0, 0, 0.4),
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                0 6px 12px rgba(255, 255, 255, 0.08);
+        }
+        
+        .container {
+            display: flex;
+            min-height: 550px;
+        }
+        
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #2ecc71 0%, #3498db 100%);
+            color: white;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .left-panel h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+        
+        .left-panel p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            z-index: 2;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            z-index: 2;
+        }
+        
+        .feature i {
+            font-size: 20px;
+            margin-right: 15px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .circles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .circles li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            animation: animate 25s linear infinite;
+            bottom: -150px;
+            border-radius: 50%;
+        }
+        
+        .circles li:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+        
+        .circles li:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+        
+        .circles li:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+        
+        .circles li:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+        
+        .circles li:nth-child(5) {
+            left: 65%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+        }
+        
+        .circles li:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+        
+        .circles li:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+        
+        .circles li:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+        
+        .circles li:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+        
+        .circles li:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+        
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        
+        .right-panel {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .form-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .tab.active {
+            opacity: 1;
+            color: #2ecc71;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #2ecc71, #3498db);
+        }
+        
+        .form-content {
+            display: none;
+        }
+        
+        .form-content.active {
+            display: block;
+        }
+        
+        .input-field {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: #f1f5f9;
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .input-field:focus {
+            border-color: rgba(46, 204, 113, 0.6);
+            box-shadow: 0 0 0 2px rgba(46, 204, 113, 0.1);
+            outline: none;
+        }
+        
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .input-with-icon {
+            position: relative;
+        }
+        
+        .input-with-icon i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+        
+        .input-with-icon input {
+            padding-left: 45px;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2ecc71 0%, #3498db 100%);
+        }
+        
+        .btn-glow {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-container input {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .forgot-link {
+            color: #2ecc71;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .separator {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: #94a3b8;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .separator span {
+            padding: 0 10px;
+            font-size: 14px;
+        }
+        
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .social-btn {
+            padding: 10px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #e2e8f0;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group.error .error-message {
+            display: block;
+        }
+        
+        .form-group.error input {
+            border-color: #e74c3c;
+        }
+        
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            font-size: 13px;
+        }
+        
+        .terms input {
+            margin-top: 3px;
+            margin-right: 10px;
+        }
+        
+        .terms label {
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+        
+        .terms a {
+            color: #2ecc71;
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .left-panel {
+                padding: 30px;
+                text-align: center;
+            }
+            
+            .left-panel h2 {
+                font-size: 28px;
+            }
+            
+            .feature {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .right-panel {
+                padding: 20px;
+            }
+            
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+            
+            .remember-forgot {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-card">
+        <div class="container">
+            <div class="left-panel">
+                <h2>Welcome to AgriCare!</h2>
+                <p>Sign in to access your crop disease detection dashboard and protect your plants with our advanced AI technology.</p>
+                
+                <div class="feature">
+                    <i class="fas fa-seedling"></i>
+                    <div>Identify diseases in over 25 different crops</div>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-bolt"></i>
+                    <div>Fast and accurate disease detection</div>
+                </div>
+                
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>Secure and encrypted data protection</div>
+                </div>
+                
+                <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+            
+            <div class="right-panel">
+                <div class="form-tabs">
+                    <div class="tab active" data-tab="login">Login</div>
+                    <div class="tab" data-tab="signup">Create Account</div>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="form-content active" id="login-form">
+                    <form id="loginForm">
+                        <div class="input-group">
+                            <div class="input-with-icon">
+                                <input type="email" id="login-email" class="input-field" placeholder="Email address" required>
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-with-icon">
+                                <input type="password" id="login-password" class="input-field" placeholder="Password" required>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="error-message">Password must be at least 8 characters</div>
+                        </div>
+                        
+                        <div class="remember-forgot">
+                            <div class="checkbox-container">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-link">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="btn-glow gradient-bg">Sign In</button>
+                    </form>
+                    
+                    <div class="separator">
+                        <span>Or continue with</span>
+                    </div>
+                    
+                    <div class="social-login">
+                        <button class="social-btn">
+                            <i class="fab fa-google"></i>
+                            <span>Google</span>
+                        </button>
+                        <button class="social-btn">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="form-content" id="signup-form">
+                    <form id="signupForm">
+                        <div class="input-group">
+                            <input type="text" id="fullname" class="input-field" placeholder="Full Name" required>
+                            <div class="error-message">Please enter your full name</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <input type="email" id="signup-email" class="input-field" placeholder="Email Address" required>
+                            <div class="error-message">Please enter a valid email address</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-with-icon">
+                                <input type="password" id="signup-password" class="input-field" placeholder="Create a password" required>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="error-message">Password must be at least 8 characters</div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-with-icon">
+                                <input type="password" id="confirm-password" class="input-field" placeholder="Confirm password" required>
+                                <i class="fas fa-lock"></i>
+                            </div>
+                            <div class="error-message">Passwords do not match</div>
+                        </div>
+                        
+                        <div class="terms">
+                            <input type="checkbox" id="terms">
+                            <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn-glow gradient-bg">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const tabs = document.querySelectorAll('.tab');
+            const formContents = document.querySelectorAll('.form-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show active form
+                    formContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === `${tabId}-form`) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Form validation for login
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const email = document.getElementById('login-email');
+                const password = document.getElementById('login-password');
+                
+                // Validate email
+                if (!validateEmail(email.value)) {
+                    email.parentElement.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    email.parentElement.parentElement.classList.remove('error');
+                }
+                
+                // Validate password
+                if (password.value.length < 8) {
+                    password.parentElement.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    password.parentElement.parentElement.classList.remove('error');
+                }
+                
+                if (isValid) {
+                    // Simulate login process
+                    const loginBtn = loginForm.querySelector('button[type="submit"]');
+                    loginBtn.innerHTML = 'Signing In...';
+                    loginBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        alert('Login successful! Redirecting to dashboard...');
+                        loginBtn.innerHTML = 'Sign In';
+                        loginBtn.disabled = false;
+                        loginForm.reset();
+                    }, 2000);
+                }
+            });
+            
+            // Form validation for signup
+            const signupForm = document.getElementById('signupForm');
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                let isValid = true;
+                const fullname = document.getElementById('fullname');
+                const email = document.getElementById('signup-email');
+                const password = document.getElementById('signup-password');
+                const confirmPassword = document.getElementById('confirm-password');
+                const terms = document.getElementById('terms');
+                
+                // Validate full name
+                if (!fullname.value.trim()) {
+                    fullname.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    fullname.parentElement.classList.remove('error');
+                }
+                
+                // Validate email
+                if (!validateEmail(email.value)) {
+                    email.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    email.parentElement.classList.remove('error');
+                }
+                
+                // Validate password
+                if (password.value.length < 8) {
+                    password.parentElement.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    password.parentElement.parentElement.classList.remove('error');
+                }
+                
+                // Validate confirm password
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.parentElement.parentElement.classList.add('error');
+                    isValid = false;
+                } else {
+                    confirmPassword.parentElement.parentElement.classList.remove('error');
+                }
+                
+                // Validate terms
+                if (!terms.checked) {
+                    alert('Please agree to the Terms of Service and Privacy Policy');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // Simulate signup process
+                    const signupBtn = signupForm.querySelector('button[type="submit"]');
+                    signupBtn.innerHTML = 'Creating Account...';
+                    signupBtn.disabled = true;
+                    
+                    // Simulate API call
+                    setTimeout(() => {
+                        alert('Account created successfully! You can now login.');
+                        signupBtn.innerHTML = 'Create Account';
+                        signupBtn.disabled = false;
+                        signupForm.reset();
+                        
+                        // Switch to login tab
+                        document.querySelector('[data-tab="login"]').click();
+                    }, 2000);
+                }
+            });
+            
+            // Email validation function
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+        });
+    </script>
+</body>
+</html>

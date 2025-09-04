@@ -1,0 +1,568 @@
+{% extends "base.html" %} {% block title %}Pricing | AI-Powered Plant Health
+Diagnostics{% endblock %} {% block styles %}
+<style>
+  :root {
+    --primary-green: #2e7d32;
+    --light-green: #7cb342;
+    --accent-green: #c5e1a5;
+    --dark-green: #1b5e20;
+    --light-bg: #f8fbf8;
+  }
+
+  body {
+    font-family: "Open Sans", sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-family: "Merriweather", serif;
+    color: #373d38;
+  }
+
+  .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url("https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 10rem 0 10rem 0;
+    margin-bottom: 3rem;
+  }
+
+  .filter-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+  }
+
+  .btn-outline-primary {
+    color: var(--primary-green);
+    border-color: var(--primary-green);
+  }
+
+  .btn-outline-primary:hover {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+  }
+
+  .featured-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .featured-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .whitepaper-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    height: 100%;
+    border-top: 4px solid var(--primary-green);
+  }
+
+  .whitepaper-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    background-color: var(--accent-green);
+    color: var(--dark-green);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    margin: 0.2rem;
+  }
+
+  .download-btn {
+    background-color: var(--light-green);
+    color: white;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+
+  .download-btn:hover {
+    background-color: var(--dark-green);
+    color: white;
+  }
+
+  .category-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .category-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .category-list li:last-child {
+    border-bottom: none;
+  }
+
+  .category-list a {
+    text-decoration: none;
+    color: #555;
+    transition: color 0.3s;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .category-list a:hover {
+    color: var(--primary-green);
+  }
+
+  .category-list span {
+    background-color: var(--accent-green);
+    color: var(--dark-green);
+    border-radius: 12px;
+    padding: 0.1rem 0.6rem;
+    font-size: 0.8rem;
+  }
+
+  .most-downloaded-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .most-downloaded-item:last-child {
+    border-bottom: none;
+  }
+
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .abstract {
+    color: #666;
+    font-size: 0.95rem;
+  }
+
+  .author {
+    color: #777;
+    font-style: italic;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold" style="color: rgb(216, 234, 216)">
+      Whitepapers – AGriCare
+    </h1>
+    <p class="lead fs-4">In-depth Agricultural Research and Insights</p>
+  </div>
+</section>
+
+<div class="container mb-5">
+  <!-- Search and Filter Section -->
+  <section class="filter-section">
+    <div class="row g-3">
+      <div class="col-md-8">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            placeholder="Search whitepapers..."
+          />
+          <button class="btn btn-primary" type="button">
+            <i class="fas fa-search me-1"></i> Search
+          </button>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <button
+          class="btn btn-outline-primary w-100"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#advancedFilters"
+        >
+          <i class="fas fa-filter me-1"></i> Filters
+        </button>
+      </div>
+    </div>
+
+    <div class="collapse mt-3" id="advancedFilters">
+      <div class="row g-3">
+        <div class="col-md-3">
+          <select class="form-select" id="topicFilter">
+            <option selected>Topic</option>
+            <option>AI in Agriculture</option>
+            <option>Sustainable Farming</option>
+            <option>Irrigation & Water Management</option>
+            <option>Pest & Disease Control</option>
+            <option>Crop Genetics</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="yearFilter">
+            <option selected>Year</option>
+            <option>2023</option>
+            <option>2022</option>
+            <option>2021</option>
+            <option>2020</option>
+            <option>2019</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="cropFilter">
+            <option selected>Crop Type</option>
+            <option>Grains</option>
+            <option>Fruits</option>
+            <option>Vegetables</option>
+            <option>Legumes</option>
+            <option>Cash Crops</option>
+          </select>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select" id="techFilter">
+            <option selected>Technology</option>
+            <option>IoT Sensors</option>
+            <option>Drone Technology</option>
+            <option>Machine Learning</option>
+            <option>Robotics</option>
+            <option>Biotechnology</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Whitepapers -->
+  <h2 class="mb-4 border-bottom pb-2">Featured Whitepapers</h2>
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    <!-- Featured Paper 1 -->
+    <div class="col">
+      <div class="card h-100 featured-card">
+        <img
+          src="../static/images/drone.jpg"
+          class="card-img-top"
+          alt="AI in Agriculture"
+        />
+        <div class="card-body">
+          <h5 class="card-title">AI-Driven Crop Management Systems</h5>
+          <p class="card-text abstract">
+            Exploring how artificial intelligence is revolutionizing crop
+            monitoring, yield prediction, and resource allocation in modern
+            agriculture.
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="author">Dr. Emily Chen</span>
+            <button class="btn download-btn">
+              <i class="fas fa-download me-1"></i> Download
+            </button>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Published: March 15, 2023</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Paper 2 -->
+    <div class="col">
+      <div class="card h-100 featured-card">
+        <img
+          src="../static/images/sustainable.jpg"
+          class="card-img-top"
+          alt="Sustainable Farming"
+        />
+        <div class="card-body">
+          <h5 class="card-title">
+            Sustainable Farming Practices for the 21st Century
+          </h5>
+          <p class="card-text abstract">
+            A comprehensive analysis of regenerative agricultural practices that
+            increase yield while improving soil health and biodiversity.
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="author">Prof. James Wilson</span>
+            <button class="btn download-btn">
+              <i class="fas fa-download me-1"></i> Download
+            </button>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Published: January 28, 2023</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Featured Paper 3 -->
+    <div class="col">
+      <div class="card h-100 featured-card">
+        <img
+          src="../static/images/water.jpg"
+          class="card-img-top"
+          alt="Water Management"
+        />
+        <div class="card-body">
+          <h5 class="card-title">
+            Smart Irrigation Systems for Water Conservation
+          </h5>
+          <p class="card-text abstract">
+            Examining IoT-based precision irrigation technologies that reduce
+            water usage by up to 40% while maintaining crop yield.
+          </p>
+          <div class="d-flex justify-content-between align-items-center">
+            <span class="author">Dr. Maria Rodriguez</span>
+            <button class="btn download-btn">
+              <i class="fas fa-download me-1"></i> Download
+            </button>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Published: February 10, 2023</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <!-- Main Content Area -->
+    <div class="col-lg-8">
+      <h2 class="mb-4 border-bottom pb-2">All Whitepapers</h2>
+
+      <!-- Whitepaper Listing -->
+      <div class="row row-cols-1 g-4" id="whitepapersList">
+        <!-- Paper 1 -->
+        <div class="col">
+          <div class="whitepaper-card p-4">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h4>AI-Powered Pest Detection in Crop Management</h4>
+              <span class="badge bg-primary">2023</span>
+            </div>
+            <p class="author mb-2">
+              Authors: Dr. Michael Zhang, Prof. Lisa Anderson
+            </p>
+            <p class="abstract mb-3">
+              This paper presents a novel AI framework that uses drone imagery
+              and machine learning to detect pest infestations early with 92%
+              accuracy, enabling targeted interventions that reduce pesticide
+              use by up to 60%.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="tag">AI in Agriculture</span>
+                <span class="tag">Pest Control</span>
+              </div>
+              <button class="btn download-btn">
+                <i class="fas fa-download me-1"></i> PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 2 -->
+        <div class="col">
+          <div class="whitepaper-card p-4">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h4>Water Resource Optimization in Arid Regions</h4>
+              <span class="badge bg-primary">2023</span>
+            </div>
+            <p class="author mb-2">
+              Authors: Dr. Sarah Johnson, Dr. Ahmed Hassan
+            </p>
+            <p class="abstract mb-3">
+              A comprehensive study on IoT-based water management systems that
+              combine soil moisture sensors, weather data, and predictive
+              algorithms to optimize irrigation in water-scarce agricultural
+              regions.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="tag">Irrigation</span>
+                <span class="tag">Water Management</span>
+              </div>
+              <button class="btn download-btn">
+                <i class="fas fa-download me-1"></i> PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 3 -->
+        <div class="col">
+          <div class="whitepaper-card p-4">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h4>
+                Climate-Resilient Crop Varieties for Sustainable Agriculture
+              </h4>
+              <span class="badge bg-primary">2022</span>
+            </div>
+            <p class="author mb-2">
+              Authors: Prof. Robert Kim, Dr. Anita Patel
+            </p>
+            <p class="abstract mb-3">
+              This research examines the development and implementation of
+              genetically modified crop varieties that demonstrate increased
+              resistance to drought, flooding, and extreme temperature
+              fluctuations.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="tag">Sustainable Farming</span>
+                <span class="tag">Crop Genetics</span>
+              </div>
+              <button class="btn download-btn">
+                <i class="fas fa-download me-1"></i> PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 4 -->
+        <div class="col">
+          <div class="whitepaper-card p-4">
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h4>
+                Blockchain Technology for Agricultural Supply Chain Transparency
+              </h4>
+              <span class="badge bg-primary">2022</span>
+            </div>
+            <p class="author mb-2">
+              Authors: Dr. David Brown, Prof. Jennifer Lee
+            </p>
+            <p class="abstract mb-3">
+              Exploring how blockchain technology can be implemented to create
+              transparent, traceable supply chains that benefit farmers,
+              distributors, and consumers while reducing food fraud.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <span class="tag">Technology</span>
+                <span class="tag">Supply Chain</span>
+              </div>
+              <button class="btn download-btn">
+                <i class="fas fa-download me-1"></i> PDF
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Previous</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <!-- Categories -->
+      <div class="sidebar-card">
+        <h4 class="mb-4"><i class="fas fa-folder-open me-2"></i> Categories</h4>
+        <ul class="category-list">
+          <li>
+            <a href="#">AI in Agriculture <span>12</span></a>
+          </li>
+          <li>
+            <a href="#">Sustainable Farming <span>8</span></a>
+          </li>
+          <li>
+            <a href="#">Irrigation & Water Management <span>9</span></a>
+          </li>
+          <li>
+            <a href="#">Pest & Disease Control <span>7</span></a>
+          </li>
+          <li>
+            <a href="#">Crop Genetics <span>5</span></a>
+          </li>
+          <li>
+            <a href="#">Precision Agriculture <span>10</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tags -->
+      <div class="sidebar-card">
+        <h4 class="mb-4"><i class="fas fa-tags me-2"></i> Popular Tags</h4>
+        <div class="d-flex flex-wrap">
+          <span class="tag">Machine Learning</span>
+          <span class="tag">IoT Sensors</span>
+          <span class="tag">Drones</span>
+          <span class="tag">Robotics</span>
+          <span class="tag">Water Conservation</span>
+          <span class="tag">Soil Health</span>
+          <span class="tag">Crop Rotation</span>
+          <span class="tag">Organic Farming</span>
+          <span class="tag">Supply Chain</span>
+          <span class="tag">Climate Resilience</span>
+        </div>
+      </div>
+
+      <!-- Most Downloaded -->
+      <div class="sidebar-card">
+        <h4 class="mb-4">
+          <i class="fas fa-chart-line me-2"></i> Most Downloaded
+        </h4>
+        <div class="most-downloaded-item">
+          <h6>AI-Driven Crop Management Systems</h6>
+          <p class="mb-1 abstract">1,248 downloads</p>
+        </div>
+        <div class="most-downloaded-item">
+          <h6>Smart Irrigation Systems</h6>
+          <p class="mb-1 abstract">987 downloads</p>
+        </div>
+        <div class="most-downloaded-item">
+          <h6>Blockchain for Supply Chains</h6>
+          <p class="mb-1 abstract">856 downloads</p>
+        </div>
+        <div class="most-downloaded-item">
+          <h6>Climate-Resilient Crops</h6>
+          <p class="mb-1 abstract">732 downloads</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+{% endblock %}

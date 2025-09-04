@@ -1,0 +1,905 @@
+{% extends "base.html" %} {% block title %}Pricing | AI-Powered Plant Health
+Diagnostics{% endblock %} {% block styles %}
+<style>
+          /* Global Styles */
+          * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          body {
+              background-color: #f8f9fa;
+              color: #333;
+              line-height: 1.6;
+              padding-top: 50px;
+          }
+
+          a {
+              text-decoration: none;
+              color: #2e7d32;
+              transition: color 0.3s;
+          }
+
+          a:hover {
+              color: #1b5e20;
+          }
+
+          .no-margin-page {
+              width: 90%;
+              max-width: 1200px;
+              margin: 0 auto;
+          }
+
+          .btn {
+              display: inline-block;
+              background-color: #2e7d32;
+              color: white;
+              padding: 10px 20px;
+              border-radius: 4px;
+              font-weight: 600;
+              transition: background-color 0.3s;
+          }
+
+          .btn:hover {
+              background-color: #1b5e20;
+              color: white;
+          }
+
+          .btn-outline {
+              background-color: transparent;
+              border: 2px solid #2e7d32;
+              color: #2e7d32;
+          }
+
+          .btn-outline:hover {
+              background-color: #2e7d32;
+              color: white;
+          }
+
+          .section-title {
+              text-align: center;
+              margin-bottom: 40px;
+              color: #2e7d32;
+          }
+
+          .section-title h2 {
+              font-size: 2.2rem;
+              margin-bottom: 15px;
+          }
+
+          .section-title p {
+              font-size: 1.1rem;
+              color: #666;
+              max-width: 700px;
+              margin: 0 auto;
+          }
+
+          /* Header Styles */
+          header {
+              background-color: white;
+              box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+              position: sticky;
+              top: 0;
+              z-index: 100;
+          }
+
+          .header-no-margin-page {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 15px 0;
+          }
+
+          .logo {
+              display: flex;
+              align-items: center;
+          }
+
+          .logo img {
+              height: 40px;
+              margin-right: 10px;
+          }
+
+          .logo h1 {
+              font-size: 24px;
+              color: #2e7d32;
+          }
+
+          nav ul {
+              display: flex;
+              list-style: none;
+          }
+
+          nav ul li {
+              margin-left: 25px;
+          }
+
+          nav ul li a {
+              font-weight: 500;
+          }
+
+          nav ul li a.active {
+              color: #1b5e20;
+              font-weight: 600;
+          }
+
+          /* Hero Section */
+          .hero {
+              background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+              background-size: cover;
+              background-position: center;
+              color: white;
+              padding: 100px 0;
+              text-align: center;
+              margin-bottom: 40px;
+          }
+
+          .hero h2 {
+              font-size: 2.8rem;
+              margin-bottom: 20px;
+          }
+
+          .hero p {
+              font-size: 1.2rem;
+              max-width: 700px;
+              margin: 0 auto 30px;
+          }
+
+          /* Search and Filter */
+          .search-filter {
+              background: white;
+              padding: 25px;
+              border-radius: 8px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              margin-bottom: 40px;
+          }
+
+          .search-no-margin-page {
+              display: flex;
+              gap: 15px;
+              margin-bottom: 20px;
+          }
+
+          .search-no-margin-page input {
+              flex: 1;
+              padding: 12px 15px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              font-size: 1rem;
+          }
+
+          .search-no-margin-page button {
+              background: #2e7d32;
+              color: white;
+              border: none;
+              padding: 0 20px;
+              border-radius: 4px;
+              cursor: pointer;
+              font-weight: 600;
+          }
+
+          .filter-no-margin-page {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 15px;
+          }
+
+          .filter-group {
+              flex: 1;
+              min-width: 200px;
+          }
+
+          .filter-group select {
+              width: 100%;
+              padding: 12px 15px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+              font-size: 1rem;
+              background: white;
+          }
+
+          /* Featured Case Studies */
+          .featured-studies {
+              margin-bottom: 50px;
+          }
+
+          .featured-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 30px;
+          }
+
+          .featured-card {
+              background: white;
+              border-radius: 8px;
+              overflow: hidden;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              transition: transform 0.3s;
+          }
+
+          .featured-card:hover {
+              transform: translateY(-5px);
+          }
+
+          .featured-img {
+              height: 200px;
+              overflow: hidden;
+          }
+
+          .featured-img img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.5s;
+          }
+
+          .featured-card:hover .featured-img img {
+              transform: scale(1.05);
+          }
+
+          .featured-content {
+              padding: 20px;
+          }
+
+          .featured-content h3 {
+              margin-bottom: 10px;
+              color: #2e7d32;
+          }
+
+          .featured-meta {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              font-size: 0.9rem;
+              color: #666;
+          }
+
+          .featured-meta span {
+              margin-right: 15px;
+          }
+
+          .featured-meta i {
+              margin-right: 5px;
+          }
+
+          /* All Case Studies */
+          .all-studies {
+              margin-bottom: 50px;
+          }
+
+          .studies-grid {
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+              gap: 25px;
+              margin-bottom: 40px;
+          }
+
+          .study-card {
+              background: white;
+              border-radius: 8px;
+              overflow: hidden;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              transition: transform 0.3s;
+          }
+
+          .study-card:hover {
+              transform: translateY(-5px);
+          }
+
+          .study-img {
+              height: 180px;
+              overflow: hidden;
+          }
+
+          .study-img img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              transition: transform 0.5s;
+          }
+
+          .study-card:hover .study-img img {
+              transform: scale(1.05);
+          }
+
+          .study-content {
+              padding: 20px;
+          }
+
+          .study-content h3 {
+              margin-bottom: 10px;
+              color: #2e7d32;
+          }
+
+          .study-meta {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              font-size: 0.9rem;
+              color: #666;
+          }
+
+          .study-meta span {
+              margin-right: 15px;
+          }
+
+          .study-meta i {
+              margin-right: 5px;
+          }
+
+          /* Pagination */
+          .pagination {
+              display: flex;
+              justify-content: center;
+              gap: 10px;
+          }
+
+          .pagination a {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 40px;
+              height: 40px;
+              border-radius: 4px;
+              background: white;
+              color: #2e7d32;
+              font-weight: 600;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+
+          .pagination a.active {
+              background: #2e7d32;
+              color: white;
+          }
+
+          .pagination a:hover:not(.active) {
+              background: #e8f5e9;
+          }
+
+          /* Sidebar */
+          .sidebar {
+              background: white;
+              border-radius: 8px;
+              padding: 25px;
+              box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+              margin-bottom: 40px;
+          }
+
+          .sidebar h3 {
+              color: #2e7d32;
+              margin-bottom: 20px;
+              padding-bottom: 10px;
+              border-bottom: 2px solid #e0e0e0;
+          }
+
+          .sidebar-section {
+              margin-bottom: 30px;
+          }
+
+          .categories-list {
+              list-style: none;
+          }
+
+          .categories-list li {
+              margin-bottom: 10px;
+              padding-bottom: 10px;
+              border-bottom: 1px solid #eee;
+          }
+
+          .categories-list li:last-child {
+              border-bottom: none;
+          }
+
+          .recent-study {
+              display: flex;
+              margin-bottom: 15px;
+          }
+
+          .recent-study-img {
+              width: 80px;
+              height: 60px;
+              border-radius: 4px;
+              overflow: hidden;
+              margin-right: 15px;
+          }
+
+          .recent-study-img img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+          }
+
+          .recent-study-content h4 {
+              font-size: 0.95rem;
+              margin-bottom: 5px;
+          }
+
+          .recent-study-content span {
+              font-size: 0.8rem;
+              color: #666;
+          }
+
+          .tags {
+              display: flex;
+              flex-wrap: wrap;
+              gap: 10px;
+          }
+
+          .tag {
+              background: #e8f5e9;
+              padding: 5px 12px;
+              border-radius: 20px;
+              font-size: 0.9rem;
+              color: #2e7d32;
+          }
+
+          /* Newsletter */
+          .newsletter {
+              background: linear-gradient(to right, #2e7d32, #4caf50);
+              color: white;
+              padding: 40px 0;
+              text-align: center;
+              margin-bottom: 40px;
+          }
+
+          .newsletter h2 {
+              margin-bottom: 15px;
+          }
+
+          .newsletter p {
+              max-width: 600px;
+              margin: 0 auto 20px;
+          }
+
+          .newsletter-form {
+              display: flex;
+              max-width: 500px;
+              margin: 0 auto;
+          }
+
+          .newsletter-form input {
+              flex: 1;
+              padding: 12px 15px;
+              border: none;
+              border-radius: 4px 0 0 4px;
+              font-size: 1rem;
+          }
+
+          .newsletter-form button {
+              background: #1b5e20;
+              color: white;
+              border: none;
+              padding: 0 20px;
+              border-radius: 0 4px 4px 0;
+              cursor: pointer;
+              font-weight: 600;
+          }
+
+
+
+          /* Layout */
+          .main-no-margin-page {
+              display: grid;
+              grid-template-columns: 1fr 300px;
+              gap: 30px;
+              margin-bottom: 40px;
+          }
+
+          /* Responsive Design */
+          @media (max-width: 900px) {
+              .main-no-margin-page {
+                  grid-template-columns: 1fr;
+              }
+
+              .header-no-margin-page {
+                  flex-direction: column;
+                  text-align: center;
+              }
+
+              nav ul {
+                  margin-top: 15px;
+                  justify-content: center;
+              }
+
+              nav ul li {
+                  margin: 0 10px;
+              }
+          }
+
+          @media (max-width: 600px) {
+              .hero h2 {
+                  font-size: 2rem;
+              }
+
+              .search-no-margin-page {
+                  flex-direction: column;
+              }
+
+              .newsletter-form {
+                  flex-direction: column;
+              }
+
+              .newsletter-form input {
+                  border-radius: 4px;
+                  margin-bottom: 10px;
+              }
+
+              .newsletter-form button {
+                  border-radius: 4px;
+                  padding: 12px;
+              }
+
+              .no-margin-page .no-margin-page {
+                  margin-left: 0 !important;
+                  margin-right: 0 !important;
+                  padding-left: 0 !important;
+                  padding-right: 0 !important;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<main class="container">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="no-margin-page">
+      <h2>Case Studies – AGriCare</h2>
+      <p>
+        Real-world examples of how our agricultural solutions are helping
+        farmers increase yields, reduce costs, and implement sustainable
+        practices.
+      </p>
+      <a href="#featured" class="btn">Explore Case Studies</a>
+    </div>
+  </section>
+
+  <!-- Search and Filter -->
+  <section class="no-margin-page">
+    <div class="search-filter">
+      <div class="search-no-margin-page">
+        <input type="text" placeholder="Search case studies..." />
+        <button type="submit"><i class="fas fa-search"></i> Search</button>
+      </div>
+      <div class="filter-no-margin-page">
+        <div class="filter-group">
+          <select>
+            <option value="">All Crops</option>
+            <option value="wheat">Wheat</option>
+            <option value="corn">Corn</option>
+            <option value="rice">Rice</option>
+            <option value="soybean">Soybean</option>
+            <option value="vegetables">Vegetables</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select>
+            <option value="">All Regions</option>
+            <option value="north">North America</option>
+            <option value="south">South America</option>
+            <option value="europe">Europe</option>
+            <option value="asia">Asia</option>
+            <option value="africa">Africa</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <select>
+            <option value="">All Techniques</option>
+            <option value="irrigation">Smart Irrigation</option>
+            <option value="pest">Pest Management</option>
+            <option value="soil">Soil Health</option>
+            <option value="precision">Precision Farming</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Case Studies -->
+  <section id="featured" class="no-margin-page featured-studies">
+    <div class="section-title">
+      <h2>Featured Case Studies</h2>
+      <p>
+        Success stories that demonstrate the impact of our agricultural
+        solutions
+      </p>
+    </div>
+
+    <div class="featured-grid">
+      <div class="featured-card">
+        <div class="featured-img">
+          <img
+            src="https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Precision Farming"
+          />
+        </div>
+        <div class="featured-content">
+          <h3>Precision Farming in Midwest Corn Fields</h3>
+          <div class="featured-meta">
+            <span><i class="far fa-calendar"></i> June 15, 2023</span>
+            <span><i class="fas fa-tag"></i> Corn, Precision Farming</span>
+          </div>
+          <p>
+            How AGriCare's precision farming technology helped a 5,000-acre farm
+            in Iowa increase yield by 22% while reducing water usage by 35%.
+          </p>
+          <a href="#" class="btn btn-outline">Read Case Study</a>
+        </div>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-img">
+          <img
+            src="https://images.unsplash.com/photo-1595245376869-189b4a57a2bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Organic Pest Control"
+          />
+        </div>
+        <div class="featured-content">
+          <h3>Organic Pest Management in California Vineyards</h3>
+          <div class="featured-meta">
+            <span><i class="far fa-calendar"></i> May 28, 2023</span>
+            <span><i class="fas fa-tag"></i> Grapes, Organic Farming</span>
+          </div>
+          <p>
+            Implementation of AGriCare's biological pest control solutions
+            resulted in a 40% reduction in pesticide use while maintaining crop
+            quality.
+          </p>
+          <a href="#" class="btn btn-outline">Read Case Study</a>
+        </div>
+      </div>
+
+      <div class="featured-card">
+        <div class="featured-img">
+          <img
+            src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+            alt="Soil Health"
+          />
+        </div>
+        <div class="featured-content">
+          <h3>Soil Regeneration in Australian Wheat Farms</h3>
+          <div class="featured-meta">
+            <span><i class="far fa-calendar"></i> May 12, 2023</span>
+            <span><i class="fas fa-tag"></i> Wheat, Soil Health</span>
+          </div>
+          <p>
+            How our soil health program helped restore degraded farmland,
+            increasing organic matter by 2.1% over three growing seasons.
+          </p>
+          <a href="#" class="btn btn-outline">Read Case Study</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content with Sidebar -->
+  <div class="no-margin-page main-no-margin-page">
+    <!-- All Case Studies -->
+    <section class="all-studies">
+      <div class="section-title">
+        <h2>All Case Studies</h2>
+        <p>Browse our complete collection of agricultural success stories</p>
+      </div>
+
+      <div class="studies-grid">
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1622288432457-36c83d23faf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Water Management"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Smart Water Management in Arid Regions</h3>
+            <div class="study-meta">
+              <span
+                ><i class="fas fa-tag"></i> Irrigation, Water Conservation</span
+              >
+            </div>
+            <p>
+              How our smart irrigation systems helped farmers in drought-prone
+              areas reduce water usage by 45%.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1590172205845-f4c7b1a993c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Crop Rotation"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Optimized Crop Rotation for Soil Health</h3>
+            <div class="study-meta">
+              <span><i class="fas fa-tag"></i> Crop Rotation, Soil Health</span>
+            </div>
+            <p>
+              Implementing scientific crop rotation patterns increased yields by
+              18% while reducing fertilizer needs.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Drone Technology"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Drone-Based Crop Monitoring in Brazil</h3>
+            <div class="study-meta">
+              <span><i class="fas fa-tag"></i> Drones, Precision Farming</span>
+            </div>
+            <p>
+              Using drone technology to monitor large-scale soybean farms,
+              reducing scouting time by 70%.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1551351467-e0c49e66c0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Greenhouse"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Year-Round Vegetable Production in Controlled Environments</h3>
+            <div class="study-meta">
+              <span><i class="fas fa-tag"></i> Greenhouse, Vegetables</span>
+            </div>
+            <p>
+              How our climate-controlled greenhouse solutions enabled year-round
+              tomato production in cold climates.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1594122230683c234e7c552f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Rice Farming"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Sustainable Rice Intensification in Southeast Asia</h3>
+            <div class="study-meta">
+              <span><i class="fas fa-tag"></i> Rice, Sustainable Farming</span>
+            </div>
+            <p>
+              Implementing SRI methods increased yields by 32% while reducing
+              water consumption by 40%.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+
+        <div class="study-card">
+          <div class="study-img">
+            <img
+              src="https://images.unsplash.com/photo-1622288432457-36c83d23faf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+              alt="Data Analytics"
+            />
+          </div>
+          <div class="study-content">
+            <h3>Predictive Analytics for Crop Disease Prevention</h3>
+            <div class="study-meta">
+              <span
+                ><i class="fas fa-tag"></i> Data Analytics, Disease
+                Prevention</span
+              >
+            </div>
+            <p>
+              Using machine learning to predict and prevent outbreaks, saving an
+              estimated 15% of crops from disease.
+            </p>
+            <a href="#" class="btn btn-outline">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pagination">
+        <a href="#" class="active">1</a>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">4</a>
+        <a href="#"><i class="fas fa-chevron-right"></i></a>
+      </div>
+    </section>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-section">
+        <h3>Categories</h3>
+        <ul class="categories-list">
+          <li><a href="#">Crop Improvement (12)</a></li>
+          <li><a href="#">Soil Health (8)</a></li>
+          <li><a href="#">Climate Solutions (5)</a></li>
+          <li><a href="#">Digital Farming (10)</a></li>
+          <li><a href="#">Water Management (7)</a></li>
+          <li><a href="#">Sustainable Practices (9)</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Recent Case Studies</h3>
+        <div class="recent-study">
+          <div class="recent-study-img">
+            <img
+              src="https://images.unsplash.com/photo-1594122230683c234e7c552f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+              alt="Recent Study"
+            />
+          </div>
+          <div class="recent-study-content">
+            <h4><a href="#">Vertical Farming in Urban Areas</a></h4>
+            <span>June 20, 2023</span>
+          </div>
+        </div>
+        <div class="recent-study">
+          <div class="recent-study-img">
+            <img
+              src="https://images.unsplash.com/photo-1551351467-e0c49e66c0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+              alt="Recent Study"
+            />
+          </div>
+          <div class="recent-study-content">
+            <h4><a href="#">AI-Powered Harvesting Robots</a></h4>
+            <span>June 18, 2023</span>
+          </div>
+        </div>
+        <div class="recent-study">
+          <div class="recent-study-img">
+            <img
+              src="https://images.unsplash.com/photo-1590172205845-f4c7b1a993c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+              alt="Recent Study"
+            />
+          </div>
+          <div class="recent-study-content">
+            <h4><a href="#">Carbon-Neutral Farming Practices</a></h4>
+            <span>June 15, 2023</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Popular Tags</h3>
+        <div class="tags">
+          <span class="tag">Precision Farming</span>
+          <span class="tag">Sustainability</span>
+          <span class="tag">IoT</span>
+          <span class="tag">Crop Rotation</span>
+          <span class="tag">Water Conservation</span>
+          <span class="tag">Soil Health</span>
+          <span class="tag">Drones</span>
+          <span class="tag">Data Analytics</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- Newsletter -->
+  <section class="newsletter">
+    <div class="no-margin-page">
+      <h2>Subscribe to Our Research Updates</h2>
+      <p>
+        Stay informed about the latest case studies, agricultural innovations,
+        and sustainable farming practices.
+      </p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Enter your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+</main>
+{% endblock %}

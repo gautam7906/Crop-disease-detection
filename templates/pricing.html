@@ -1,0 +1,566 @@
+{% extends "base.html" %} {% block title %}Pricing | AI-Powered Plant Health
+Diagnostics{% endblock %} {% block styles %}
+<style>
+  :root {
+    /* Light Theme */
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --secondary: #3b82f6;
+    --dark: #1f2937;
+    --light: #f9fafb;
+    --gray: #6b7280;
+    --danger: #ef4444;
+    --white: #ffffff;
+    --card-bg: #ffffff;
+    --body-bg: #f3f4f6;
+    --text-primary: #111827;
+    --text-secondary: #4b5563;
+
+    /* Shadows & Transitions */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] {
+    /* Dark Theme */
+    --primary: #10b981;
+    --primary-dark: #059669;
+    --secondary: #60a5fa;
+    --dark: #111827;
+    --light: #1f2937;
+    --gray: #9ca3af;
+    --card-bg: #1f2937;
+    --body-bg: #111827;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+  }
+
+  .pricing-section {
+    padding: 12rem 1rem;
+    background-color: var(--body-bg);
+    min-height: 100vh;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color 0.3s ease;
+  }
+
+  .pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* Header Styles */
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .pricing-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .pricing-header p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* Pricing Toggle */
+  .pricing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem auto 3rem;
+    max-width: 300px;
+    background: var(--card-bg);
+    border-radius: 50px;
+    padding: 0.5rem;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+
+  .toggle-option {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    z-index: 2;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+
+  .toggle-option.active {
+    color: var(--white);
+  }
+
+  .toggle-slider {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: calc(50% - 0.5rem);
+    height: calc(100% - 1rem);
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    border-radius: 50px;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 1;
+  }
+
+  .toggle-yearly .toggle-slider {
+    transform: translateX(100%);
+  }
+
+  /* Cards Grid */
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    perspective: 1000px;
+  }
+
+  .pricing-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    box-shadow: var(--shadow-md);
+    padding: 2.5rem;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    z-index: 1;
+  }
+
+  .pricing-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pricing-card.featured {
+    border: 2px solid var(--primary);
+  }
+
+  /* Card Content */
+  .pricing-card h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .price-container {
+    margin: 1.5rem 0;
+    position: relative;
+  }
+
+  .price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-primary);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .price .currency {
+    font-size: 1.5rem;
+    margin-right: 0.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .price .period {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    align-self: flex-end;
+    margin-bottom: 0.5rem;
+    margin-left: 0.25rem;
+  }
+
+  .price-annual {
+    display: none;
+  }
+
+  .toggle-yearly .price-monthly {
+    display: none;
+  }
+
+  .toggle-yearly .price-annual {
+    display: flex;
+  }
+
+  .discount-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: var(--danger);
+    color: var(--white);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .pricing-features li {
+    padding: 0.75rem 0;
+    position: relative;
+    padding-left: 2rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+  }
+
+  .pricing-features li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2310B981'%3E%3Cpath d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .pricing-features li.disabled {
+    color: var(--gray);
+    opacity: 0.7;
+  }
+
+  .pricing-features li.disabled::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236B7280'%3E%3Cpath d='M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'/%3E%3C/svg%3E");
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+    font-size: 1rem;
+  }
+
+  .btn-primary {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: var(--white);
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+  }
+
+  .btn-outline:hover {
+    background: var(--primary);
+    color: var(--white);
+  }
+
+  /* Popular Badge */
+  .popular-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: -2.5rem;
+    background: var(--danger);
+    color: var(--white);
+    padding: 0.25rem 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Dark Mode Toggle (Bonus) */
+  .theme-toggle {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 100;
+    border: none;
+    color: var(--text-primary);
+  }
+
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+
+  .slide-up {
+    opacity: 0;
+    animation: slideUp 0.8s forwards;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .pricing-header h1 {
+      font-size: 2.25rem;
+    }
+
+    .pricing-header p {
+      font-size: 1.1rem;
+    }
+
+    .pricing-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+<section class="pricing-section">
+  <div class="pricing-container">
+    <div class="pricing-header fade-in">
+      <h1>Flexible Pricing for Every Grower</h1>
+      <p>
+        Advanced plant health diagnostics powered by AI. Scale as you grow with
+        no hidden fees.
+      </p>
+    </div>
+
+    <!-- Pricing Toggle -->
+    <div class="pricing-toggle" id="pricingToggle">
+      <div class="toggle-option active" data-period="monthly">Monthly</div>
+      <div class="toggle-option" data-period="yearly">
+        Yearly <span class="discount-badge">Save 20%</span>
+      </div>
+      <div class="toggle-slider"></div>
+    </div>
+
+    <!-- Pricing Cards -->
+    <div class="pricing-cards">
+      <!-- Starter Plan -->
+      <div class="pricing-card featured slide-up" style="animation-delay: 0.2s">
+        <h2>Starter</h2>
+        <div class="price-container">
+          <div class="price price-monthly">
+            <span class="currency">$</span>19
+            <span class="period">/month</span>
+          </div>
+          <div class="price price-annual">
+            <span class="currency">$</span>15
+            <span class="period">/month</span>
+          </div>
+          <div class="discount-badge price-annual">$180/year</div>
+        </div>
+        <ul class="pricing-features">
+          <li>100 plant scans/month</li>
+          <li>Basic disease detection</li>
+          <li>Email support</li>
+          <li class="disabled">Advanced analytics</li>
+          <li class="disabled">API access</li>
+          <li class="disabled">Priority support</li>
+        </ul>
+        <button class="btn btn-primary">Get Started</button>
+      </div>
+
+      <!-- Pro Plan (Featured) -->
+      <div class="pricing-card featured slide-up" style="animation-delay: 0.4s">
+        <div class="popular-badge">MOST POPULAR</div>
+        <h2>Grower Pro</h2>
+        <div class="price-container">
+          <div class="price price-monthly">
+            <span class="currency">$</span>49
+            <span class="period">/month</span>
+          </div>
+          <div class="price price-annual">
+            <span class="currency">$</span>39
+            <span class="period">/month</span>
+          </div>
+          <div class="discount-badge price-annual">$468/year</div>
+        </div>
+        <ul class="pricing-features">
+          <li>500 plant scans/month</li>
+          <li>Advanced disease detection</li>
+          <li>Priority email & chat support</li>
+          <li>Growth analytics dashboard</li>
+          <li>Custom treatment plans</li>
+          <li class="disabled">API access</li>
+        </ul>
+        <button class="btn btn-primary">Start Free Trial</button>
+      </div>
+
+      <!-- Enterprise Plan -->
+      <div class="pricing-card featured slide-up" style="animation-delay: 0.6s">
+        <h2>Commercial</h2>
+        <div class="price-container">
+          <div class="price price-monthly">
+            <span class="currency">$</span>199
+            <span class="period">/month</span>
+          </div>
+          <div class="price price-annual">
+            <span class="currency">$</span>159
+            <span class="period">/month</span>
+          </div>
+          <div class="discount-badge price-annual">$1,908/year</div>
+        </div>
+        <ul class="pricing-features">
+          <li>Unlimited scans</li>
+          <li>Premium AI diagnostics</li>
+          <li>24/7 priority support</li>
+          <li>Advanced analytics</li>
+          <li>API access</li>
+          <li>Dedicated account manager</li>
+        </ul>
+        <button class="btn btn-outline">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dark Mode Toggle (Bonus) -->
+  <button class="theme-toggle" id="themeToggle">
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 3V4M12 20V21M4 12H3M6.31412 6.31412L5.5 5.5M17.6859 6.31412L18.5 5.5M6.31412 17.69L5.5 18.5001M17.6859 17.69L18.5 18.5001M21 12H20M16 12C16 14.2091 14.2091 16 12 16C9.79086 16 8 14.2091 8 12C8 9.79086 9.79086 8 12 8C14.2091 8 16 9.79086 16 12Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  </button>
+</section>
+{% endblock %} {% block scripts %}
+<script>
+  // Smooth scrolling for all anchor links
+  document
+    .querySelectorAll('a[href^="#"], a[href^="mailto:"], a[href^="tel:"]')
+    .forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        if (this.getAttribute("href").startsWith("#")) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        }
+        // mailto: and tel: links will behave normally
+      });
+    });
+
+  // Pricing Toggle
+  const pricingToggle = document.getElementById("pricingToggle");
+  const toggleOptions = document.querySelectorAll(".toggle-option");
+
+  toggleOptions.forEach((option) => {
+    option.addEventListener("click", () => {
+      pricingToggle.classList.toggle("toggle-yearly");
+      toggleOptions.forEach((opt) => opt.classList.toggle("active"));
+    });
+  });
+
+  // Dark Mode Toggle
+  const themeToggle = document.getElementById("themeToggle");
+  const html = document.documentElement;
+
+  themeToggle.addEventListener("click", () => {
+    const isDark = html.getAttribute("data-theme") === "dark";
+    html.setAttribute("data-theme", isDark ? "light" : "dark");
+    localStorage.setItem("theme", isDark ? "light" : "dark");
+  });
+
+  // Check for saved theme preference
+  if (
+    localStorage.getItem("theme") === "dark" ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+      !localStorage.getItem("theme"))
+  ) {
+    html.setAttribute("data-theme", "dark");
+  }
+
+  // Scroll Animations
+  document.addEventListener("DOMContentLoaded", () => {
+    const cards = document.querySelectorAll(".pricing-card");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    cards.forEach((card, index) => {
+      card.style.animationDelay = `${index * 0.2}s`;
+      observer.observe(card);
+    });
+  });
+</script>
+{% endblock %}

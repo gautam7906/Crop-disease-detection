@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plant Disease Detection</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/logo.jpg') }}"
+      type="image/jpeg"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <!-- AOS Animation Library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+      /* Smooth pop animations for sections */
+      .carousel-text-wrapper h1 {
+        font-size: 3rem;
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-expand-lg"
+      style="background-color: rgb(35, 47, 62)"
+    >
+      <div class="container" style="margin: 0px 45px 0px 10px">
+        <a class="navbar-brand" style="font-size: 20px">
+          <img
+            src="../static/images/logo.jpg"
+            alt="Logo"
+            width="35"
+            height="35"
+          />
+          AGriCare
+        </a>
+        <button
+          class="navbar-toggler bg-light"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('home') }}"
+                id="homeLink"
+                data-aos="fade-left"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('about') }}"
+                data-aos="fade-left"
+                data-aos-delay="200"
+                >About</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('features') }}"
+                data-aos="fade-left"
+                data-aos-delay="100"
+                >Features</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('pricing') }}"
+                data-aos="fade-left"
+                data-aos-delay="200"
+                >Pricing</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('contact') }}"
+                data-aos="fade-left"
+                data-aos-delay="200"
+                >Contact</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link zoom-hover"
+                href="{{ url_for('faqs') }}"
+                data-aos="fade-left"
+                data-aos-delay="200"
+                >FAQs</a
+              >
+              </li>
+            <li class="nav-item">
+              <a class="nav-link zoom-hover" href="{{ url_for('login') }}" data-aos="fade-left" data-aos-delay="200" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="fa-solid fa-user" style="font-size: 16px;"></i>
+                <span style="font-size: 16px;">Login</span>
+            
+              </a>
+
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                {% if not current_user.is_authenticated %}
+                  <li><a class="dropdown-item" href="{{ url_for('login') }}">Login</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('signup') }}">Signup</a></li>
+                {% else %}
+                  <li><span class="dropdown-item-text">Hello, {{ current_user.username }}</span></li>
+                  <li><a class="dropdown-item" href="{{ url_for('logout') }}">Logout</a></li>
+                {% endif %}
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      id="carouselExampleSlidesOnly"
+      class="carousel slide"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <div class="carousel-text-wrapper">
+            <h1 class="carousel-text-title" style="font-size: 65px">
+              Plant Disease Recognition
+            </h1>
+            <div class="form-box">
+              <form
+                action="/upload/"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <h1 style="font-size: 40px">Upload Image</h1>
+                <div class="input-box d-flex">
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    name="img"
+                    required
+                  />
+                </div>
+                <div class="input-box d-flex">
+                  <button type="submit" class="btn btn-success m-auto">
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <footer>
+      <div
+        class="footer-top"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'});"
+      >
+        <p>Back to top</p>
+      </div>
+
+      <div class="footer-container amazon-style">
+        <div class="footer-column" data-aos="fade-right">
+          <h5>Get to Know Us</h5>
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('about') }}">About Us</a>
+          <a href="{{ url_for('contact') }}">Contact</a>
+          <a href="{{ url_for('faqs') }}">FAQs</a>
+        </div>
+
+        <div class="footer-contact" data-aos="fade-up">
+          <h5>Connect with us</h5>
+          <p>
+            Email:
+            <a href="mailto:gautamtyagi9058@gmail.com" target="_blank"
+              >gautamtyagi9058@gmail.com</a
+            >
+          </p>
+          <h5 style="padding-top: 10px">Follow</h5>
+          <div class="social-icons">
+            <a
+              href="https://wa.me/917906969709"
+              target="_blank"
+              title="WhatsApp"
+            >
+              <img
+                src="../static/images/whatsapp.png"
+                alt="WhatsApp"
+                class="social-icon social-icon-whatsapp"
+              />
+            </a>
+            <a
+              href="https://www.instagram.com/gautamtyagi143"
+              target="_blank"
+              title="Instagram"
+            >
+              <img
+                src="../static/images/instagram.png"
+                alt="Instagram"
+                class="social-icon social-icon-instagram"
+              />
+            </a>
+            <a
+              href="https://github.com/gautam7906"
+              target="_blank"
+              title="GitHub"
+            >
+              <img
+                src="../static/images/github.png"
+                alt="GitHub"
+                class="social-icon social-icon-github"
+              />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gautam-tyagi-322a94340/"
+              target="_blank"
+              title="LinkedIn"
+            >
+              <img
+                src="../static/images/linkedin.png"
+                alt="LinkedIn"
+                class="social-icon social-icon-linkedin"
+              />
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column" data-aos="fade-left">
+          <h5>Knowledge Hub</h5>
+          <a href="{{ url_for('studies') }}">Case Studies</a>
+          <a href="{{ url_for('research') }}">Research Papers</a>
+          <a href="{{ url_for('blogs') }}">Blogs</a>
+          <a href="{{ url_for('whitepapers') }}">Whitepapers</a>
+        </div>
+
+        <div class="footer-column" data-aos="fade-left" data-aos-delay="100">
+          <h5>Help</h5>
+          <a href="{{ url_for('contact') }}">Help Center</a>
+          <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+          <a href="{{ url_for('cookies') }}">cookies</a>
+          <a href="{{ url_for('terms') }}">Terms of Use</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2025 AGriCare. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="../static/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/js/main.js"></script>
+    <script>
+      AOS.init({
+        duration: 1200,
+        offset: 120,
+        once: false,
+        mirror: false,
+      });
+    </script>
+  </body>
+</html>

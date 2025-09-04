@@ -1,0 +1,1063 @@
+{% extends "base.html" %}
+
+{% block title %}About AGriCare - AI-Powered Crop Disease Detection{% endblock %}
+
+{% block styles %}
+<style>
+    :root {
+        --primary: #3893ef;
+        --primary-700: #2a7bc8;
+        --surface: #f8f9fa;
+        --text: #23262a;
+        --muted: #6b7280;
+    }
+
+    *:focus {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    
+    /* Remove default blue rings */
+    button:focus,
+    a:focus,
+    [tabindex="0"]:focus {
+        outline: 2px solid var(--primary-700) !important;
+        outline-offset: 3px !important;
+        box-shadow: none !important;
+    }
+    
+    html:focus-within { scroll-behavior: smooth; }
+    body { color: var(--text); line-height: 1.65; padding-top: 120px; }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.25; }
+    .display-hero { font-size: clamp(2.2rem, 2.5vw + 1.4rem, 3.75rem); }
+
+    /* Buttons */
+    .btn-primary { background: var(--primary); border-color: var(--primary); }
+    .btn-primary:hover, .btn-primary:focus { background: var(--primary-700);}
+    .btn-outline-primary { color: var(--primary); }
+    .btn-outline-primary:hover { background: var(--primary); color: #fff; }
+
+    /* Section helpers */
+    .section { padding: 3.5rem 0; }
+    @media (min-width: 992px) { .section { padding: 3rem 0; } }
+
+    /* Hero */
+    .hero {
+        position: relative;
+        background: radial-gradient(1200px 600px at 85% -10%, rgba(56,147,239,.20), transparent 60%),
+                    linear-gradient(135deg, rgba(56,147,239,.06), rgba(42,123,200,.04));
+        border-radius: 1.25rem;
+        overflow: hidden;
+    }
+    .hero::after { /* subtle grid */
+        content: ""; position: absolute; inset: 0; pointer-events: none;
+        background-image: linear-gradient(rgba(0,0,0,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,.03) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: radial-gradient(60% 60% at 50% 40%, #000 60%, transparent 100%);
+    }
+    .floating-blob {
+        position: absolute; width: 360px; height: 360px; right: -120px; top: -100px; filter: blur(30px); opacity: .35;
+        background: conic-gradient(from 120deg, rgba(56,147,239,.8), rgba(42,123,200,.8), rgba(56,147,239,.8));
+        border-radius: 50%; animation: float 10s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(18px) } }
+
+    /* Cards */
+    .card { border: none; border-radius: 1rem; }
+    .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.06); }
+    .hover-rise { transition: transform .35s ease, box-shadow .35s ease; }
+    .hover-rise:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(0,0,0,.10); }
+
+    /* Icon badge */
+    .icon-badge { display:inline-flex; align-items:center; justify-content:center; width:56px; height:56px; border-radius:50%; background: rgba(56,147,239,.12); }
+
+    /* Steps */
+    .step-num { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color:#fff; font-weight:700; display:inline-flex; align-items:center; justify-content:center; }
+
+    /* Testimonials */
+    .quote-mark { position:absolute; right:1rem; bottom:.5rem; opacity:.12; font-size:3rem; color: var(--primary); }
+
+    /* Team */
+    .team-card img {  height: 300px; object-fit: cover; border-top-left-radius: 20px; border-top-right-radius: 20px; --primary: #d0d0d1; --primary-700: #000000;}
+
+    #founder {
+        border-radius: 50%;
+        margin: 0px 125px;
+        height: 110px;
+    }
+
+    /* Gradient sections */
+    .gradient { background: linear-gradient(135deg, var(--primary), var(--primary-700)); color:#fff; }
+
+    /* Accessibility */
+    a:focus, button:focus {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+    }
+
+    /* AOS custom tweaks */
+    [data-aos="custom-fade-up"] { opacity:0; transform:translateY(24px); transition: all .7s cubic-bezier(.2,.7,.2,1); }
+    [data-aos="custom-fade-up"].aos-animate { opacity:1; transform:translateY(0); }
+    [data-aos="custom-zoom-in"] { opacity:0; transform: scale(.96); transition: all .6s cubic-bezier(.2,.7,.2,1); }
+    [data-aos="custom-zoom-in"].aos-animate { opacity:1; transform: scale(1); }
+
+    /* Scroll-triggered pop elements */
+    .pop-element {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .pop-element.active {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    /* Floating tooltips */
+    .floating-tooltip {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 1000;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        max-width: 300px;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.4s ease;
+    }
+    .floating-tooltip.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .floating-tooltip .close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    /* Highlight pulse animation */
+    @keyframes highlight-pulse {
+        0% { box-shadow: 0 0 0 0 rgba(56, 147, 239, 0.4); }
+        70% { box-shadow: 0 0 0 15px rgba(56, 147, 239, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(56, 147, 239, 0); }
+    }
+    .highlight-pulse {
+        animation: highlight-pulse 1.5s infinite;
+        border-radius: 50%;
+    }
+
+    /* Scroll progress indicator */
+    .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: var(--primary);
+        z-index: 1000;
+        transition: width 0.1s ease;
+    }
+
+    /* Floating action button */
+    .fab {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px rgba(56, 147, 239, 0.3);
+        cursor: pointer;
+        z-index: 999;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    .fab.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    .fab:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 25px rgba(56, 147, 239, 0.4);
+    }
+
+    /* Floating notification */
+    .floating-notification {
+        position: fixed;
+        top: 100px;
+        right: 30px;
+        z-index: 1000;
+        background: white;
+        padding: 15px 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        max-width: 300px;
+        transform: translateX(120%);
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .floating-notification.show {
+        transform: translateX(0);
+    }
+    .floating-notification .close {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        cursor: pointer;
+        opacity: 0.5;
+    }
+
+    .pop-in {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+        transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .pop-in.animated {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* Staggered delays */
+    .pop-in.delay-1 { transition-delay: 0.1s; }
+    .pop-in.delay-2 { transition-delay: 0.2s; }
+    .pop-in.delay-3 { transition-delay: 0.3s; }
+    .pop-in.delay-4 { transition-delay: 0.4s; }
+
+    /* Special variations */
+    .pop-in.left { transform: translateX(-30px) scale(0.95); }
+    .pop-in.right { transform: translateX(30px) scale(0.95); }
+    .pop-in.zoom { transform: scale(0.8); }
+
+    /* For elements that should fade only */
+    .fade-in {
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+    }
+    .fade-in.animated { opacity: 1; }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce) {
+        html:focus-within { scroll-behavior: auto; }
+        *:not([data-aos]):not([data-aos] *):not(.pop-in):not(.fade-in) {
+        animation: none !important;
+        transition: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Scroll progress indicator -->
+<div class="scroll-progress"></div>
+
+<!-- Floating action button -->
+<div class="fab" id="fab">
+    <i class="fas fa-arrow-up" style="font-size: 1.5rem"></i>
+</div>
+
+<!-- Floating notification -->
+<div class="floating-notification" id="notification">
+    <button class="close" id="closeNotification">&times;</button>
+    <div class="d-flex align-items-center">
+        <div
+            class="highlight-pulse me-3"
+            style="width: 12px; height: 12px; background: var(--primary)"
+        ></div>
+        <div>
+            <strong>Did you know?</strong>
+            <p class="mb-0 small">
+                AGriCare can detect over 50 crop diseases with 95% accuracy!
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Floating tooltip -->
+<div class="floating-tooltip" id="tooltip">
+    <button class="close" id="closeTooltip">&times;</button>
+    <h6 class="fw-bold mb-2">Need help?</h6>
+    <p class="small mb-0">
+        Our team is available 24/7 to assist you with any questions about crop
+        diseases.
+    </p>
+</div>
+
+<div class="container section">
+    <!-- HERO -->
+    <section
+        class="hero p-4 p-md-5 mb-5"
+        data-aos="custom-fade-up"
+        style="margin-top: -25px"
+    >
+        <div class="floating-blob" aria-hidden="true"></div>
+        <div class="row align-items-center g-4">
+            <div
+                class="col-lg-6 order-2 order-lg-1"
+                data-aos="custom-fade-up"
+                data-aos-delay="100"
+            >
+                <h1 class="display-hero fw-bold mb-3">About AGriCare</h1>
+                <p class="lead text-muted mb-4">
+                    Revolutionizing agriculture with AI-powered disease detection
+                    that's fast, accurate, and farmer-first.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#how-it-works" class="btn btn-primary btn-lg px-4 py-2">
+                        <i class="fas fa-arrow-down-circle me-2"></i>See How It Works
+                    </a>
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="btn btn-outline-primary btn-lg px-4 py-2"
+                    >
+                        <i class="fas fa-upload me-2"></i>Try Demo
+                    </a>
+                </div>
+
+                <!-- Scroll indicator -->
+                <div class="mt-5 text-center pop-element" id="scrollIndicator">
+                    <div class="mb-2 small text-muted">Scroll to explore</div>
+                    <div class="d-flex justify-content-center">
+                        <div
+                            style="
+                                width: 24px;
+                                height: 40px;
+                                border: 2px solid var(--muted);
+                                border-radius: 12px;
+                                position: relative;
+                            "
+                        >
+                            <div
+                                style="
+                                    width: 4px;
+                                    height: 8px;
+                                    background: var(--muted);
+                                    border-radius: 2px;
+                                    position: absolute;
+                                    top: 6px;
+                                    left: 50%;
+                                    transform: translateX(-50%);
+                                    animation: scrollIndicator 2s infinite;
+                                "
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="col-lg-6 order-1 order-lg-2"
+                data-aos="custom-zoom-in"
+                data-aos-delay="200"
+            >
+                <picture>
+                    <source
+                        type="image/webp"
+                        srcset="{{ url_for('static', filename='images/agri-care-hero.webp') }}"
+                    />
+                    <!-- <img src="{{ url_for('static', filename='images/agri-care-hero.jpeg') }}" class="img-fluid rounded-3 shadow-soft" width="100vw" height="100vh" alt="AGriCare AI analyzing plant disease" loading="lazy" /> -->
+                </picture>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION -->
+    <section
+        class="section bg-light rounded-3 p-4 p-md-5 position-relative overflow-hidden"
+        data-aos="custom-fade-up"
+    >
+        <svg
+            class="position-absolute top-0 end-0 opacity-10"
+            width="200"
+            height="200"
+            viewBox="0 0 200 200"
+            aria-hidden="true"
+        >
+            <path
+                d="M100 50c27.6 0 50 22.4 50 50s-22.4 50-50 50-50-22.4-50-50 22.4-50 50-50z"
+                fill="var(--primary)"
+            />
+        </svg>
+        <div class="row justify-content-center">
+            <div class="col-lg-9 text-center">
+                <h2 class="mb-3">Our Mission</h2>
+                <p class="fs-5 text-muted mb-4">
+                    Empower farmers with accessible, accurate, and instant crop
+                    disease diagnosis using cutting‑edge AI, boosting yield and
+                    reducing loss.
+                </p>
+                <div class="d-flex justify-content-center flex-wrap gap-4 pt-2">
+                    <div
+                        data-aos="custom-zoom-in"
+                        data-aos-delay="100"
+                        class="text-center"
+                    >
+                        <div class="icon-badge mb-2">
+                            <i class="fas fa-globe fs-4 text-primary"></i>
+                        </div>
+                        <div class="fw-semibold">Global Impact</div>
+                    </div>
+                    <div
+                        data-aos="custom-zoom-in"
+                        data-aos-delay="200"
+                        class="text-center"
+                    >
+                        <div class="icon-badge mb-2">
+                            <i class="fas fa-users fs-4 text-primary"></i>
+                        </div>
+                        <div class="fw-semibold">Farmer-Centric</div>
+                    </div>
+                    <div
+                        data-aos="custom-zoom-in"
+                        data-aos-delay="300"
+                        class="text-center"
+                    >
+                        <div class="icon-badge mb-2">
+                            <i class="fas fa-lightbulb fs-4 text-primary"></i>
+                        </div>
+                        <div class="fw-semibold">Innovation Driven</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS (animated counters) -->
+    <section class="section gradient rounded-3" data-aos="custom-fade-up">
+        <div class="row text-center g-4">
+            <div class="col-6 col-md-3">
+                <div class="p-3">
+                    <div class="display-6 fw-bold mb-1" data-counter data-target="95">
+                        0
+                    </div>
+                    <div>Accuracy Rate</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3">
+                    <div class="display-6 fw-bold mb-1" data-counter data-target="50">
+                        0
+                    </div>
+                    <div>Crop Types</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3">
+                    <div
+                        class="display-6 fw-bold mb-1"
+                        data-counter
+                        data-target="10000"
+                        data-suffix="+"
+                    >
+                        0
+                    </div>
+                    <div>Farmers Served</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="p-3">
+                    <div class="display-6 fw-bold mb-1" data-counter data-target="24">
+                        0
+                    </div>
+                    <div>Availability (x7)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECHNOLOGY -->
+    <section class="section" data-aos="custom-fade-up">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2"
+                >OUR TECHNOLOGY</span
+            >
+            <h2 class="mb-2">Advanced AI for Agriculture</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 720px">
+                State-of-the-art computer vision models deliver real-time, reliable
+                crop disease detection and actionable guidance.
+            </p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="100">
+                <div class="card shadow-soft hover-rise h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-badge mb-3">
+                            <i class="fas fa-microchip fs-3 text-primary"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Deep Learning</h3>
+                        <p class="mb-0">
+                            CNNs trained on diverse, expert-labeled datasets to pinpoint
+                            diseases with high confidence.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="200">
+                <div class="card shadow-soft hover-rise h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-badge mb-3">
+                            <i class="fas fa-mobile-alt fs-3 text-primary"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Mobile Optimized</h3>
+                        <p class="mb-0">
+                            Edge-ready, PWA-enabled experience that works smoothly even in
+                            low-connectivity regions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="300">
+                <div class="card shadow-soft hover-rise h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-badge mb-3">
+                            <i class="fas fa-bolt fs-3 text-primary"></i>
+                        </div>
+                        <h3 class="h5 mb-2">Real-Time Analysis</h3>
+                        <p class="mb-0">
+                            Cloud inference for instant diagnosis, with treatment and
+                            prevention insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="section" data-aos="custom-fade-up">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6" data-aos="custom-fade-up" data-aos-delay="100">
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-2"
+                    >HOW IT WORKS</span
+                >
+                <h2 class="mb-3">Simple Three-Step Process</h2>
+                <p class="lead text-muted mb-4">
+                    Get accurate diagnosis in seconds with our user‑friendly platform.
+                </p>
+
+                <div class="bg-light rounded-3 p-3 p-md-4 mb-3 hover-rise">
+                    <div class="d-flex align-items-start gap-3">
+                        <span class="step-num">1</span>
+                        <div>
+                            <h3 class="h6 mb-1">Upload Image</h3>
+                            <p class="mb-0 text-muted">
+                                Capture or upload a clear photo of the affected plant part
+                                using your phone.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light rounded-3 p-3 p-md-4 mb-3 hover-rise">
+                    <div class="d-flex align-items-start gap-3">
+                        <span class="step-num">2</span>
+                        <div>
+                            <h3 class="h6 mb-1">AI Analysis</h3>
+                            <p class="mb-0 text-muted">
+                                Deep learning pinpoints likely diseases with confidence
+                                scores.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-light rounded-3 p-3 p-md-4 hover-rise">
+                    <div class="d-flex align-items-start gap-3">
+                        <span class="step-num">3</span>
+                        <div>
+                            <h3 class="h6 mb-1">Get Results</h3>
+                            <p class="mb-0 text-muted">
+                                Instant diagnosis, accuracy 95%, disease details, and
+                                treatment recommendations.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="custom-zoom-in" data-aos-delay="200">
+                <div class="position-relative">
+                    <picture>
+                        <source
+                            type="image/webp"
+                            srcset="{{ url_for('static', filename='images/process-flow.webp') }}"
+                        />
+                        <img
+                            class="img-fluid rounded-3 shadow-soft"
+                            src="{{ url_for('static', filename='images/process-flow.webp') }}"
+                            width="640"
+                            height="480"
+                            alt="Process flow: upload, AI analysis, results"
+                            loading="lazy"
+                        />
+                    </picture>
+                    <div
+                        class="position-absolute bottom-0 start-0 bg-primary text-white p-3 rounded-end"
+                        style="transform: translateY(50%)"
+                    >
+                        <i class="fas fa-clock me-2"></i>
+                        <span
+                            >Average processing time: <strong>2.4 seconds</strong></span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section" data-aos="custom-fade-up">
+        <div class="text-center mb-4">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2"
+                >TESTIMONIALS</span
+            >
+            <h2 class="mb-2">Trusted by Farmers Worldwide</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 720px">
+                Real stories of improved yields, reduced pesticide use, and quicker
+                action.
+            </p>
+        </div>
+        <div class="row g-4">
+            <!-- 1 -->
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="100">
+                <article
+                    class="card shadow-soft h-100 position-relative hover-rise p-3"
+                >
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                            src="{{ url_for('static', filename='images/farmer1.jpg') }}"
+                            class="rounded-circle me-3"
+                            width="56"
+                            height="56"
+                            alt="Rajesh Kumar"
+                            loading="lazy"
+                        />
+                        <div>
+                            <h3 class="h6 mb-0">Rajesh Kumar</h3>
+                            <small class="text-muted">Wheat Farmer, Punjab</small>
+                        </div>
+                    </div>
+                    <p class="mb-4">
+                        "AGriCare saved my crop by detecting disease early when I
+                        couldn't recognize the symptoms. Accurate and easy even for
+                        low-tech users."
+                    </p>
+                    <div aria-label="5 star rating" class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i>
+                    </div>
+                    <i class="fas fa-quote-right quote-mark"></i>
+                </article>
+            </div>
+            <!-- 2 -->
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="200">
+                <article
+                    class="card shadow-soft h-100 position-relative hover-rise p-3"
+                >
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                            src="{{ url_for('static', filename='images/farmer2.jpeg') }}"
+                            class="rounded-circle me-3"
+                            width="56"
+                            height="56"
+                            alt="Priya Sharma"
+                            loading="lazy"
+                        />
+                        <div>
+                            <h3 class="h6 mb-0">Priya Sharma</h3>
+                            <small class="text-muted">Rice Farmer, West Bengal</small>
+                        </div>
+                    </div>
+                    <p class="mb-4">
+                        "Treatment tips helped me cut pesticide use by 40% while
+                        controlling diseases. App works even with poor internet."
+                    </p>
+                    <div aria-label="4.5 star rating" class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <i class="fas fa-quote-right quote-mark"></i>
+                </article>
+            </div>
+            <!-- 3 -->
+            <div class="col-md-4" data-aos="custom-zoom-in" data-aos-delay="300">
+                <article
+                    class="card shadow-soft h-100 position-relative hover-rise p-3"
+                >
+                    <div class="d-flex align-items-center mb-3">
+                        <img
+                            src="{{ url_for('static', filename='images/farmer3.jpeg') }}"
+                            class="rounded-circle me-3"
+                            width="56"
+                            height="56"
+                            alt="Arun Patel"
+                            loading="lazy"
+                        />
+                        <div>
+                            <h3 class="h6 mb-0">Arun Patel</h3>
+                            <small class="text-muted">Cotton Farmer, Gujarat</small>
+                        </div>
+                    </div>
+                    <p class="mb-4">
+                        "My yield increased by 15%. Early warnings let me act before
+                        spread. Regional language support is a big plus."
+                    </p>
+                    <div aria-label="5 star rating" class="text-warning mb-2">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i><i class="fas fa-star"></i
+                        ><i class="fas fa-star"></i>
+                    </div>
+                    <i class="fas fa-quote-right quote-mark"></i>
+                </article>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary">
+                <i class="fas fa-comment me-2"></i>Read More Success
+                Stories
+            </a>
+        </div>
+    </section>
+
+    <!-- TEAM -->
+    <section class="section" data-aos="custom-fade-up">
+        <div class="text-center mb-4">
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2"
+                >OUR TEAM</span
+            >
+            <h2 class="mb-2">Meet the Innovators</h2>
+            <p class="lead text-muted mx-auto" style="max-width: 720px">
+                AI + Agriculture specialists building for real-world farm impact.
+            </p>
+        </div>
+        <div class="row g-4 justify-content-center">
+            <!-- Gautam Tyagi -->
+            <div
+                class="col-md-6 col-lg-4"
+                data-aos="custom-zoom-in"
+                data-aos-delay="100"
+            >
+                <div class="card team-card text-center shadow-soft h-100">
+                    <img
+                        src="{{ url_for('static', filename='images/gautam-tyagi.jpg') }}"
+                        alt="Gautam Tyagi, Founder & Lead Developer"
+                        loading="lazy"
+                        id="founder"
+                    />
+                    <div class="card-body px-4 pb-4 pt-3">
+                        <h3 class="h5 mb-1">Gautam Tyagi</h3>
+                        <p class="text-muted mb-3">Founder & Lead Developer</p>
+                        <p class="mb-3">
+                            AI/ML enthusiast – Developed plant disease detection model and
+                            deployed it with Flask web application.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a
+                                href="https://www.linkedin.com/feed/"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="Gautam's LinkedIn"
+                                class="text-decoration-none text-dark"
+                                ><i class="fab fa-linkedin fs-5"></i
+                            ></a>
+                            <a
+                                href="https://github.com/gautam7906"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="Gautam's GitHub"
+                                class="text-decoration-none text-dark"
+                                ><i class="fab fa-github fs-5"></i
+                            ></a>
+                            <a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=gautamtyagi9058@gmail.com"
+                                aria-label="Email Gautam"
+                                class="text-decoration-none text-dark"
+                                ><i class="fas fa-envelope fs-5"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Anshul Tyagi -->
+            <div
+                class="col-md-6 col-lg-4"
+                data-aos="custom-zoom-in"
+                data-aos-delay="200"
+            >
+                <div class="card team-card text-center shadow-soft h-100">
+                    <img
+                        src="{{ url_for('static', filename='images/anshul-tyagi.png') }}"
+                        alt="Anshul Tyagi, Co‑Founder & Frontend Lead"
+                        loading="lazy"
+                        id="founder"
+                    />
+                    <div class="card-body px-4 pb-4 pt-3">
+                        <h3 class="h5 mb-1">Anshul Tyagi</h3>
+                        <p class="text-muted mb-3">Co‑Founder & Frontend Lead</p>
+                        <p class="mb-3">
+                            Frontend developer crafting intuitive UX for rural users with
+                            accessibility in focus.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a
+                                href="https://linkedin.com/in/anshultyagi"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="Anshul's LinkedIn"
+                                class="text-decoration-none text-dark"
+                                ><i class="fab fa-linkedin fs-5"></i
+                            ></a>
+                            <a
+                                href="https://github.com/anshultyagi"
+                                target="_blank"
+                                rel="noopener"
+                                aria-label="Anshul's GitHub"
+                                class="text-decoration-none text-dark"
+                                ><i class="fab fa-github fs-5"></i
+                            ></a>
+                            <a
+                                href="https://mail.google.com/mail/?view=cm&fs=1&to=anshuktyagi589@gmail.com"
+                                aria-label="Email Anshul"
+                                class="text-decoration-none text-dark"
+                                ><i class="fas fa-envelope fs-5"></i
+                            ></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <p class="lead mb-3">
+                Join our growing team of agricultural technologists
+            </p>
+            <a href="#" class="btn btn-outline-primary px-4"
+                ><i class="fas fa-briefcase me-2"></i>View Open Positions</a
+            >
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section
+        class="section gradient rounded-3 text-center"
+        data-aos="custom-fade-up"
+    >
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <h2 class="mb-3">Ready to Transform Your Farming?</h2>
+                <p class="lead mb-4">
+                    Join thousands of farmers already benefiting from AI‑powered
+                    disease detection.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a
+                        href="{{ url_for('home') }}"
+                        class="btn btn-light btn-lg px-4 py-3"
+                        ><i class="fas fa-upload me-2"></i>Try Free Demo</a
+                    >
+                    <a href="#" class="btn btn-outline-light btn-lg px-4 py-3"
+                        ><i class="fas fa-book me-2"></i>Learn More</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize AOS (Animate On Scroll)
+        AOS.init({
+            duration: 1200,
+            once: false, // Animation will trigger every time you scroll
+            offset: 120, // Trigger animation when element is 120px from bottom of viewport
+            startEvent: "load", // Wait until full page load
+            easing: "ease-out-quart",
+        });
+
+        // Smooth scrolling for all anchor links
+        document
+            .querySelectorAll('a[href^="#"], a[href^="mailto:"], a[href^="tel:"]')
+            .forEach((anchor) => {
+                anchor.addEventListener("click", function (e) {
+                    if (this.getAttribute("href").startsWith("#")) {
+                        e.preventDefault();
+                        const target = document.querySelector(
+                            this.getAttribute("href")
+                        );
+                        if (target) {
+                            target.scrollIntoView({
+                                behavior: "smooth",
+                            });
+                        }
+                    }
+                    // mailto: and tel: links will behave normally
+                });
+            });
+
+        // Initialize scroll indicator animation
+        const scrollIndicator = document.getElementById("scrollIndicator");
+        if (scrollIndicator) {
+            setTimeout(() => {
+                scrollIndicator.classList.add("active");
+            }, 500);
+        }
+
+        // Show notification after 3 seconds
+        const notification = document.getElementById("notification");
+        if (notification) {
+            setTimeout(() => {
+                notification.classList.add("show");
+            }, 3000);
+
+            const closeNotification =
+                document.getElementById("closeNotification");
+            if (closeNotification) {
+                closeNotification.addEventListener("click", function () {
+                    notification.classList.remove("show");
+                });
+            }
+        }
+
+        // Scroll-triggered tooltip
+        const tooltip = document.getElementById("tooltip");
+        if (tooltip) {
+            window.addEventListener("scroll", function () {
+                const scrollPosition = window.scrollY;
+                const pageHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                if (
+                    scrollPosition > pageHeight * 0.4 &&
+                    !tooltip.classList.contains("show")
+                ) {
+                    tooltip.classList.add("show");
+                }
+            });
+
+            const closeTooltip = document.getElementById("closeTooltip");
+            if (closeTooltip) {
+                closeTooltip.addEventListener("click", function () {
+                    tooltip.classList.remove("show");
+                });
+            }
+        }
+
+        // Scroll progress indicator
+        const progressBar = document.querySelector(".scroll-progress");
+        if (progressBar) {
+            window.addEventListener("scroll", function () {
+                const scrollTop =
+                    document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight =
+                    document.documentElement.scrollHeight -
+                    document.documentElement.clientHeight;
+                const scrollProgress = (scrollTop / scrollHeight) * 100;
+                progressBar.style.width = scrollProgress + "%";
+
+                // Show/hide FAB (Floating Action Button)
+                const fab = document.getElementById("fab");
+                if (fab) {
+                    if (scrollTop > 300) {
+                        fab.classList.add("show");
+                    } else {
+                        fab.classList.remove("show");
+                    }
+                }
+            });
+        }
+
+        // FAB click handler
+        const fab = document.getElementById("fab");
+        if (fab) {
+            fab.addEventListener("click", function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            });
+        }
+
+        // Animated counters on scroll
+        const counters = document.querySelectorAll("[data-counter]");
+        const formatNum = (n) => n.toLocaleString("en-IN");
+
+        const animateCounter = (el) => {
+            const target = parseInt(el.getAttribute("data-target"), 10);
+            const suffix = el.getAttribute("data-suffix") || "";
+            const isPercent =
+                el.closest(".col-md-3") &&
+                el.textContent.trim() === "0" &&
+                target <= 100;
+            const duration = 1200; // ms
+            const start = performance.now();
+
+            const tick = (now) => {
+                const p = Math.min(1, (now - start) / duration);
+                const val = Math.floor(target * (0.5 - Math.cos(Math.PI * p) / 2));
+                el.textContent = isPercent
+                    ? `${val}%`
+                    : `${formatNum(val)}${p === 1 ? suffix : ""}`;
+                if (p < 1) requestAnimationFrame(tick);
+            };
+
+            requestAnimationFrame(tick);
+        };
+
+        if (counters.length > 0) {
+            const counterObserver = new IntersectionObserver(
+                (entries, obs) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            animateCounter(entry.target);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                },
+                { threshold: 0.35 }
+            );
+
+            counters.forEach((el) => counterObserver.observe(el));
+        }
+
+        // Scroll-triggered pop elements
+        const popElements = document.querySelectorAll(".pop-element");
+        if (popElements.length > 0) {
+            const popObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("active");
+                            popObserver.unobserve(entry.target); // Only trigger once
+                        }
+                    });
+                },
+                { threshold: 0.1 }
+            );
+
+            popElements.forEach((el) => popObserver.observe(el));
+        }
+
+        // Add scroll indicator animation styles
+        if (!document.getElementById("scrollIndicatorStyles")) {
+            const style = document.createElement("style");
+            style.id = "scrollIndicatorStyles";
+            style.textContent = `
+                @keyframes scrollIndicator {
+                    0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+                    100% { transform: translateX(-50%) translateY(10px); opacity: 0; }
+                }`;
+            document.head.appendChild(style);
+        }
+    });
+</script>
+{% endblock %}

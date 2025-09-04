@@ -1,0 +1,355 @@
+{% extends "base.html" %} {% block title %}Pricing | AI-Powered Plant Health
+Diagnostics{% endblock %} {% block styles %}
+<style>
+  :root {
+    --primary-color: #2e7d32;
+    --secondary-color: #7cb342;
+    --light-color: #f1f8e9;
+    --dark-color: #1b5e20;
+  }
+
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .hero-section {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 10rem 0 10rem 0;
+    margin-bottom: 2rem;
+  }
+
+  .filter-section {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .paper-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 100%;
+  }
+
+  .paper-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-card {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--dark-color);
+    border-color: var(--dark-color);
+  }
+
+  .footer-cta {
+    background-color: var(--dark-color);
+    color: white;
+    padding: 4rem 0;
+    margin-top: 4rem;
+  }
+
+  .badge-topic {
+    background-color: var(--light-color);
+    color: var(--dark-color);
+  }
+
+  .citation-badge {
+    background-color: var(--secondary-color);
+    color: white;
+  }
+
+  .download-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+  }
+
+  .download-btn:hover {
+    background-color: var(--dark-color);
+    color: white;
+  }
+</style>
+{% endblock %} {% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center">
+  <div class="container">
+    <h1 class="display-4 fw-bold">AGriCare Research Library</h1>
+    <p class="lead">Exploring cutting-edge agricultural technology research</p>
+  </div>
+</section>
+
+<div class="container">
+  <!-- Filters Section -->
+  <section class="filter-section">
+    <h3 class="mb-4">Filter Research Papers</h3>
+    <div class="row g-3">
+      <div class="col-md-3">
+        <select class="form-select" id="yearFilter">
+          <option selected>Year</option>
+          <option>2025</option>
+          <option>2024</option>
+          <option>2023</option>
+          <option>2022</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" id="authorFilter">
+          <option selected>Author</option>
+          <option>Dr. Emily Chen</option>
+          <option>Prof. James Wilson</option>
+          <option>Dr. Maria Rodriguez</option>
+          <option>Prof. Robert Kim</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" id="topicFilter">
+          <option selected>Topic</option>
+          <option>AI & Machine Learning</option>
+          <option>Water Management</option>
+          <option>Drone Technology</option>
+          <option>Sustainable Farming</option>
+        </select>
+      </div>
+      <div class="col-md-3">
+        <select class="form-select" id="institutionFilter">
+          <option selected>Institution</option>
+          <option>Stanford University</option>
+          <option>MIT</option>
+          <option>UC Davis</option>
+          <option>Wageningen University</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <div class="row">
+    <!-- Main Content Area -->
+    <div class="col-lg-8">
+      <h3 class="mb-4">Research Papers</h3>
+
+      <!-- Paper Listing -->
+      <div class="row row-cols-1 g-4" id="researchPapers">
+        <!-- Paper 1 -->
+        <div class="col">
+          <div class="paper-card p-4">
+            <div class="d-flex justify-content-between align-items-start">
+              <h4 class="text-primary">
+                AI-driven Crop Yield Prediction Models for Precision Agriculture
+              </h4>
+              <span class="badge bg-primary">2025</span>
+            </div>
+            <p class="text-muted">
+              Authors: Dr. Emily Chen, Prof. James Wilson, Dr. Alex Kumar
+            </p>
+            <p class="mb-3">
+              This paper presents a novel AI framework that integrates satellite
+              imagery, weather data, and soil sensors to predict crop yields
+              with 94% accuracy, enabling farmers to optimize resource
+              allocation and improve food security.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-topic">AI & Machine Learning</span>
+              <div>
+                <span class="badge citation-badge me-2"
+                  ><i class="fas fa-quote-right"></i> 142 citations</span
+                >
+                <button class="btn btn-sm download-btn">
+                  <i class="fas fa-download me-1"></i> PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 2 -->
+        <div class="col">
+          <div class="paper-card p-4">
+            <div class="d-flex justify-content-between align-items-start">
+              <h4 class="text-primary">
+                Water Resource Optimization in Smart Farming Using IoT Sensors
+              </h4>
+              <span class="badge bg-primary">2024</span>
+            </div>
+            <p class="text-muted">
+              Authors: Dr. Maria Rodriguez, Prof. Robert Kim, Dr. Sarah Johnson
+            </p>
+            <p class="mb-3">
+              This research introduces an IoT-based irrigation system that
+              reduces water consumption by up to 40% while maintaining crop
+              yield. The system uses real-time soil moisture data and predictive
+              algorithms to optimize watering schedules.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-topic">Water Management</span>
+              <div>
+                <span class="badge citation-badge me-2"
+                  ><i class="fas fa-quote-right"></i> 89 citations</span
+                >
+                <button class="btn btn-sm download-btn">
+                  <i class="fas fa-download me-1"></i> PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 3 -->
+        <div class="col">
+          <div class="paper-card p-4">
+            <div class="d-flex justify-content-between align-items-start">
+              <h4 class="text-primary">
+                Advanced Drone Technology in Precision Agriculture: Applications
+                and Challenges
+              </h4>
+              <span class="badge bg-primary">2023</span>
+            </div>
+            <p class="text-muted">
+              Authors: Dr. Michael Zhang, Prof. Lisa Anderson, Dr. David Brown
+            </p>
+            <p class="mb-3">
+              This comprehensive review examines the current state of drone
+              technology in agriculture, focusing on crop monitoring, planting,
+              and spraying applications. The paper also discusses regulatory
+              challenges and future directions.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-topic">Drone Technology</span>
+              <div>
+                <span class="badge citation-badge me-2"
+                  ><i class="fas fa-quote-right"></i> 127 citations</span
+                >
+                <button class="btn btn-sm download-btn">
+                  <i class="fas fa-download me-1"></i> PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paper 4 -->
+        <div class="col">
+          <div class="paper-card p-4">
+            <div class="d-flex justify-content-between align-items-start">
+              <h4 class="text-primary">
+                Sustainable Farming Practices: Integrating Traditional Knowledge
+                with Modern Technology
+              </h4>
+              <span class="badge bg-primary">2023</span>
+            </div>
+            <p class="text-muted">
+              Authors: Prof. James Wilson, Dr. Anita Patel, Dr. Emily Chen
+            </p>
+            <p class="mb-3">
+              This interdisciplinary study explores how traditional agricultural
+              practices can be enhanced with modern technology to create
+              sustainable farming systems that are both productive and
+              environmentally friendly.
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="badge badge-topic">Sustainable Farming</span>
+              <div>
+                <span class="badge citation-badge me-2"
+                  ><i class="fas fa-quote-right"></i> 76 citations</span
+                >
+                <button class="btn btn-sm download-btn">
+                  <i class="fas fa-download me-1"></i> PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+      <!-- Most Cited Papers -->
+      <div class="sidebar-card p-4 mb-4">
+        <h4 class="mb-4">
+          <i class="fas fa-fire text-danger me-2"></i> Most Cited Papers
+        </h4>
+        <ul class="list-group list-group-flush">
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">AI-driven Crop Yield Prediction</div>
+              <small class="text-muted">Chen et al. (2025)</small>
+            </div>
+            <span class="badge citation-badge">142</span>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Drone Technology in Agriculture</div>
+              <small class="text-muted">Zhang et al. (2023)</small>
+            </div>
+            <span class="badge citation-badge">127</span>
+          </li>
+          <li
+            class="list-group-item d-flex justify-content-between align-items-start"
+          >
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">IoT for Water Management</div>
+              <small class="text-muted">Rodriguez et al. (2024)</small>
+            </div>
+            <span class="badge citation-badge">89</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Trending Topics -->
+      <div class="sidebar-card p-4">
+        <h4 class="mb-4">
+          <i class="fas fa-chart-line text-primary me-2"></i> Trending Topics
+        </h4>
+        <div class="d-flex flex-wrap gap-2">
+          <span class="badge bg-primary p-2">AI & Machine Learning</span>
+          <span class="badge bg-success p-2">Sustainable Farming</span>
+          <span class="badge bg-info p-2">Water Management</span>
+          <span class="badge bg-warning p-2">Drone Technology</span>
+          <span class="badge bg-secondary p-2">IoT Sensors</span>
+          <span class="badge bg-dark p-2">Climate Resilience</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer CTA -->
+<section class="footer-cta text-center">
+  <div class="container">
+    <h2 class="mb-4">Contribute Your Research to AGriCare</h2>
+    <p class="lead mb-4">
+      Join our community of researchers and help shape the future of agriculture
+      technology
+    </p>
+    <button class="btn btn-light btn-lg px-4">Submit Your Paper</button>
+  </div>
+</section>
+{% endblock %} {% block scripts %}
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+
+{% endblock %}

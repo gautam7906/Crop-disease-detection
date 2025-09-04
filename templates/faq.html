@@ -1,0 +1,1896 @@
+{% extends "base.html" %}
+{% block title %}FAQs - AGriCare Plant Health Solutions{% endblock %}
+
+{% block content %}
+<!-- Animated Hero Section -->
+<section class="animated-hero box-margin">
+  <div class="hero-bg-animation"></div>
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <div class="hero-content" data-aos="fade-right">
+          <span class="animated-badge" data-aos="fade-down" data-aos-delay="300">
+            <i class="fas fa-star me-2"></i>
+            Plant Care
+          </span>
+          <h1 class="display-3 fw-bold mb-4 text-white" data-aos="fade-right" data-aos-delay="100">
+            <span class="text-highlight">AI-Powered</span> Agriculture
+          </h1>
+          <p class="hero-subtitle mb-4" data-aos="fade-right" data-aos-delay="200">
+            Revolutionizing plant health with cutting-edge technology
+          </p>
+          
+          <div class="animated-search" data-aos="fade-up" data-aos-delay="400">
+            <input type="text" placeholder="Ask about plant diseases..." class="search-input">
+            <button class="search-btn">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            <div class="search-popup">
+              <div class="popup-content">
+                <div class="popup-header">
+                  <h5>Popular Questions</h5>
+                  <button class="popup-close">&times;</button>
+                </div>
+                <ul class="popup-list">
+                  <li><a href="#"><i class="fas fa-leaf me-2"></i> How accurate is the analysis?</a></li>
+                  <li><a href="#"><i class="fas fa-mobile-alt me-2"></i> Is there a mobile app?</a></li>
+                  <li><a href="#"><i class="fas fa-crop me-2"></i> Which crops are supported?</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 d-none d-lg-block">
+        <div class="hero-visual" data-aos="fade-left" data-aos-delay="500">
+          <div class="floating-icons">
+            <i class="fas fa-leaf icon-1"></i>
+            <i class="fas fa-seedling icon-2"></i>
+            <i class="fas fa-tint icon-3"></i>
+          </div>
+          <div class="main-icon">
+            <i class="fas fa-microscope"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Animated Tech Features -->
+<section class="animated-tech py-6 box-margin">
+  <div class="container">
+    <div class="section-header text-center mb-6" data-aos="fade-up">
+      <div class="icon-pulse">
+        <i class="fas fa-microchip"></i>
+      </div>
+      <h2 class="display-4 fw-bold mb-3">Advanced Technology</h2>
+      <p class="section-subtitle">How our system analyzes plant health</p>
+    </div>
+
+    <div class="row g-4">
+      <!-- Tech 1 -->
+      <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="100">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI Analysis</h3>
+          <p>Deep learning models trained on millions of plant images</p>
+          <button class="tech-btn" data-tech="ai">
+            <i class="fas fa-plus"></i> Learn More
+          </button>
+          <div class="tech-details" id="ai-details">
+            <h4>AI Technology Details</h4>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> 98.3% accuracy rate</li>
+              <li><i class="fas fa-check-circle"></i> Continuous learning</li>
+              <li><i class="fas fa-check-circle"></i> 39 disease categories</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tech 2 -->
+      <div class="col-md-6 col-lg-3" box-margin data-aos="flip-up" data-aos-delay="200">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3>Mobile App</h3>
+          <p>Instant analysis through iOS/Android applications</p>
+          <button class="tech-btn" data-tech="mobile">
+            <i class="fas fa-plus"></i> Learn More
+          </button>
+          <div class="tech-details" id="mobile-details">
+            <h4>Mobile Features</h4>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Offline mode</li>
+              <li><i class="fas fa-check-circle"></i> Field mapping</li>
+              <li><i class="fas fa-check-circle"></i> Treatment tracking</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tech 3 -->
+      <div class="col-md-6 col-lg-3" box-margin data-aos="flip-up" data-aos-delay="300">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3>Global Database</h3>
+          <p>Regional disease patterns and treatments</p>
+          <button class="tech-btn" data-tech="database">
+            <i class="fas fa-plus"></i> Learn More
+          </button>
+          <div class="tech-details" id="database-details">
+            <h4>Database Coverage</h4>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> 142 countries</li>
+              <li><i class="fas fa-check-circle"></i> Localized solutions</li>
+              <li><i class="fas fa-check-circle"></i> Regulatory compliant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Tech 4 -->
+      <div class="col-md-6 col-lg-3" box-margin data-aos="flip-up" data-aos-delay="400">
+        <div class="tech-card">
+          <div class="tech-icon">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <h3>Analytics</h3>
+          <p>Track plant health over time</p>
+          <button class="tech-btn" data-tech="analytics">
+            <i class="fas fa-plus"></i> Learn More
+          </button>
+          <div class="tech-details" id="analytics-details">
+            <h4>Analytics Features</h4>
+            <ul>
+              <li><i class="fas fa-check-circle"></i> Health trends</li>
+              <li><i class="fas fa-check-circle"></i> Yield predictions</li>
+              <li><i class="fas fa-check-circle"></i> Custom reports</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive Process -->
+    <section class="animated-tech py-6 box-margin">
+        <div class="container">
+            <div class="section-header text-center mb-6" data-aos="fade-up">
+                <div class="icon-pulse">
+                    <i class="fas fa-project-diagram"></i>
+                </div>
+                <h2 class="display-4 fw-bold mb-3">How It Works</h2>
+                <p class="section-subtitle">Simple 4-step process</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Step 1 -->
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="100">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Capture</h3>
+                        <p>Take photo of affected area</p>
+                        <button class="tech-btn" data-tech="capture">
+                            <i class="fas fa-plus"></i> Learn More
+                        </button>
+                        <div class="tech-details" id="capture-details">
+                            <h4>Capture Details</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Use clear, well-lit photos</li>
+                                <li><i class="fas fa-check-circle"></i> Focus on affected leaves</li>
+                                <li><i class="fas fa-check-circle"></i> Multiple angles recommended</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="200">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <h3>Upload</h3>
+                        <p>Submit for analysis</p>
+                        <button class="tech-btn" data-tech="upload">
+                            <i class="fas fa-plus"></i> Learn More
+                        </button>
+                        <div class="tech-details" id="upload-details">
+                            <h4>Upload Features</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Works on mobile and web</li>
+                                <li><i class="fas fa-check-circle"></i> Secure cloud processing</li>
+                                <li><i class="fas fa-check-circle"></i> Automatic image optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="300">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>Analyze</h3>
+                        <p>AI processes the image</p>
+                        <button class="tech-btn" data-tech="analyze">
+                            <i class="fas fa-plus"></i> Learn More
+                        </button>
+                        <div class="tech-details" id="analyze-details">
+                            <h4>Analysis Process</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Results in under 10 seconds</li>
+                                <li><i class="fas fa-check-circle"></i> Multiple model consensus</li>
+                                <li><i class="fas fa-check-circle"></i> Confidence scoring</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="col-md-6 col-lg-3" data-aos="flip-up" data-aos-delay="400">
+                    <div class="tech-card">
+                        <div class="tech-icon">
+                            <i class="fas fa-prescription-bottle-alt"></i>
+                        </div>
+                        <h3>Treat</h3>
+                        <p>Get treatment plan</p>
+                        <button class="tech-btn" data-tech="treat">
+                            <i class="fas fa-plus"></i> Learn More
+                        </button>
+                        <div class="tech-details" id="treat-details">
+                            <h4>Treatment Options</h4>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Customized for your crop</li>
+                                <li><i class="fas fa-check-circle"></i> Organic & chemical solutions</li>
+                                <li><i class="fas fa-check-circle"></i> Prevention strategies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+
+<!-- Animated FAQ -->
+<section class="animated-faq py-6 box-margin">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="section-header text-center mb-6" data-aos="fade-up">
+          <div class="icon-pulse">
+            <i class="fas fa-question-circle"></i>
+          </div>
+          <h2 class="display-4 fw-bold mb-3">Frequently Asked Questions</h2>
+          <p class="section-subtitle">Quick answers to common questions</p>
+        </div>
+
+        <div class="accordion" id="faqAccordion">
+          <!-- Question 1 -->
+          <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm" data-aos="fade-up">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                <i class="fas fa-leaf text-success me-3"></i>
+                How accurate is AGriCare's analysis?
+              </button>
+            </h3>
+            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Our AI achieves 95.7% accuracy in detecting plant diseases across supported crops. The system continuously improves as it processes more images.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Question 2 -->
+          <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="100">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                <i class="fas fa-mobile-alt text-success me-3"></i>
+                Is there a mobile app available?
+              </button>
+            </h3>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                NO! But AGriCare offers iOS and Android apps with all features including offline analysis and field mapping tools in future.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Question 3 -->
+          <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="200">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                <i class="fas fa-crop text-success me-3"></i>
+                Which crops are supported?
+              </button>
+            </h3>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                We support 38+ crops including tomatoes, potatoes, strawberry, peach, corn, and most common vegetables. New crops are added monthly.
+              </div>
+            </div>
+          </div>
+          
+          <!-- Question 4 -->
+          <div class="accordion-item mb-3 border-0 rounded-3 overflow-hidden shadow-sm" data-aos="fade-up" data-aos-delay="300">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
+                <i class="fas fa-camera text-success me-3"></i>
+                What image quality is needed?
+              </button>
+            </h3>
+            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                Clear, well-lit photos with minimum 800px resolution work best. Focus on affected areas and use a plain background when possible.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Interactive CTA -->
+<section class="interactive-cta py-6 bg-success text-white box-margin">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="icon-pulse-lg mb-4" data-aos="zoom-in">
+          <i class="fas fa-headset"></i>
+        </div>
+        <h2 class="display-4 fw-bold mb-3" data-aos="fade-up">Need Expert Help?</h2>
+        <p class="cta-subtitle mb-5" data-aos="fade-up" data-aos-delay="100">
+          Our agricultural specialists are ready to assist you
+        </p>
+        <div class="d-flex flex-wrap justify-content-center gap-3" data-aos="fade-up" data-aos-delay="200">
+          <a href="mailto:gautamtyagi9058@gmail.com" class="btn btn-light btn-lg px-4 py-3 cta-btn">
+            <i class="fas fa-envelope me-2"></i> Email Support
+          </a>
+          <a href="tel:+917906969709" class="btn btn-outline-light btn-lg px-4 py-3 cta-btn">
+            <i class="fas fa-phone-alt me-2"></i> Call +91 79069 69709</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Animated Design System */
+  :root {
+    --primary: #2e8b57;
+    --primary-light: rgba(46, 139, 87, 0.1);
+    --dark: #162e23;
+    --light: #f5f9f7;
+    --border-radius: 16px;
+    --box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  /* Animated Hero */
+  .animated-hero {
+    position: relative;
+    margin-top: 8rem;
+    padding: 3rem 50px 35px 57px;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--dark), var(--primary));
+    color: white;
+    border-radius: 35px;
+  }
+  
+  .hero-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%232e8b57' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.8;
+    animation: bgMove 60s linear infinite;
+  }
+  
+  .animated-badge {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    padding: 0.5rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(5px);
+  }
+  
+  .text-highlight {
+    position: relative;
+    z-index: 1;
+  }
+  
+  .text-highlight:after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    width: 100%;
+    height: 12px;
+    background: rgba(255,255,255,0.25);
+    z-index: -1;
+    transform: skewX(-15deg);
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255,255,255,0.85);
+    max-width: 500px;
+  }
+  
+  .animated-search {
+    position: relative;
+    max-width: 500px;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    font-size: 1rem;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: var(--transition);
+  }
+  
+  .search-input:focus {
+    outline: none;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+  }
+  
+  .search-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: var(--transition);
+  }
+  
+  .search-btn:hover {
+    background: #247244;
+    transform: rotate(15deg);
+  }
+  
+  .search-popup {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    margin-top: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+  .search-input:focus + .search-btn + .search-popup {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  
+  .popup-content {
+    position: relative;
+  }
+  
+  .popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .popup-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6c757d;
+  }
+
+  .box-margin {
+    margin-bottom: 20px;
+  }
+  
+  .popup-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .popup-list li a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #495057;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .popup-list li a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+  }
+  
+  .hero-visual {
+    position: relative;
+    height: 400px;
+  }
+  
+  .floating-icons {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .floating-icons i {
+    position: absolute;
+    font-size: 2rem;
+    color: rgba(255,255,255,0.3);
+  }
+  
+  .icon-1 {
+    top: 20%;
+    left: 10%;
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .icon-2 {
+    top: 60%;
+    left: 70%;
+    animation: float 8s ease-in-out infinite reverse;
+  }
+  
+  .icon-3 {
+    top: 30%;
+    left: 50%;
+    animation: float 7s ease-in-out infinite 2s;
+  }
+  
+  .main-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10rem;
+    color: white;
+    animation: pulse 2s ease infinite alternate;
+  }
+  
+  /* Animated Tech Cards */
+  .tech-card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    height: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    border-top: 3px solid var(--primary);
+  }
+  
+  .tech-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--box-shadow);
+  }
+  
+  .tech-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    background: var(--primary-light);
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    transition: var(--transition);
+  }
+  
+  .tech-card:hover .tech-icon {
+    transform: rotateY(180deg);
+  }
+  
+  .tech-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    margin-top: 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  
+  .tech-btn:hover {
+    background: #247244;
+    transform: translateY(-3px);
+  }
+  
+  .tech-details {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+  }
+  
+  .tech-details.active {
+    max-height: 500px;
+    margin-top: 1rem;
+  }
+  
+  /* Process Steps */
+  .process-steps {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 5%;
+  }
+  
+  .process-steps:after {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #e9ecef;
+    z-index: 1;
+  }
+  
+  .step {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    padding: 0 1rem;
+  }
+  
+  .step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin: 0 auto 1.5rem;
+    position: relative;
+    z-index: 3;
+  }
+  
+  .step-icon {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin: 0 auto 1.5rem;
+    transition: var(--transition);
+  }
+  
+  .step:hover .step-icon {
+    transform: scale(1.1);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+  }
+  
+  .step-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .step-tooltip .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--dark);
+    color: white;
+    text-align: center;
+    border-radius: var(--border-radius);
+    padding: 0.5rem;
+    position: absolute;
+    z-index: 10;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .step-tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  /* Pulse Animation */
+  .icon-pulse {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: var(--primary-light);
+    color: var(--primary);
+    margin: 0 auto 1.5rem;
+    position: relative;
+  }
+  
+  .icon-pulse:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--primary-light);
+    z-index: -1;
+    animation: pulse 2s infinite;
+  }
+  
+  .icon-pulse-lg {
+    width: 100px;
+    height: 100px;
+    font-size: 40px;
+  }
+  
+  .pulse-animation {
+    animation: pulse 2s infinite;
+  }
+  
+  /* Accordion */
+  .accordion-button:not(.collapsed) {
+    color: var(--primary);
+    background-color: var(--primary-light);
+  }
+  
+  .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(46, 139, 87, 0.25);
+  }
+  
+  /* CTA Buttons */
+  .cta-btn {
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+  }
+  
+  .cta-btn:after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255,255,255,0.1);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+  }
+  
+  .cta-btn:hover:after {
+    left: 100%;
+  }
+  
+  /* Animations */
+  @keyframes bgMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 1000px 1000px; }
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 992px) {
+    .process-steps {
+      flex-wrap: wrap;
+    }
+    
+    .step {
+      flex: 0 0 50%;
+      margin-bottom: 3rem;
+    }
+    
+    .process-steps:after {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .animated-hero {
+      padding: 5rem 0;
+    }
+    
+    .display-3 {
+      font-size: 2.5rem;
+    }
+    
+    .step {
+      flex: 0 0 100%;
+    }
+  }
+</style>
+
+<!-- Animation Libraries -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - AGriCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #2e7d32;
+            transition: color 0.3s;
+        }
+        
+        a:hover {
+            color: #1b5e20;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #1b5e20;
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #2e7d32;
+            color: #2e7d32;
+        }
+        
+        .btn-outline:hover {
+            background-color: #2e7d32;
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #2e7d32;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 24px;
+            color: #2e7d32;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            font-weight: 500;
+        }
+        
+        nav ul li a.active {
+            color: #1b5e20;
+            font-weight: 600;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Search and Filter */
+        .search-filter {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .search-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-container button {
+            background: #2e7d32;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            background: white;
+        }
+        
+        /* Featured Case Studies */
+        .featured-studies {
+            margin-bottom: 50px;
+        }
+        
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .featured-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .featured-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .featured-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .featured-card:hover .featured-img img {
+            transform: scale(1.05);
+        }
+        
+        .featured-content {
+            padding: 20px;
+        }
+        
+        .featured-content h3 {
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .featured-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .featured-meta span {
+            margin-right: 15px;
+        }
+        
+        .featured-meta i {
+            margin-right: 5px;
+        }
+        
+        /* All Case Studies */
+        .all-studies {
+            margin-bottom: 50px;
+        }
+        
+        .studies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .study-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .study-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .study-img {
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .study-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .study-card:hover .study-img img {
+            transform: scale(1.05);
+        }
+        
+        .study-content {
+            padding: 20px;
+        }
+        
+        .study-content h3 {
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .study-meta {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .study-meta span {
+            margin-right: 15px;
+        }
+        
+        .study-meta i {
+            margin-right: 5px;
+        }
+        
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .pagination a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            background: white;
+            color: #2e7d32;
+            font-weight: 600;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pagination a.active {
+            background: #2e7d32;
+            color: white;
+        }
+        
+        .pagination a:hover:not(.active) {
+            background: #e8f5e9;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .sidebar h3 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .sidebar-section {
+            margin-bottom: 30px;
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .categories-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .recent-study {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .recent-study-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .recent-study-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .recent-study-content h4 {
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+        
+        .recent-study-content span {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .tag {
+            background: #e8f5e9;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #2e7d32;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            background: linear-gradient(to right, #2e7d32, #4caf50);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 15px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-form button {
+            background: #1b5e20;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background: #1b5e20;
+            color: white;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section p {
+            margin-bottom: 15px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #e0e0e0;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+        
+        /* Layout */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .search-container {
+                flex-direction: column;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-form input {
+                border-radius: 4px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-form button {
+                border-radius: 4px;
+                padding: 12px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMmU3ZDMyIj48cGF0aCBkPSJNMTIgMy4zOTJ2MTcuMjMybC0yLjUtMS40MzJsLTYuNSAzLjczNkwyIDIwbDguNS00LjczNkwyIDEwLjUzNmw2LjUgMy43MzZMMTUgMTUuODkzVjcuMzc2bDctNC4wMDRWNy4zOWwtNyA0LjAwM3YxMi44MjZsLTUtMi44NTdsLTUgMi44NTdWMTQuOTNsOC00LjU3MnoiLz48L3N2Zz4=" alt="AGriCare Logo">
+                <h1>AGriCare</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#" class="active">Case Studies</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Case Studies – AGriCare</h2>
+            <p>Real-world examples of how our agricultural solutions are helping farmers increase yields, reduce costs, and implement sustainable practices.</p>
+            <a href="#featured" class="btn">Explore Case Studies</a>
+        </div>
+    </section>
+
+    <!-- Search and Filter -->
+    <section class="container">
+        <div class="search-filter">
+            <div class="search-container">
+                <input type="text" placeholder="Search case studies...">
+                <button type="submit"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="filter-container">
+                <div class="filter-group">
+                    <select>
+                        <option value="">All Crops</option>
+                        <option value="wheat">Wheat</option>
+                        <option value="corn">Corn</option>
+                        <option value="rice">Rice</option>
+                        <option value="soybean">Soybean</option>
+                        <option value="vegetables">Vegetables</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select>
+                        <option value="">All Regions</option>
+                        <option value="north">North America</option>
+                        <option value="south">South America</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                        <option value="africa">Africa</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <select>
+                        <option value="">All Techniques</option>
+                        <option value="irrigation">Smart Irrigation</option>
+                        <option value="pest">Pest Management</option>
+                        <option value="soil">Soil Health</option>
+                        <option value="precision">Precision Farming</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Case Studies -->
+    <section id="featured" class="container featured-studies">
+        <div class="section-title">
+            <h2>Featured Case Studies</h2>
+            <p>Success stories that demonstrate the impact of our agricultural solutions</p>
+        </div>
+        
+        <div class="featured-grid">
+            <div class="featured-card">
+                <div class="featured-img">
+                    <img src="https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Precision Farming">
+                </div>
+                <div class="featured-content">
+                    <h3>Precision Farming in Midwest Corn Fields</h3>
+                    <div class="featured-meta">
+                        <span><i class="far fa-calendar"></i> June 15, 2023</span>
+                        <span><i class="fas fa-tag"></i> Corn, Precision Farming</span>
+                    </div>
+                    <p>How AGriCare's precision farming technology helped a 5,000-acre farm in Iowa increase yield by 22% while reducing water usage by 35%.</p>
+                    <a href="#" class="btn btn-outline">Read Case Study</a>
+                </div>
+            </div>
+            
+            <div class="featured-card">
+                <div class="featured-img">
+                    <img src="https://images.unsplash.com/photo-1595245376869-189b4a57a2bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Organic Pest Control">
+                </div>
+                <div class="featured-content">
+                    <h3>Organic Pest Management in California Vineyards</h3>
+                    <div class="featured-meta">
+                        <span><i class="far fa-calendar"></i> May 28, 2023</span>
+                        <span><i class="fas fa-tag"></i> Grapes, Organic Farming</span>
+                    </div>
+                    <p>Implementation of AGriCare's biological pest control solutions resulted in a 40% reduction in pesticide use while maintaining crop quality.</p>
+                    <a href="#" class="btn btn-outline">Read Case Study</a>
+                </div>
+            </div>
+            
+            <div class="featured-card">
+                <div class="featured-img">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Soil Health">
+                </div>
+                <div class="featured-content">
+                    <h3>Soil Regeneration in Australian Wheat Farms</h3>
+                    <div class="featured-meta">
+                        <span><i class="far fa-calendar"></i> May 12, 2023</span>
+                        <span><i class="fas fa-tag"></i> Wheat, Soil Health</span>
+                    </div>
+                    <p>How our soil health program helped restore degraded farmland, increasing organic matter by 2.1% over three growing seasons.</p>
+                    <a href="#" class="btn btn-outline">Read Case Study</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content with Sidebar -->
+    <div class="container main-container">
+        <!-- All Case Studies -->
+        <section class="all-studies">
+            <div class="section-title">
+                <h2>All Case Studies</h2>
+                <p>Browse our complete collection of agricultural success stories</p>
+            </div>
+            
+            <div class="studies-grid">
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1622288432457-36c83d23faf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Water Management">
+                    </div>
+                    <div class="study-content">
+                        <h3>Smart Water Management in Arid Regions</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Irrigation, Water Conservation</span>
+                        </div>
+                        <p>How our smart irrigation systems helped farmers in drought-prone areas reduce water usage by 45%.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1590172205845-f4c7b1a993c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Crop Rotation">
+                    </div>
+                    <div class="study-content">
+                        <h3>Optimized Crop Rotation for Soil Health</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Crop Rotation, Soil Health</span>
+                        </div>
+                        <p>Implementing scientific crop rotation patterns increased yields by 18% while reducing fertilizer needs.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Drone Technology">
+                    </div>
+                    <div class="study-content">
+                        <h3>Drone-Based Crop Monitoring in Brazil</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Drones, Precision Farming</span>
+                        </div>
+                        <p>Using drone technology to monitor large-scale soybean farms, reducing scouting time by 70%.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1551351467-e0c49e66c0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Greenhouse">
+                    </div>
+                    <div class="study-content">
+                        <h3>Year-Round Vegetable Production in Controlled Environments</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Greenhouse, Vegetables</span>
+                        </div>
+                        <p>How our climate-controlled greenhouse solutions enabled year-round tomato production in cold climates.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1594122230683c234e7c552f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Rice Farming">
+                    </div>
+                    <div class="study-content">
+                        <h3>Sustainable Rice Intensification in Southeast Asia</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Rice, Sustainable Farming</span>
+                        </div>
+                        <p>Implementing SRI methods increased yields by 32% while reducing water consumption by 40%.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="study-card">
+                    <div class="study-img">
+                        <img src="https://images.unsplash.com/photo-1622288432457-36c83d23faf7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Data Analytics">
+                    </div>
+                    <div class="study-content">
+                        <h3>Predictive Analytics for Crop Disease Prevention</h3>
+                        <div class="study-meta">
+                            <span><i class="fas fa-tag"></i> Data Analytics, Disease Prevention</span>
+                        </div>
+                        <p>Using machine learning to predict and prevent outbreaks, saving an estimated 15% of crops from disease.</p>
+                        <a href="#" class="btn btn-outline">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#"><i class="fas fa-chevron-right"></i></a>
+            </div>
+        </section>
+        
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <h3>Categories</h3>
+                <ul class="categories-list">
+                    <li><a href="#">Crop Improvement (12)</a></li>
+                    <li><a href="#">Soil Health (8)</a></li>
+                    <li><a href="#">Climate Solutions (5)</a></li>
+                    <li><a href="#">Digital Farming (10)</a></li>
+                    <li><a href="#">Water Management (7)</a></li>
+                    <li><a href="#">Sustainable Practices (9)</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Recent Case Studies</h3>
+                <div class="recent-study">
+                    <div class="recent-study-img">
+                        <img src="https://images.unsplash.com/photo-1594122230683c234e7c552f6?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Recent Study">
+                    </div>
+                    <div class="recent-study-content">
+                        <h4><a href="#">Vertical Farming in Urban Areas</a></h4>
+                        <span>June 20, 2023</span>
+                    </div>
+                </div>
+                <div class="recent-study">
+                    <div class="recent-study-img">
+                        <img src="https://images.unsplash.com/photo-1551351467-e0c49e66c0ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Recent Study">
+                    </div>
+                    <div class="recent-study-content">
+                        <h4><a href="#">AI-Powered Harvesting Robots</a></h4>
+                        <span>June 18, 2023</span>
+                    </div>
+                </div>
+                <div class="recent-study">
+                    <div class="recent-study-img">
+                        <img src="https://images.unsplash.com/photo-1590172205845-f4c7b1a993c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80" alt="Recent Study">
+                    </div>
+                    <div class="recent-study-content">
+                        <h4><a href="#">Carbon-Neutral Farming Practices</a></h4>
+                        <span>June 15, 2023</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h3>Popular Tags</h3>
+                <div class="tags">
+                    <span class="tag">Precision Farming</span>
+                    <span class="tag">Sustainability</span>
+                    <span class="tag">IoT</span>
+                    <span class="tag">Crop Rotation</span>
+                    <span class="tag">Water Conservation</span>
+                    <span class="tag">Soil Health</span>
+                    <span class="tag">Drones</span>
+                    <span class="tag">Data Analytics</span>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Subscribe to Our Research Updates</h2>
+            <p>Stay informed about the latest case studies, agricultural innovations, and sustainable farming practices.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+ 
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>AGriCare</h3>
+                    <p>Providing innovative agricultural solutions and expert guidance to farmers worldwide since 2010.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Products</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Case Studies</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agricultural District, Country</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                    <p><i class="fas fa-envelope"></i> info@agricare.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AGriCare. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html> src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    AOS.init({
+      duration: 1200,
+      once: false,   // <- animation har bar scroll pe chale
+      offset: 120,   // <- thoda niche scroll karne par hi chale
+      startEvent: 'load' // <- wait until full page load
+    });
+  });
+    // Add smooth scrolling to all links
+  document.querySelectorAll('a[href^="#"], a[href^="mailto:"], a[href^="tel:"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          if(this.getAttribute('href').startsWith('#')) {
+              document.querySelector(this.getAttribute('href')).scrollIntoView({
+                  behavior: 'smooth'
+              });
+          } else {
+              window.location.href = this.getAttribute('href');
+          }
+      });
+  });
+  
+  // Tech card details toggle
+  document.querySelectorAll('.tech-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tech = this.getAttribute('data-tech');
+      const details = document.getElementById(tech + '-details');
+      details.classList.toggle('active');
+      
+      const icon = this.querySelector('i');
+      if (details.classList.contains('active')) {
+        icon.classList.remove('fa-plus');
+        icon.classList.add('fa-minus');
+        this.innerHTML = '<i class="fas fa-minus me-2"></i> Hide Details';
+      } else {
+        icon.classList.remove('fa-minus');
+        icon.classList.add('fa-plus');
+        this.innerHTML = '<i class="fas fa-plus me-2"></i> Learn More';
+      }
+    });
+  });
+  
+  // Search popup interaction
+  const searchInput = document.querySelector('.search-input');
+  const searchPopup = document.querySelector('.search-popup');
+  
+  searchInput.addEventListener('focus', function() {
+    searchPopup.style.opacity = '1';
+    searchPopup.style.visibility = 'visible';
+    searchPopup.style.transform = 'translateY(0)';
+  });
+  
+  document.querySelector('.popup-close').addEventListener('click', function() {
+    searchPopup.style.opacity = '0';
+    searchPopup.style.visibility = 'hidden';
+    searchPopup.style.transform = 'translateY(10px)';
+    searchInput.blur();
+  });
+  
+  // Floating icons animation
+  document.addEventListener('DOMContentLoaded', function() {
+    const icons = document.querySelectorAll('.floating-icons i');
+    icons.forEach((icon, index) => {
+      icon.style.animationDelay = `${index * 2}s`;
+    });
+  });
+</script>
+{% endblock %}

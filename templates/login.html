@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | Secure Access</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+    html, body { height: 100%; overflow: hidden; }
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+    }
+
+    .container {
+        display: flex;
+        width: 90vw;
+        max-width: 900px;
+        height: 90vh;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+
+    .left-panel, .right-panel {
+        flex: 1;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Left Panel */
+    .left-panel {
+        background: linear-gradient(135deg, #4e54c8, #8f94fb);
+        color: white;
+    }
+    .left-panel h2 { font-size: 32px; margin-bottom: 20px; }
+    .left-panel p { font-size: 16px; margin-bottom: 30px; line-height: 1.6; }
+    .feature { display: flex; align-items: center; margin-bottom: 20px; }
+    .feature i {
+        font-size: 18px; margin-right: 15px;
+        background: rgba(255,255,255,0.2);
+        width: 40px; height: 40px; display: flex;
+        align-items: center; justify-content: center; border-radius: 50%;
+    }
+
+    /* Right Panel */
+    .right-panel {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    .right-panel h2 {
+        text-align: center; color: #333; margin-bottom: 20px; font-size: 26px;
+        flex-shrink: 0;
+    }
+
+    /* Form wrapper with scroll */
+    .form-wrapper {
+        flex: 1; /* fill remaining space */
+        overflow-y: auto; /* scroll inside form only */
+        padding-right: 5px; /* small padding for scrollbar */
+    }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: #555; }
+
+    .input-with-icon { position: relative; }
+    .input-with-icon i {
+        position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+        color: #777;
+    }
+    .input-with-icon input {
+        width: 100%; padding: 14px 14px 14px 45px;
+        border: 1px solid #ddd; border-radius: 8px;
+        font-size: 16px; transition: all 0.3s;
+    }
+    .input-with-icon input:focus {
+        border-color: #6e8efb;
+        box-shadow: 0 0 0 2px rgba(110, 142, 251, 0.2);
+        outline: none;
+    }
+
+    .login-btn {
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: white; border: none;
+        padding: 14px; border-radius: 8px;
+        width: 100%; font-size: 16px; font-weight: 600;
+        cursor: pointer; transition: 0.3s;
+        margin-bottom: 15px;
+    }
+    .login-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+
+    .separator {
+        display: flex; align-items: center; margin: 20px 0; color: #777;
+        flex-shrink: 0;
+    }
+    .separator::before, .separator::after {
+        content: ""; flex: 1; height: 1px; background: #ddd;
+    }
+    .separator span { padding: 0 10px; font-size: 14px; }
+
+    .social-login { display: flex; justify-content: center; gap: 15px; margin-bottom: 15px; flex-shrink: 0; }
+    .social-btn {
+        width: 45px; height: 45px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: #f5f5f5; border: 1px solid #ddd;
+        cursor: pointer; transition: 0.3s;
+    }
+    .social-btn:hover { transform: translateY(-3px); }
+    .social-btn.google { color: #DB4437; }
+    .social-btn.github { color: #000; }
+
+    .signup { text-align: center; font-size: 14px; color: #555; flex-shrink: 0; }
+    .signup a { color: #6e8efb; font-weight: 600; text-decoration: none; }
+    .signup a:hover { text-decoration: underline; }
+
+    .alert {
+        padding: 12px; border-radius: 8px; margin-bottom: 15px; font-size: 14px;
+    }
+    .alert-success { background-color: rgba(46, 204, 113, 0.1); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.2); }
+    .alert-error { background-color: rgba(231, 76, 60, 0.1); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.2); }
+
+    @media (max-width: 900px) {
+        .container { flex-direction: column; height: 90vh; }
+        .left-panel, .right-panel { padding: 20px; height: auto; }
+        .form-wrapper { max-height: 60vh; }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Left Panel -->
+    <div class="left-panel">
+      <h2>Welcome Back!</h2>
+      <p>Sign in to access your account and enjoy all features with secure login.</p>
+      <div class="feature"><i class="fas fa-user-lock"></i> <span>Secure access</span></div>
+      <div class="feature"><i class="fas fa-rocket"></i> <span>Quick login</span></div>
+      <div class="feature"><i class="fas fa-globe"></i> <span>Access anywhere</span></div>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="right-panel">
+      <h2>Login</h2>
+
+      <!-- Scrollable form wrapper -->
+      <div class="form-wrapper">
+        <!-- Flash messages -->
+        <div id="flash-messages">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+
+        <form method="POST" action="/login">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input type="email" name="email" id="email" placeholder="Enter your email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" name="password" id="password" placeholder="Enter your password" required>
+            </div>
+          </div>
+
+          <button type="submit" class="login-btn">Sign In</button>
+        </form>
+      </div>
+
+      <!-- Fixed footer elements -->
+      <div class="separator"><span>Or login with</span></div>
+      <div class="social-login">
+        <a href="{{ url_for('google.login') }}" class="social-btn google"><i class="fab fa-google"></i></a>
+        <a href="{{ url_for('github.login') }}" class="social-btn github"><i class="fab fa-github"></i></a>
+      </div>
+      <div class="signup">Don't have an account? <a href="/signup">Sign Up here</a></div>
+    </div>
+  </div>
+</body>
+</html>

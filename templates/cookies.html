@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookies Policy | AgriCare</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        color: #333;
+        background: #fff;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      /* Header */
+      .cookies-header {
+        background-color: #f8f9fa;
+        padding: 40px 0;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .cookies-header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      .breadcrumbs {
+        font-size: 0.9rem;
+        margin-top: 10px;
+        color: #6c757d;
+      }
+
+      .breadcrumbs a {
+        color: #4caf50;
+        text-decoration: none;
+      }
+
+      .breadcrumbs a:hover {
+        text-decoration: underline;
+      }
+
+      /* Layout */
+      .cookies-layout {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      /* Sidebar */
+      .cookies-sidebar {
+        position: sticky;
+        top: 100px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        height: fit-content;
+      }
+
+      .cookies-sidebar h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #2c3e50;
+      }
+
+      .cookies-sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .cookies-sidebar li {
+        margin-bottom: 12px;
+        padding-left: 10px;
+        border-left: 3px solid transparent;
+        transition: all 0.3s;
+      }
+
+      .cookies-sidebar li:hover {
+        border-left: 3px solid #4caf50;
+      }
+
+      .cookies-sidebar a {
+        text-decoration: none;
+        color: #2c3e50;
+        font-weight: 500;
+        display: block;
+        transition: 0.3s;
+      }
+
+      .cookies-sidebar a:hover,
+      .cookies-sidebar a.active {
+        color: #4caf50;
+      }
+
+      /* Main Content */
+      .cookies-content {
+        line-height: 1.8;
+      }
+
+      .cookies-content h2 {
+        color: #2c3e50;
+        font-size: 1.8rem;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      .cookies-content h3 {
+        font-size: 1.3rem;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        color: #2c3e50;
+      }
+
+      .cookies-content p,
+      .cookies-content ul {
+        margin-bottom: 20px;
+      }
+
+      .cookies-content ul {
+        padding-left: 20px;
+      }
+
+      .cookies-content li {
+        margin-bottom: 10px;
+      }
+
+      .info-box {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 5px;
+        margin: 25px 0;
+        border-left: 4px solid #4caf50;
+      }
+
+      .table-container {
+        overflow-x: auto;
+        margin: 25px 0;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #f8f9fa;
+        font-weight: 600;
+      }
+
+      tr:hover {
+        background-color: #f8f9fa;
+      }
+
+      /* Cookie Settings */
+      .cookie-settings {
+        background: #f8f9fa;
+        padding: 25px;
+        border-radius: 8px;
+        margin: 30px 0;
+      }
+
+      .cookie-toggle {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 15px 0;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+      }
+
+      .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 34px;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+
+      input:checked + .slider {
+        background-color: #4caf50;
+      }
+
+      input:checked + .slider:before {
+        transform: translateX(30px);
+      }
+
+      .save-settings {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 15px;
+        transition: background 0.3s;
+      }
+
+      .save-settings:hover {
+        background: #3d8b40;
+      }
+
+      /* Back to top Button */
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #4caf50;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+      }
+
+      /* Footer */
+      footer {
+        background: #2c3e50;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: 46px;
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 992px) {
+        .cookies-layout {
+          grid-template-columns: 1fr;
+        }
+
+        .cookies-sidebar {
+          position: relative;
+          top: 0;
+          margin-bottom: 30px;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .cookies-header h1 {
+          font-size: 2rem;
+        }
+
+        .cookie-toggle {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .toggle-switch {
+          margin-top: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="cookies-header">
+      <div class="container">
+        <h1>Cookies Policy</h1>
+        <div class="breadcrumbs"><a href="/">Home</a> › Cookies Policy</div>
+        <p class="lead">Last Updated: August 26, 2025</p>
+      </div>
+    </header>
+
+    <div class="container cookies-layout">
+      <!-- Sidebar -->
+      <aside class="cookies-sidebar">
+        <h3>Table of Contents</h3>
+        <ul>
+          <li><a href="#intro">1. Introduction</a></li>
+          <li><a href="#what-are-cookies">2. What Are Cookies</a></li>
+          <li><a href="#types-of-cookies">3. Types of Cookies We Use</a></li>
+          <li><a href="#purpose">4. Purpose of Cookies</a></li>
+          <li><a href="#third-party-cookies">5. Third-Party Cookies</a></li>
+          <li><a href="#cookie-duration">6. Cookie Duration</a></li>
+          <li><a href="#managing">7. Managing Cookies</a></li>
+          <li><a href="#details">8. Detailed Cookie Information</a></li>
+          <li><a href="#changes">9. Changes to Policy</a></li>
+          <li><a href="#contact">10. Contact Us</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="cookies-content">
+        <div class="info-box">
+          <strong>Note:</strong> This Cookies Policy explains how AgriCare uses
+          cookies and similar technologies to recognize you when you visit our
+          website.
+        </div>
+
+        <section id="intro">
+          <h2>1. Introduction</h2>
+          <p>
+            Welcome to AgriCare's Cookies Policy. This policy explains how we
+            use cookies and similar technologies on our website and mobile
+            applications to provide and improve our services, enhance your user
+            experience, and analyze how our services are used.
+          </p>
+          <p>
+            By using AgriCare's services, you consent to the use of cookies as
+            described in this policy, unless you have disabled them in your
+            browser settings.
+          </p>
+          <p>
+            We are committed to protecting your privacy and ensuring
+            transparency about the technologies we use. This policy provides
+            detailed information about the types of cookies we use, their
+            purposes, and how you can control them.
+          </p>
+        </section>
+
+        <section id="what-are-cookies">
+          <h2>2. What Are Cookies</h2>
+          <p>
+            Cookies are small text files that are placed on your device
+            (computer, tablet, or mobile phone) when you visit a website. They
+            are widely used to make websites work more efficiently and provide
+            information to the website owners.
+          </p>
+
+          <h3>How Cookies Work</h3>
+          <p>
+            When you visit our website, we may place cookies on your device.
+            These cookies allow us to recognize your device on subsequent visits
+            and remember your preferences and actions over time. Each cookie is
+            unique to your web browser and contains anonymous information that
+            allows us to enhance your browsing experience.
+          </p>
+
+          <h3>Types of Cookies Based on Duration</h3>
+          <ul>
+            <li>
+              <strong>Session Cookies:</strong> These are temporary cookies that
+              remain on your device until you close your browser. They are
+              essential for navigating our website and using its features.
+            </li>
+            <li>
+              <strong>Persistent Cookies:</strong> These cookies remain on your
+              device for a set period specified in the cookie (usually between a
+              few days and several years). They remember your preferences and
+              actions across multiple browsing sessions.
+            </li>
+          </ul>
+
+          <h3>Other Tracking Technologies</h3>
+          <p>
+            In addition to cookies, we may use other similar technologies such
+            as:
+          </p>
+          <ul>
+            <li>
+              <strong>Web Beacons:</strong> Small graphic images embedded in web
+              pages or emails that help us analyze user behavior.
+            </li>
+            <li>
+              <strong>Local Storage:</strong> Technology that allows websites to
+              store information locally on your device.
+            </li>
+            <li>
+              <strong>Scripts:</strong> Small pieces of code that enable
+              specific functionalities on our website.
+            </li>
+          </ul>
+        </section>
+
+        <section id="types-of-cookies">
+          <h2>3. Types of Cookies We Use</h2>
+          <p>
+            AgriCare uses several types of cookies for different purposes. We
+            classify them as follows:
+          </p>
+
+          <h3>Essential Cookies</h3>
+          <p>
+            These cookies are strictly necessary for the website to function
+            properly. They enable core functionality such as security, network
+            management, and accessibility. You cannot disable these cookies as
+            the website cannot function properly without them.
+          </p>
+          <p>
+            <strong>Examples:</strong> User authentication, maintaining user
+            session state, preventing fraudulent use of login credentials.
+          </p>
+
+          <h3>Analytics/Performance Cookies</h3>
+          <p>
+            These cookies help us understand how visitors interact with our
+            website by collecting and reporting information anonymously. This
+            data helps us improve how our website works.
+          </p>
+          <p>
+            <strong>Examples:</strong> Counting visits and traffic sources,
+            measuring which pages are most popular, understanding how visitors
+            move around the site.
+          </p>
+
+          <h3>Functional Cookies</h3>
+          <p>
+            These cookies enable the website to provide enhanced functionality
+            and personalization based on your preferences and past activity.
+            They may be set by us or by third-party providers whose services we
+            have added to our pages.
+          </p>
+          <p>
+            <strong>Examples:</strong> Remembering your language preference,
+            region selection, or username for future visits.
+          </p>
+
+          <h3>Targeting/Advertising Cookies</h3>
+          <p>
+            These cookies are used to track visitors across websites to display
+            relevant advertisements. They are also used to limit the number of
+            times you see an ad and measure the effectiveness of advertising
+            campaigns.
+          </p>
+          <p>
+            <strong>Examples:</strong> Cookies placed by advertising networks to
+            collect information about your browsing habits and interests.
+          </p>
+
+          <h3>Social Media Cookies</h3>
+          <p>
+            These cookies are set by social media services that we have added to
+            our site to enable you to share our content with your friends and
+            networks. They are capable of tracking your browser across other
+            sites and building a profile of your interests.
+          </p>
+        </section>
+
+        <section id="purpose">
+          <h2>4. Purpose of Cookies</h2>
+          <p>We use cookies for the following purposes:</p>
+
+          <h3>Authentication and Security</h3>
+          <ul>
+            <li>To identify you when you log in to our services</li>
+            <li>To protect your account from unauthorized access</li>
+            <li>To prevent fraudulent use of login credentials</li>
+            <li>
+              To ensure that only you have access to your personal information
+            </li>
+          </ul>
+
+          <h3>Preferences and Personalization</h3>
+          <ul>
+            <li>To remember your preferences and settings</li>
+            <li>To provide personalized content and recommendations</li>
+            <li>To remember information about your browser and preferences</li>
+            <li>
+              To customize the website according to your individual interests
+            </li>
+          </ul>
+
+          <h3>Analytics and Performance</h3>
+          <ul>
+            <li>To analyze how our services are used so we can improve them</li>
+            <li>To gather statistical data about site usage</li>
+            <li>To measure the effectiveness of our content</li>
+            <li>To identify technical issues and optimize performance</li>
+          </ul>
+
+          <h3>Advertising and Marketing</h3>
+          <ul>
+            <li>
+              To deliver targeted advertisements that may be relevant to your
+              interests
+            </li>
+            <li>To measure the effectiveness of our marketing campaigns</li>
+            <li>To limit the number of times you see the same advertisement</li>
+            <li>To understand user demographics and interests</li>
+          </ul>
+
+          <h3>Social Media Integration</h3>
+          <ul>
+            <li>To enable you to share content on social media platforms</li>
+            <li>To integrate with social media services</li>
+            <li>To track the effectiveness of social media campaigns</li>
+          </ul>
+        </section>
+
+        <section id="third-party-cookies">
+          <h2>5. Third-Party Cookies</h2>
+          <p>
+            In addition to our own cookies, we may also use various third-party
+            cookies to report usage statistics of the service, deliver
+            advertisements, and provide other functionalities.
+          </p>
+
+          <h3>Analytics Providers</h3>
+          <p>
+            We use Google Analytics to help us understand how our customers use
+            the site. You can read more about how Google uses your personal
+            information here:
+            <a href="https://policies.google.com/privacy" target="_blank"
+              >https://policies.google.com/privacy</a
+            >.
+          </p>
+
+          <h3>Advertising Partners</h3>
+          <p>
+            We work with third-party advertising partners to show you ads that
+            we think may interest you. These advertising partners may use
+            cookies and other technologies to collect information about your
+            activities on this and other websites to provide you with targeted
+            advertising.
+          </p>
+
+          <h3>Social Media Platforms</h3>
+          <p>
+            We use social media plugins from platforms like Facebook, Twitter,
+            and LinkedIn to allow you to share content from our website. These
+            plugins may set cookies that enable the social media platforms to
+            track your browsing activity.
+          </p>
+
+          <h3>Payment Processors</h3>
+          <p>
+            For processing payments, we use third-party payment processors that
+            may set cookies to facilitate secure transactions and prevent fraud.
+          </p>
+
+          <div class="info-box">
+            <strong>Note:</strong> We do not have control over third-party
+            cookies. Please refer to the respective third-party's cookie policy
+            for more information.
+          </div>
+        </section>
+
+        <section id="cookie-duration">
+          <h2>6. Cookie Duration</h2>
+          <p>
+            Cookies remain on your device for different periods of time
+            depending on their type:
+          </p>
+
+          <h3>Session Cookies</h3>
+          <p>
+            These cookies are temporary and are deleted automatically when you
+            close your browser. They are essential for the proper functioning of
+            our website during your visit.
+          </p>
+
+          <h3>Persistent Cookies</h3>
+          <p>
+            These cookies remain on your device for a predetermined period. The
+            duration varies depending on the purpose of the cookie:
+          </p>
+          <ul>
+            <li>
+              Authentication cookies: Typically remain for the duration of your
+              session or for a few days for "remember me" functionality
+            </li>
+            <li>
+              Analytics cookies: May remain for periods ranging from 30 minutes
+              to 2 years
+            </li>
+            <li>
+              Advertising cookies: Often have longer durations, sometimes up to
+              several years
+            </li>
+            <li>
+              Preference cookies: Usually remain for extended periods to
+              remember your settings
+            </li>
+          </ul>
+
+          <p>
+            The exact duration for each cookie is specified in the detailed
+            cookie table below.
+          </p>
+        </section>
+
+        <section id="managing">
+          <h2>7. Managing Cookies</h2>
+          <p>
+            You can control and manage cookies in various ways. Please note that
+            removing or blocking cookies may impact your user experience and
+            parts of our website may no longer be fully accessible.
+          </p>
+
+          <h3>Browser Controls</h3>
+          <p>
+            Most browsers allow you to view, manage, delete, and block cookies
+            for a website. You can usually find these settings in the "Options"
+            or "Preferences" menu of your browser. Be aware that if you delete
+            all cookies, any preferences you have set will be lost.
+          </p>
+
+          <h3>Browser-Specific Instructions</h3>
+          <ul>
+            <li>
+              <strong>Google Chrome:</strong> Settings → Advanced → Privacy and
+              security → Content settings → Cookies
+            </li>
+            <li>
+              <strong>Mozilla Firefox:</strong> Options → Privacy & Security →
+              Cookies and Site Data
+            </li>
+            <li>
+              <strong>Safari:</strong> Preferences → Privacy → Cookies and
+              website data
+            </li>
+            <li>
+              <strong>Internet Explorer:</strong> Tools → Internet Options →
+              Privacy
+            </li>
+            <li>
+              <strong>Microsoft Edge:</strong> Settings → Privacy, search, and
+              services → Cookies
+            </li>
+          </ul>
+
+          <h3>Do Not Track</h3>
+          <p>
+            Some browsers have a "Do Not Track" feature that lets you tell
+            websites that you do not want to be tracked. Our website does not
+            currently respond to "Do Not Track" signals, as there is no industry
+            standard for implementation.
+          </p>
+
+          <h3>Opt-Out Tools</h3>
+          <p>
+            For advertising cookies, you can opt out of many third-party
+            advertising networks through the following resources:
+          </p>
+          <ul>
+            <li>
+              Digital Advertising Alliance (DAA):
+              <a href="http://optout.aboutads.info/" target="_blank"
+                >http://optout.aboutads.info/</a
+              >
+            </li>
+            <li>
+              Network Advertising Initiative (NAI):
+              <a href="http://optout.networkadvertising.org/" target="_blank"
+                >http://optout.networkadvertising.org/</a
+              >
+            </li>
+            <li>
+              European Interactive Digital Advertising Alliance (EDAA):
+              <a href="http://www.youronlinechoices.com/" target="_blank"
+                >http://www.youronlinechoices.com/</a
+              >
+            </li>
+          </ul>
+
+          <div class="cookie-settings">
+            <h3>Cookie Preferences</h3>
+            <p>
+              You can manage your cookie preferences for this website using the
+              options below:
+            </p>
+
+            <div class="cookie-toggle">
+              <div>
+                <h4>Essential Cookies</h4>
+                <p>Required for the website to function. Cannot be disabled.</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked disabled />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="cookie-toggle">
+              <div>
+                <h4>Analytics Cookies</h4>
+                <p>
+                  Help us improve our website by collecting usage information.
+                </p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="cookie-toggle">
+              <div>
+                <h4>Functional Cookies</h4>
+                <p>Enable enhanced functionality and personalization.</p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="cookie-toggle">
+              <div>
+                <h4>Marketing Cookies</h4>
+                <p>
+                  Used to track visitors across websites for advertising
+                  purposes.
+                </p>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <button class="save-settings">Save Preferences</button>
+          </div>
+        </section>
+
+        <section id="details">
+          <h2>8. Detailed Cookie Information</h2>
+          <p>
+            The table below provides more information about the cookies we use
+            and why:
+          </p>
+
+          <div class="table-container">
+            <table>
+              <thead>
+                <tr>
+                  <th>Cookie Name</th>
+                  <th>Provider</th>
+                  <th>Type</th>
+                  <th>Purpose</th>
+                  <th>Duration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>agricare_session</td>
+                  <td>AgriCare</td>
+                  <td>Essential</td>
+                  <td>Maintains your session state and authentication</td>
+                  <td>Session</td>
+                </tr>
+                <tr>
+                  <td>agricare_consent</td>
+                  <td>AgriCare</td>
+                  <td>Essential</td>
+                  <td>Stores your cookie preferences</td>
+                  <td>1 year</td>
+                </tr>
+                <tr>
+                  <td>agricare_csrf</td>
+                  <td>AgriCare</td>
+                  <td>Essential</td>
+                  <td>Protects against cross-site request forgery attacks</td>
+                  <td>Session</td>
+                </tr>
+                <tr>
+                  <td>_ga</td>
+                  <td>Google Analytics</td>
+                  <td>Analytics</td>
+                  <td>Distinguishes unique users</td>
+                  <td>2 years</td>
+                </tr>
+                <tr>
+                  <td>_gid</td>
+                  <td>Google Analytics</td>
+                  <td>Analytics</td>
+                  <td>Distinguishes unique users</td>
+                  <td>24 hours</td>
+                </tr>
+                <tr>
+                  <td>_gat</td>
+                  <td>Google Analytics</td>
+                  <td>Analytics</td>
+                  <td>Throttles request rate</td>
+                  <td>1 minute</td>
+                </tr>
+                <tr>
+                  <td>agricare_preferences</td>
+                  <td>AgriCare</td>
+                  <td>Functional</td>
+                  <td>Stores your site preferences (language, region, etc.)</td>
+                  <td>1 year</td>
+                </tr>
+                <tr>
+                  <td>agricare_cart</td>
+                  <td>AgriCare</td>
+                  <td>Functional</td>
+                  <td>Stores items in your shopping cart</td>
+                  <td>30 days</td>
+                </tr>
+                <tr>
+                  <td>_fbp</td>
+                  <td>Facebook</td>
+                  <td>Marketing</td>
+                  <td>Facebook Pixel for ad delivery and measurement</td>
+                  <td>3 months</td>
+                </tr>
+                <tr>
+                  <td>_gcl_au</td>
+                  <td>Google Ads</td>
+                  <td>Marketing</td>
+                  <td>Google Ads conversion tracking</td>
+                  <td>3 months</td>
+                </tr>
+                <tr>
+                  <td>NID</td>
+                  <td>Google</td>
+                  <td>Marketing</td>
+                  <td>
+                    Stores user preferences and information for Google Maps
+                  </td>
+                  <td>6 months</td>
+                </tr>
+                <tr>
+                  <td>li_sugr</td>
+                  <td>LinkedIn</td>
+                  <td>Marketing</td>
+                  <td>LinkedIn Insight Tag for conversion tracking</td>
+                  <td>3 months</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Local Storage</h3>
+          <p>
+            In addition to cookies, we may use local storage to store
+            information on your device:
+          </p>
+          <ul>
+            <li>
+              <strong>agricare_user_settings:</strong> Stores user interface
+              preferences
+            </li>
+            <li>
+              <strong>agricare_recent_items:</strong> Stores recently viewed
+              products or pages
+            </li>
+            <li>
+              <strong>agricare_offline_data:</strong> Stores data for offline
+              functionality
+            </li>
+          </ul>
+        </section>
+
+        <section id="changes">
+          <h2>9. Changes to This Policy</h2>
+          <p>
+            We may update this Cookies Policy from time to time to reflect
+            changes in technology, legislation, or our operations. We will post
+            any changes on this page and update the "Last Updated" date at the
+            top of this policy.
+          </p>
+          <p>
+            We recommend that you check this page periodically to stay informed
+            about our use of cookies. If we make material changes to this
+            policy, we will notify you by email or through a notice on our
+            website.
+          </p>
+
+          <h3>Change History</h3>
+          <ul>
+            <li><strong>August 26, 2025:</strong> Initial version published</li>
+            <li>
+              <strong>April 15, 2023:</strong> Privacy policy referenced was
+              last updated
+            </li>
+          </ul>
+        </section>
+
+        <section id="contact">
+          <h2>10. Contact Us</h2>
+          <p>
+            If you have any questions about our use of cookies or this policy,
+            please contact us:
+          </p>
+          <div class="info-box">
+            <p><strong>Entity:</strong> AgriCare Solutions Ltd.</p>
+            <p>
+              <strong>Email:</strong>
+              <a href="mailto:gautamtyagi9058@gmail.com"
+                >gautamtyagi9058@gmail.com</a
+              >
+            </p>
+            <p>
+              <strong>Address:</strong> Tyagi Farm Street, Agricultural Zone
+              Meerut, India 250001
+            </p>
+            <p>
+              <strong>Phone:</strong>
+              <a href="tel:+917906969709">+91 (790) 696-9709</a>
+            </p>
+            <p><strong>Data Protection Officer:</strong> dpo@agricare.com</p>
+          </div>
+
+          <h3>Additional Resources</h3>
+          <p>
+            For more information about cookies and how to manage them, you may
+            find the following resources helpful:
+          </p>
+          <ul>
+            <li>
+              All About Cookies:
+              <a href="https://www.allaboutcookies.org/" target="_blank"
+                >https://www.allaboutcookies.org/</a
+              >
+            </li>
+            <li>
+              Your Online Choices:
+              <a href="http://www.youronlinechoices.com/" target="_blank"
+                >http://www.youronlinechoices.com/</a
+              >
+            </li>
+            <li>
+              Network Advertising Initiative:
+              <a href="http://www.networkadvertising.org/" target="_blank"
+                >http://www.networkadvertising.org/</a
+              >
+            </li>
+          </ul>
+        </section>
+
+        <a href="#" class="back-to-top" id="backToTop">
+          <i class="fas fa-arrow-up"></i>
+        </a>
+      </main>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>© 2025 AgriCare. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Back to top functionality
+      const backToTopButton = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add("show");
+        } else {
+          backToTopButton.classList.remove("show");
+        }
+      });
+
+      backToTopButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+
+      // Scroll spy for sidebar navigation
+      const sections = document.querySelectorAll("main section");
+      const navLinks = document.querySelectorAll(".cookies-sidebar a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 150;
+          if (window.pageYOffset >= sectionTop) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + current) {
+            link.classList.add("active");
+          }
+        });
+      });
+
+      // Cookie preferences functionality
+      document
+        .querySelector(".save-settings")
+        .addEventListener("click", function () {
+          alert("Your cookie preferences have been saved!");
+        });
+    </script>
+  </body>
+</html>

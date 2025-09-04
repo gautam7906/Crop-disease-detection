@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us | AGriCare - Plant Health Solutions</title>
+    <link
+      rel="icon"
+      href="{{ url_for('static', filename='images/logo.jpg') }}"
+      type="image/jpeg"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstrap.min.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      :root {
+        --primary-green: #2e8b57;
+        --dark-green: #3a7d44;
+        --light-gray: #f8f9fa;
+        --dark-gray: #343a40;
+      }
+
+      body {
+        padding-top: 60px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .navbar {
+        box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .contact-header {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80");
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 7rem 0;
+        margin-bottom: 3rem;
+      }
+
+      .contact-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        height: 100%;
+        background: white;
+        overflow: hidden;
+      }
+
+      .contact-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+
+      .contact-icon {
+        font-size: 2.5rem;
+        color: var(--primary-green);
+        margin-bottom: 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .contact-card:hover .contact-icon {
+        transform: scale(1.2);
+      }
+
+      .contact-info {
+        position: relative;
+        padding-left: 20px;
+      }
+
+      .contact-info::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 4px;
+        background: var(--primary-green);
+        border-radius: 4px;
+      }
+
+      .contact-form {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+      }
+
+      .form-control {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+      }
+
+      .form-control:focus {
+        border-color: var(--primary-green);
+        box-shadow: 0 0 0 0.25rem rgba(46, 139, 87, 0.25);
+      }
+
+      .submit-btn {
+        background-color: var(--primary-green);
+        border: none;
+        padding: 12px 35px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--dark-green);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(46, 139, 87, 0.4);
+      }
+
+      .map-container {
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        height: 400px;
+      }
+
+      .contact-form-box {
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 2.5rem;
+        background: white;
+        transition: all 0.4s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .contact-form-box:hover {
+        box-shadow: 0 8px 25px rgba(46, 139, 87, 0.1);
+        transform: translateY(-5px);
+      }
+
+      /* Form Fields Styling */
+      .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+
+      .input-field {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 12px 15px;
+        transition: all 0.3s ease;
+        background-color: #f9f9f9;
+      }
+
+      .input-field:hover {
+        border-color: #2e8b57;
+        background-color: white;
+      }
+
+      .input-field:focus {
+        border-color: #2e8b57;
+        box-shadow: 0 0 0 0.2rem rgba(46, 139, 87, 0.25);
+        background-color: white;
+      }
+
+      /* Animated Underline Effect */
+      .highlight-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #2e8b57;
+        transition: width 0.3s ease;
+      }
+
+      .input-field:hover ~ .highlight-bar,
+      .input-field:focus ~ .highlight-bar {
+        width: 100%;
+      }
+
+      /* Submit Button */
+      .submit-btn {
+        background-color: #2e8b57;
+        border: none;
+        transition: all 0.3s ease;
+      }
+
+      .submit-btn:hover {
+        background-color: #3a7d44;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(46, 139, 87, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding-top: 70px;
+        }
+
+        .contact-header {
+          padding: 3rem 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <!-- Hero Header -->
+    <section class="contact-header text-center" data-aos="fade">
+      <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Contact Our Plant Health Experts</h1>
+        <p class="lead">
+          We're here to help you with all your agricultural needs
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Cards -->
+    <section class="container mb-5">
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="contact-card p-4 h-100 text-center">
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+            <h3 class="mb-3">Our Location</h3>
+            <div class="contact-info text-start">
+              <p class="mb-1"><strong>AGriCare Solutions</strong></p>
+              <p class="mb-1">Tyagi Farm Street</p>
+              <p class="mb-1">Agricultural Zone</p>
+              <p>Meerut, India 250001</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="contact-card p-4 h-100 text-center">
+            <i class="fas fa-envelope contact-icon"></i>
+            <h3 class="mb-3">Email Us</h3>
+            <div class="contact-info text-start">
+              <p class="mb-3">
+                <strong>General Inquiries:</strong><br />
+                <a href="mailto:info@agricare.com" class="text-decoration-none"
+                  >info@agricare.com</a
+                >
+              </p>
+              <p>
+                <strong>Support:</strong><br />
+                <a
+                  href="mailto:support@agricare.com"
+                  class="text-decoration-none"
+                  >support@agricare.com</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="contact-card p-4 h-100 text-center">
+            <i class="fab fa-whatsapp contact-icon" style="color: #25d366"></i>
+            <h3 class="mb-3">WhatsApp Us</h3>
+            <div class="contact-info text-start">
+              <p class="mb-3">
+                <strong>Customer Service:</strong><br />
+                <!-- YAHAN CHANGE KARO -->
+                <a
+                  href="https://wa.me/917906969709?text=Hello%20AGriCare%2C%20I%20need%20help%20with%20plant%20disease"
+                  target="_blank"
+                  class="text-decoration-none"
+                  >+91 79069 69709</a
+                >
+              </p>
+              <p>
+                <strong>Technical Support:</strong><br />
+                <!-- YAHAN CHANGE KARO -->
+                <a
+                  href="https://wa.me/917505392430?text=Hello%20AGriCare%2C%20I%20need%20technical%20support"
+                  target="_blank"
+                  class="text-decoration-none"
+                  >+91 75053 92430</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form and Map -->
+    <section class="container mb-5">
+      <div class="row g-5">
+        <div class="col-lg-6" data-aos="fade-right">
+          <div class="contact-form-box">
+            <h2 class="mb-4 text-center">Send Us a Message</h2>
+
+            <!-- FLASH MESSAGE START -->
+            {% with messages = get_flashed_messages(with_categories=true) %} {%
+            if messages %} {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mt-2 text-center">
+              {{ message }}
+            </div>
+            {% endfor %} {% endif %} {% endwith %}
+            <!-- FLASH MESSAGE END -->
+
+            <form class="row g-3" action="/contact" method="POST">
+              <!-- Name Field -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control input-field"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                  />
+                  <div class="highlight-bar"></div>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <input
+                    type="email"
+                    class="form-control input-field"
+                    name="email"
+                    placeholder="Your Email"
+                    required
+                  />
+                  <div class="highlight-bar"></div>
+                </div>
+              </div>
+
+              <!-- Subject Field -->
+              <div class="col-12">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control input-field"
+                    name="subject"
+                    placeholder="Subject"
+                    required
+                  />
+                  <div class="highlight-bar"></div>
+                </div>
+              </div>
+
+              <!-- Message Field -->
+              <div class="col-12">
+                <div class="form-group">
+                  <textarea
+                    class="form-control input-field"
+                    name="message"
+                    rows="5"
+                    placeholder="Your Message"
+                    required
+                  ></textarea>
+                  <div class="highlight-bar"></div>
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="col-12 text-center">
+                <button
+                  type="submit"
+                  class="btn submit-btn text-white px-4 py-3"
+                >
+                  <i class="fas fa-paper-plane me-2"></i> Send Message
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-left">
+          <div class="map-container h-100">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3499.876234021447!2d77.7056233150826!3d28.70472298238365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfea6a5e5c4a1%3A0x9b5b5b5b5b5b5b5b!2sMeerut%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      // Initialize animations
+      AOS.init({
+        duration: 1000,
+        offset: 120,
+        once: false,
+        mirror: true,
+      });
+
+      // Add smooth scrolling to all links
+      document
+        .querySelectorAll('a[href^="#"], a[href^="mailto:"], a[href^="tel:"]')
+        .forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            if (this.getAttribute("href").startsWith("#")) {
+              document.querySelector(this.getAttribute("href")).scrollIntoView({
+                behavior: "smooth",
+              });
+            } else {
+              window.location.href = this.getAttribute("href");
+            }
+          });
+        });
+    </script>
+  </body>
+</html>

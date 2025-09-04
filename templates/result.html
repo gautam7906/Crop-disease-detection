@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Diagnosis Result • AGriCare</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <meta name="theme-color" content="#0b0f14" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      name="description"
+      content="AGriCare AI-powered plant disease diagnosis result with confidence, cause, cure, and prevention tips."
+    />
+    <meta property="og:title" content="AGriCare • Diagnosis Result" />
+    <meta
+      property="og:description"
+      content="AI diagnosis with premium UI/UX, animations and dynamic insights."
+    />
+    <meta property="og:type" content="website" />
+
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --bg-soft: #0f151d;
+        --card: #0d141b;
+        --card-2: #111a23;
+        --text: #e6f1ff;
+        --muted: #91a3b0;
+        --primary: #00e676;
+        --primary-2: #00bfa5;
+        --accent: #7c4dff;
+        --warn: #ffb300;
+        --error: #ff5252;
+        --ring: 0 0 0 2px rgba(0, 230, 118, 0.28),
+          0 0 0 8px rgba(0, 230, 118, 0.08);
+        --radius: 18px;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+        --fast: 0.18s;
+        --easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 600px at 10% -10%,
+            rgba(124, 77, 255, 0.18),
+            transparent 60%
+          ),
+          radial-gradient(
+            1000px 500px at 110% 10%,
+            rgba(0, 191, 165, 0.15),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #0b0f14, #0a0e13 40%, #0b1117);
+        color: var(--text);
+        font-family: "Inter", system-ui, Segoe UI, Roboto, Arial, sans-serif;
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 28px 20px 80px;
+        content-visibility: auto;
+        contain-intrinsic-size: 1200px 2000px;
+      }
+      .header {
+        position: relative;
+        overflow: hidden;
+        border-radius: calc(var(--radius) + 6px);
+        padding: 28px 22px 22px;
+        background: linear-gradient(
+          160deg,
+          rgba(0, 230, 118, 0.08),
+          rgba(124, 77, 255, 0.06) 45%,
+          rgba(0, 191, 165, 0.07)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        box-shadow: var(--shadow);
+        will-change: transform;
+      }
+      .header .badge {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: rgba(124, 77, 255, 0.14);
+        color: #e9ddff;
+        border: 1px solid rgba(124, 77, 255, 0.4);
+        text-transform: uppercase;
+        font-size: 0.78rem;
+      }
+      .header h1 {
+        margin: 14px 0 6px;
+        font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+        letter-spacing: 0.2px;
+      }
+      .header p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .parallax {
+        pointer-events: none;
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        border-radius: inherit;
+      }
+      .parallax .blob {
+        position: absolute;
+        filter: blur(40px);
+        opacity: 0.35;
+        transform: translateZ(0);
+      }
+      .blob.b1 {
+        width: 420px;
+        height: 420px;
+        background: radial-gradient(circle, #00e676, transparent 60%);
+        top: -80px;
+        left: -40px;
+      }
+      .blob.b2 {
+        width: 520px;
+        height: 520px;
+        background: radial-gradient(circle, #7c4dff, transparent 60%);
+        right: -140px;
+        top: -120px;
+      }
+      .blob.b3 {
+        width: 380px;
+        height: 380px;
+        background: radial-gradient(circle, #00bfa5, transparent 60%);
+        left: 38%;
+        bottom: -160px;
+      }
+
+      .topbar {
+        margin-top: 16px;
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .topbar .crumbs {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .crumbs i {
+        opacity: 0.6;
+      }
+      .preview {
+        margin-top: 18px;
+        display: grid;
+        grid-template-columns: 1.15fr 1.85fr;
+        gap: 20px;
+      }
+      @media (max-width: 980px) {
+        .preview {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card {
+        background: linear-gradient(180deg, var(--card), var(--card-2));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+        will-change: transform;
+        word-break: break-word;
+      }
+      .card.pad {
+        padding: 18px;
+      }
+      .image-box {
+        position: relative;
+      }
+      .image-box .img {
+        width: 100%;
+        display: block;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .img.skeleton {
+        background: linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.06),
+          rgba(255, 255, 255, 0.12),
+          rgba(255, 255, 255, 0.06)
+        );
+        background-size: 200% 100%;
+        animation: sheen 1.2s linear infinite;
+      }
+      @keyframes sheen {
+        to {
+          background-position: -200% 0;
+        }
+      }
+      .tag {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: rgba(0, 0, 0, 0.45);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 8px 12px;
+        border-radius: 999px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .tag .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .dot.warn {
+        background: var(--warn);
+        box-shadow: 0 0 12px var(--warn);
+      }
+      .dot.ok {
+        background: var(--primary);
+        box-shadow: 0 0 12px var(--primary);
+      }
+      .dot.bad {
+        background: var(--error);
+        box-shadow: 0 0 12px var(--error);
+      }
+      .meta {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        padding: 12px 16px;
+      }
+      .meta .file {
+        color: var(--muted);
+        font-size: 0.9rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 60%;
+      }
+      .meta .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .button {
+        appearance: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, #0f1821, #0c131a);
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 12px;
+        font-weight: 600;
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        transform: translateZ(0);
+        transition: transform var(--fast) var(--easing),
+          box-shadow var(--fast) var(--easing),
+          border-color var(--fast) var(--easing);
+        cursor: pointer;
+      }
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--ring);
+        border-color: rgba(0, 230, 118, 0.45);
+      }
+      .button:focus-visible {
+        outline: none;
+        box-shadow: var(--ring);
+      }
+      .button.primary {
+        background: linear-gradient(180deg, #0b1e14, #071c16);
+        border-color: rgba(0, 230, 118, 0.35);
+      }
+      .button.ghost {
+        background: transparent;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 18px;
+        margin-top: 20px;
+      }
+      .tile {
+        grid-column: span 6;
+        background: linear-gradient(180deg, var(--card), var(--card-2));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+        transition: transform var(--fast) var(--easing),
+          box-shadow var(--fast) var(--easing);
+        position: relative;
+        overflow: hidden;
+      }
+      .tile:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+      }
+      .tile.small {
+        grid-column: span 4;
+      }
+      .tile.full {
+        grid-column: span 12;
+      }
+      @media (max-width: 1080px) {
+        .tile.small {
+          grid-column: span 6;
+        }
+      }
+      @media (max-width: 760px) {
+        .tile,
+        .tile.small,
+        .tile.full {
+          grid-column: span 12;
+        }
+      }
+      .tile .head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 8px;
+      }
+      .tile .head i {
+        color: var(--primary);
+      }
+      .tile .title {
+        font-weight: 700;
+      }
+      .tile p {
+        margin: 8px 0 0;
+        color: var(--muted);
+      }
+      .conf {
+        display: grid;
+        place-items: center;
+        padding: 14px;
+      }
+      .gauge {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: conic-gradient(
+          var(--primary) 0%,
+          rgba(255, 255, 255, 0.09) 0%
+        );
+        display: grid;
+        place-items: center;
+        box-shadow: inset 0 0 24px rgba(0, 230, 118, 0.18),
+          0 10px 40px rgba(0, 0, 0, 0.4);
+      }
+      .gauge .inner {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        background: linear-gradient(180deg, #0b1117, #0f1821);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        display: grid;
+        place-items: center;
+        text-align: center;
+        padding: 10px;
+      }
+      .gauge .val {
+        font-size: 1.9rem;
+        font-weight: 800;
+        color: #eafff5;
+      }
+      .badge-row {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+      .b {
+        padding: 6px 10px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .b.ok {
+        background: rgba(0, 230, 118, 0.12);
+        color: #a8ffcf;
+      }
+      .b.mod {
+        background: rgba(255, 179, 0, 0.12);
+        color: #ffe3a1;
+      }
+      .b.bad {
+        background: rgba(255, 82, 82, 0.14);
+        color: #ffc6c6;
+      }
+      .list {
+        display: grid;
+        gap: 10px;
+        margin-top: 8px;
+      }
+      .li {
+        display: flex;
+        gap: 10px;
+        align-items: flex-start;
+        padding: 12px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .li i {
+        margin-top: 2px;
+        color: var(--primary);
+      }
+      .footer-actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .model-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 12px;
+        padding: 15px;
+        transition: all 0.3s ease;
+      }
+      .model-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateY(-3px);
+      }
+      .progress {
+        overflow: hidden;
+        position: relative;
+        height: 10px;
+        margin-top: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+      }
+      .progress-bar {
+        transition: width 0.6s ease;
+        height: 100%;
+        border-radius: 5px;
+      }
+
+      .scrollup {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(180deg, #0f1821, #0b1218);
+        color: var(--text);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: var(--shadow);
+        opacity: 0;
+        transform: translateY(16px);
+        pointer-events: none;
+        transition: opacity var(--fast) var(--easing),
+          transform var(--fast) var(--easing),
+          box-shadow var(--fast) var(--easing);
+        z-index: 30;
+      }
+      .scrollup.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .scrollup:hover {
+        box-shadow: var(--ring);
+      }
+
+      .fade {
+        opacity: 0;
+        transform: translateY(14px);
+        transition: opacity 0.6s var(--easing), transform 0.6s var(--easing);
+      }
+      .in-view {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      hr.sep {
+        border: 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.12),
+          transparent
+        );
+        margin: 14px 0;
+      }
+      .kv {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .kv .chip {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .brand .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #1aee85, #0bb2a1);
+        color: #003326;
+        font-weight: 900;
+      }
+      a.clean {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 18px;
+        transform: translate(-50%, 20px);
+        opacity: 0;
+        background: #0e1620;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 10px 14px;
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        z-index: 40;
+        transition: all 0.25s var(--easing);
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      .toast i {
+        color: var(--primary);
+      }
+
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media print {
+        body {
+          background: #fff;
+          color: #000;
+        }
+        .parallax,
+        .scrollup,
+        .meta .actions,
+        .footer-actions,
+        .toast {
+          display: none !important;
+        }
+        .card,
+        .tile {
+          box-shadow: none;
+          border: 1px solid #ddd;
+        }
+        .header {
+          background: #fff;
+          border: none;
+        }
+        .gauge {
+          box-shadow: none;
+        }
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="scrollUp" class="scrollup" aria-label="Scroll to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+    <div id="toast" class="toast" role="status" aria-live="polite">
+      <i class="fa-solid fa-circle-check"></i><span id="toastMsg">Copied!</span>
+    </div>
+
+    <div class="container">
+      <header class="header fade" aria-labelledby="pageTitle">
+        <div class="parallax" aria-hidden="true">
+          <div class="blob b1"></div>
+          <div class="blob b2"></div>
+          <div class="blob b3"></div>
+        </div>
+        <div class="topbar">
+          <div class="brand">
+            <a class="navbar-brand" style="font-size: 20px">
+              <img
+                src="{{ url_for('static', filename='images/logo.jpg') }}"
+                alt="AGriCare logo"
+                width="35"
+                height="35"
+              />
+            </a>
+            <div>
+              <div style="font-weight: 900; letter-spacing: 0.2px">
+                AGriCare
+              </div>
+              <div style="font-size: 0.8rem; color: var(--muted)">
+                AI Diagnosis Suite
+              </div>
+            </div>
+          </div>
+          <nav class="crumbs" aria-label="Breadcrumb">
+            <a href="{{ url_for('home') }}" class="clean">Home</a>
+            <i class="fa-solid fa-chevron-right fa-xs" aria-hidden="true"></i>
+            <span aria-current="page">Results</span>
+          </nav>
+          <span class="badge" aria-label="Premium diagnosis"
+            ><i class="fa-solid fa-bolt"></i> Premium</span
+          >
+        </div>
+        <h1 id="pageTitle">Diagnosis Result</h1>
+        <p>Advanced AI-powered analysis for your plant's health.</p>
+      </header>
+
+      <section class="preview fade" aria-label="Preview and insights">
+        <div class="card image-box">
+          <img
+            id="plantImg"
+            class="img skeleton"
+            src="{{ url_for('static', filename=imagepath) }}"
+            alt="Uploaded plant image"
+            loading="eager"
+            decoding="async"
+          />
+          <div id="severityTag" class="tag">
+            <span id="severityDot" class="dot"></span>
+            <span id="severityText">
+              {% if 'healthy' in prediction.name|lower %} Healthy {% elif
+              prediction.confidence_int < 40 %} Mild Confidence {% elif
+              prediction.confidence_int < 70 %} Moderate Confidence {% else %}
+              High Confidence {% endif %}
+            </span>
+          </div>
+          <div class="meta">
+            <div class="file" title="{{ imagepath }}">
+              <i class="fa-regular fa-image"></i> {{ imagepath }}
+            </div>
+            <div class="actions" role="group" aria-label="Actions">
+              <a class="button" href="{{ url_for('home') }}"
+                ><i class="fa-solid fa-upload"></i> Upload Another</a
+              >
+              <button class="button primary" id="downloadBtn" type="button">
+                <i class="fa-solid fa-file-arrow-down"></i> Download Report
+              </button>
+              <button class="button ghost" id="copyLinkBtn" type="button">
+                <i class="fa-solid fa-link"></i> Copy Link
+              </button>
+              <button class="button" id="printBtn" type="button">
+                <i class="fa-solid fa-file-pdf"></i> Print / PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="grid">
+            <div class="tile small fade" aria-labelledby="diseaseTitle">
+              <div class="head">
+                <i class="fa-solid fa-disease" aria-hidden="true"></i>
+                <div id="diseaseTitle" class="title">Disease Identified</div>
+              </div>
+              <hr class="sep" role="presentation" />
+              <div
+                style="font-size: 1.05rem; font-weight: 700"
+                id="diseaseName"
+              >
+                {{ prediction.name }}
+              </div>
+              <div class="kv" style="margin-top: 10px">
+                <div class="chip">Model: Ensemble</div>
+                <div class="chip">Top-1</div>
+                <div class="chip">v2.0</div>
+              </div>
+            </div>
+
+            <div class="tile small fade" aria-labelledby="causeTitle">
+              <div class="head">
+                <i class="fa-solid fa-virus" aria-hidden="true"></i>
+                <div id="causeTitle" class="title">Primary Cause</div>
+              </div>
+              <hr class="sep" role="presentation" />
+              <p id="causeText">{{ prediction.cause }}</p>
+            </div>
+
+            <div class="tile small fade conf" aria-labelledby="confTitle">
+              <div
+                class="gauge"
+                id="gauge"
+                aria-labelledby="confTitle"
+                role="img"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="{{ prediction.confidence_int }}"
+              >
+                <div class="inner">
+                  <div id="confTitle" class="visually-hidden"></div>
+                  <div class="val" id="confVal">
+                    {{ prediction.confidence }}%
+                  </div>
+                  <div style="font-size: 0.82rem; color: var(--muted)">
+                    Confidence
+                  </div>
+                </div>
+              </div>
+              <div class="badge-row" id="badgeRow">
+                {% if 'healthy' in prediction.name|lower %}
+                <span class="b ok">Healthy</span
+                ><span class="b ok">No Action</span>
+                {% elif prediction.confidence_int < 40 %}
+                <span class="b ok">Low</span><span class="b mod">Review</span>
+                {% elif prediction.confidence_int < 70 %}
+                <span class="b mod">Moderate</span
+                ><span class="b ok">Treat</span>
+                {% else %}
+                <span class="b bad">Severe</span
+                ><span class="b ok">Act Now</span>
+                {% endif %}
+              </div>
+            </div>
+
+            <!-- Model Comparison Tile -->
+            <div class="tile full fade" aria-labelledby="modelCompareTitle">
+              <div class="head">
+                <i class="fa-solid fa-microscope" aria-hidden="true"></i>
+                <div id="modelCompareTitle" class="title">Model Comparison</div>
+              </div>
+              <hr class="sep" role="presentation" />
+              <div
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px"
+              >
+                <div class="model-card">
+                  <div class="head">
+                    <i class="fa-solid fa-robot" aria-hidden="true"></i>
+                    <div class="title">Model 1 Prediction</div>
+                  </div>
+                  <div style="margin-top: 10px">
+                    <strong>{{ prediction.model1_prediction }}</strong>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ prediction.model1_confidence }}%; background-color: #7c4dff;"
+                      ></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.9rem;
+                        margin-top: 5px;
+                        color: var(--muted);
+                      "
+                    >
+                      Confidence: {{ prediction.model1_confidence }}%
+                    </div>
+                  </div>
+                </div>
+                <div class="model-card">
+                  <div class="head">
+                    <i class="fa-solid fa-brain" aria-hidden="true"></i>
+                    <div class="title">Model 2 Prediction</div>
+                  </div>
+                  <div style="margin-top: 10px">
+                    <strong>{{ prediction.model2_prediction }}</strong>
+                    <div class="progress">
+                      <div
+                        class="progress-bar"
+                        role="progressbar"
+                        style="width: {{ prediction.model2_confidence }}%; background-color: #00bfa5;"
+                      ></div>
+                    </div>
+                    <div
+                      style="
+                        font-size: 0.9rem;
+                        margin-top: 5px;
+                        color: var(--muted);
+                      "
+                    >
+                      Confidence: {{ prediction.model2_confidence }}%
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                style="
+                  margin-top: 15px;
+                  padding: 12px;
+                  background: rgba(124, 77, 255, 0.08);
+                  border-radius: 10px;
+                  border-left: 3px solid #7c4dff;
+                "
+              >
+                <i class="fa-solid fa-lightbulb" style="color: #7c4dff"></i>
+                <span style="margin-left: 8px; font-size: 0.9rem">
+                  Final prediction is based on ensemble of both models for
+                  higher accuracy.
+                </span>
+              </div>
+            </div>
+
+            <div class="tile full fade" aria-labelledby="prevTitle">
+              <div class="head">
+                <i class="fa-solid fa-shield-virus" aria-hidden="true"></i>
+                <div id="prevTitle" class="title">Prevention Tips</div>
+              </div>
+              <hr class="sep" role="presentation" />
+              <div
+                class="grid"
+                style="grid-template-columns: repeat(12, 1fr); gap: 12px"
+              >
+                <div class="tile small" style="margin: 0">
+                  <div class="head">
+                    <i
+                      class="fa-solid fa-ruler-combined"
+                      aria-hidden="true"
+                    ></i>
+                    <div class="title">Spacing</div>
+                  </div>
+                  <p>Improve airflow with adequate plant spacing.</p>
+                </div>
+                <div class="tile small" style="margin: 0">
+                  <div class="head">
+                    <i class="fa-solid fa-sun" aria-hidden="true"></i>
+                    <div class="title">Sunlight</div>
+                  </div>
+                  <p>Ensure 6–8 hours of sunlight for most crops.</p>
+                </div>
+                <div class="tile small" style="margin: 0">
+                  <div class="head">
+                    <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+                    <div class="title">Crop Rotation</div>
+                  </div>
+                  <p>Rotate crops yearly to reduce soil-borne risks.</p>
+                </div>
+              </div>
+              <div class="footer-actions">
+                <button class="button" id="moreTipsBtn" type="button">
+                  <i class="fa-solid fa-lightbulb"></i> More Tips
+                </button>
+                <button class="button" id="printBtn2" type="button">
+                  <i class="fa-solid fa-file-pdf"></i> Print / PDF
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function(){
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Animate in
+        const io = ('IntersectionObserver' in window) ? new IntersectionObserver((es)=>{
+          es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target);} });
+        },{threshold:.12}) : null;
+        document.querySelectorAll('.fade').forEach(el=>{ if(io) io.observe(el); else el.classList.add('in-view'); });
+
+        // Confidence gauge
+        const gauge = document.getElementById('gauge');
+        const pct = Math.max(0, Math.min(100, {{ prediction.confidence_int }}));
+        setTimeout(()=>{ if(gauge) gauge.style.background = `conic-gradient(var(--primary) ${pct}%, rgba(255,255,255,.09) ${pct}%)`; }, prefersReduced?0:220);
+
+        // Severity dot color
+        const sevDot = document.getElementById('severityDot');
+        const nameLower = `{{ prediction.name|lower }}`;
+        let sevClass = 'warn';
+        if(nameLower.includes('healthy')) sevClass = 'ok';
+        else if(pct >= 70) sevClass = 'bad';
+        else if(pct >= 40) sevClass = 'warn';
+        else sevClass = 'ok';
+        if(sevDot){ sevDot.classList.add(sevClass); }
+
+        // Parallax: scroll + subtle mouse
+        const par = document.querySelector('.parallax');
+        function onScroll(){
+          const y = window.scrollY||document.documentElement.scrollTop;
+          const btn = document.getElementById('scrollUp');
+          if(btn){ if(y>140) btn.classList.add('show'); else btn.classList.remove('show'); }
+          if(!par || prefersReduced) return;
+          par.querySelectorAll('.blob').forEach((b,i)=>{
+            const rate = (i+1)*0.07;
+            b.style.transform = `translate3d(${(y*rate)}px, ${(y*rate*0.6)}px,0)`;
+          });
+        }
+        window.addEventListener('scroll', onScroll, {passive:true});
+        onScroll();
+
+        if(par && !prefersReduced){
+          window.addEventListener('mousemove', (e)=>{
+            const cx = (e.clientX / window.innerWidth - 0.5) * 10;
+            const cy = (e.clientY / window.innerHeight - 0.5) * 8;
+            par.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+          }, {passive:true});
+        }
+
+        // Image skeleton -> loaded
+        const img = document.getElementById('plantImg');
+        if(img){
+          if(img.complete){ img.classList.remove('skeleton'); }
+          else{
+            img.addEventListener('load', ()=> img.classList.remove('skeleton'));
+            img.addEventListener('error', ()=> img.classList.remove('skeleton'));
+          }
+        }
+
+        // Buttons
+        const scrollBtn = document.getElementById('scrollUp');
+        if(scrollBtn) scrollBtn.addEventListener('click', ()=> window.scrollTo({top:0,behavior: prefersReduced?'auto':'smooth'}));
+
+        function toast(msg){
+          const t = document.getElementById('toast'); const tm = document.getElementById('toastMsg');
+          if(!t||!tm) return; tm.textContent = msg; t.classList.add('show'); setTimeout(()=> t.classList.remove('show'), 1500);
+        }
+
+        // Download JSON report
+        function downloadReport(){
+          const report = {
+            app: 'AGriCare',
+            image: '{{ imagepath }}',
+            diagnosis: {
+              name: '{{ prediction.name }}',
+              cause: '{{ prediction.cause }}',
+              cure: '{{ prediction.cure }}'
+            },
+            confidence: {{ prediction.confidence }},
+            confidence_int: {{ prediction.confidence_int }},
+            model_comparison: {
+              model1: {
+                prediction: '{{ prediction.model1_prediction }}',
+                confidence: {{ prediction.model1_confidence }}
+              },
+              model2: {
+                prediction: '{{ prediction.model2_prediction }}',
+                confidence: {{ prediction.model2_confidence }}
+              }
+            },
+            timestamp: new Date().toISOString()
+          };
+          const blob = new Blob([JSON.stringify(report,null,2)], {type:'application/json'});
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url; a.download = `agricare_diagnosis_${Date.now()}.json`;
+          document.body.appendChild(a); a.click(); a.remove();
+          URL.revokeObjectURL(url);
+        }
+
+        const downloadBtn = document.getElementById('downloadBtn');
+        if(downloadBtn) downloadBtn.addEventListener('click', downloadReport);
+
+        // Copy link
+        const copyBtn = document.getElementById('copyLinkBtn');
+        if(copyBtn){
+          copyBtn.addEventListener('click', async ()=>{
+            try{
+              const link = window.location.href;
+              await navigator.clipboard.writeText(link);
+              toast('Link copied to clipboard');
+            }catch{ toast('Could not copy link'); }
+          });
+        }
+
+        // Print
+        const printBtn = document.getElementById('printBtn');
+        const printBtn2 = document.getElementById('printBtn2');
+        [printBtn, printBtn2].forEach(b => b && b.addEventListener('click', ()=> window.print()));
+
+        // Hover micro-interactions
+        document.querySelectorAll('.tile').forEach(t=>{
+          t.addEventListener('pointerenter', ()=>{ t.style.transform='translateY(-8px) scale(1.01)'; t.style.boxShadow='0 36px 80px rgba(0,0,0,.45)';});
+          t.addEventListener('pointerleave', ()=>{ t.style.transform=''; t.style.boxShadow='';});
+        });
+
+        // Keyboard shortcuts: g = scroll top, p = print, d = download
+        window.addEventListener('keydown',(e)=>{
+          if(e.target && ['INPUT','TEXTAREA'].includes(e.target.tagName)) return;
+          if(e.key==='g'){ e.preventDefault(); window.scrollTo({top:0,behavior: prefersReduced?'auto':'smooth'}); }
+          if(e.key==='p'){ e.preventDefault(); window.print(); }
+          if(e.key==='d'){ e.preventDefault(); downloadReport(); }
+        });
+
+        // "More tips" expands cure list with context-aware item
+        const moreTips = document.getElementById('moreTipsBtn');
+        if(moreTips){
+          moreTips.addEventListener('click', ()=>{
+            const list = document.getElementById('cureList');
+            const extra = document.createElement('div');
+            extra.className = 'li';
+            const icon = document.createElement('i'); icon.className='fa-solid fa-flask';
+            const txt = document.createElement('div');
+            const n = nameLower;
+            let advice = 'Use certified clean tools; sanitize between cuts.';
+            if(n.includes('tomato')) advice = 'Use copper-based fungicides on schedule; avoid overhead irrigation.';
+            else if(n.includes('potato')) advice = 'Rotate out of solanaceous crops for 2–3 years; remove volunteers.';
+            else if(n.includes('grape')) advice = 'Prune for airflow; remove mummified berries.';
+            txt.textContent = advice;
+            extra.appendChild(icon); extra.appendChild(txt); list.appendChild(extra);
+            moreTips.disabled = true; moreTips.textContent = 'Added Tips';
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

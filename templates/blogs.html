@@ -1,0 +1,506 @@
+{% extends "base.html" %} {% block title %}Pricing | AI-Powered Plant Health
+Diagnostics{% endblock %} {% block styles %}
+<style>
+  /* Global Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  a {
+    text-decoration: none;
+    color: #2e7d32;
+    transition: color 0.3s;
+  }
+
+  a:hover {
+    color: #1b5e20;
+  }
+
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .btn {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+  }
+
+  .btn:hover {
+    background-color: #1b5e20;
+    color: white;
+  }
+
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+      url("https://images.unsplash.com/photo-1500937386664-56d1dfef3854?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 10rem 0 8rem 0;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto 30px;
+  }
+
+  /* Blog Content */
+  .blog-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+
+  .articles-container {
+    display: grid;
+    gap: 25px;
+  }
+
+  .article-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+
+  .article-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .article-img {
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .article-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .article-card:hover .article-img img {
+    transform: scale(1.05);
+  }
+
+  .article-content {
+    padding: 20px;
+  }
+
+  .article-content h3 {
+    margin-bottom: 10px;
+    color: #2e7d32;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .article-meta span {
+    margin-right: 15px;
+  }
+
+  .article-meta i {
+    margin-right: 5px;
+  }
+
+  .read-more {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: 600;
+  }
+
+  /* Sidebar */
+  .sidebar {
+    background: white;
+    border-radius: 8px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar h3 {
+    color: #2e7d32;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories-list {
+    list-style: none;
+  }
+
+  .categories-list li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .categories-list li:last-child {
+    border-bottom: none;
+  }
+
+  .popular-post {
+    display: flex;
+    margin-bottom: 15px;
+  }
+
+  .popular-post-img {
+    width: 80px;
+    height: 60px;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-right: 15px;
+  }
+
+  .popular-post-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .popular-post-content h4 {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .popular-post-content span {
+    font-size: 0.8rem;
+    color: #666;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tag {
+    background: #e8f5e9;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #2e7d32;
+  }
+
+  /* Newsletter */
+  .newsletter {
+    background: linear-gradient(to right, #2e7d32, #4caf50);
+    color: white;
+    padding: 40px 0;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .newsletter h2 {
+    margin-bottom: 15px;
+  }
+
+  .newsletter p {
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+
+  .newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+  }
+
+  .newsletter-form button {
+    background: #1b5e20;
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    .blog-container {
+      grid-template-columns: 1fr;
+    }
+
+    .header-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    nav ul {
+      margin-top: 15px;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero h2 {
+      font-size: 2rem;
+    }
+
+    .newsletter-form {
+      flex-direction: column;
+    }
+
+    .newsletter-form input {
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+
+    .newsletter-form button {
+      border-radius: 4px;
+      padding: 12px;
+    }
+
+    nav ul {
+      flex-wrap: wrap;
+    }
+
+    nav ul li {
+      margin: 5px 10px;
+    }
+  }
+</style>
+{% endblock %} {% block content %}
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <h2>AGriCare Blog</h2>
+    <p>
+      Expert agricultural advice, innovative farming techniques, and sustainable
+      practices for modern farmers
+    </p>
+    <a href="#newsletter" class="btn">Subscribe to Newsletter</a>
+  </div>
+</section>
+
+<!-- Blog Content -->
+<div class="container blog-container">
+  <main class="articles-container">
+    <article class="article-card">
+      <div class="article-img">
+        <img
+          src="https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+          alt="Sustainable Farming"
+        />
+      </div>
+      <div class="article-content">
+        <h3>Sustainable Farming Practices for the 21st Century</h3>
+        <div class="article-meta">
+          <span><i class="far fa-calendar"></i> June 15, 2023</span>
+          <span><i class="far fa-user"></i> Dr. Sarah Johnson</span>
+          <span><i class="far fa-folder"></i> Sustainable Agriculture</span>
+        </div>
+        <p>
+          Discover innovative sustainable farming techniques that increase yield
+          while protecting the environment. Learn about crop rotation, water
+          conservation, and organic pest control methods that are
+          revolutionizing modern agriculture.
+        </p>
+        <a href="#" class="read-more"
+          >Read More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </article>
+
+    <article class="article-card">
+      <div class="article-img">
+        <img
+          src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+          alt="Crop Monitoring"
+        />
+      </div>
+      <div class="article-content">
+        <h3>How Technology is Revolutionizing Crop Monitoring</h3>
+        <div class="article-meta">
+          <span><i class="far fa-calendar"></i> June 10, 2023</span>
+          <span><i class="far fa-user"></i> Mark Williams</span>
+          <span><i class="far fa-folder"></i> Agri-Tech</span>
+        </div>
+        <p>
+          From drone surveillance to IoT sensors, technology is transforming how
+          farmers monitor crop health. This article explores the latest
+          innovations that help farmers detect issues early and maximize their
+          harvest potential.
+        </p>
+        <a href="#" class="read-more"
+          >Read More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </article>
+
+    <article class="article-card">
+      <div class="article-img">
+        <img
+          src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80"
+          alt="Soil Health"
+        />
+      </div>
+      <div class="article-content">
+        <h3>The Importance of Soil Health and How to Improve It</h3>
+        <div class="article-meta">
+          <span><i class="far fa-calendar"></i> June 5, 2023</span>
+          <span><i class="far fa-user"></i> Prof. Robert Chen</span>
+          <span><i class="far fa-folder"></i> Soil Management</span>
+        </div>
+        <p>
+          Healthy soil is the foundation of successful farming. Learn how to
+          test your soil's health, interpret the results, and implement
+          strategies to improve soil structure, nutrient content, and microbial
+          activity for better crop yields.
+        </p>
+        <a href="#" class="read-more"
+          >Read More <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </article>
+  </main>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <h3>Search</h3>
+      <form>
+        <input
+          type="text"
+          placeholder="Search articles..."
+          style="
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+          "
+        />
+      </form>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Categories</h3>
+      <ul class="categories-list">
+        <li><a href="#">Sustainable Agriculture (12)</a></li>
+        <li><a href="#">Crop Management (8)</a></li>
+        <li><a href="#">Soil Health (5)</a></li>
+        <li><a href="#">Agri-Tech (10)</a></li>
+        <li><a href="#">Livestock Care (7)</a></li>
+        <li><a href="#">Organic Farming (9)</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Popular Posts</h3>
+      <div class="popular-post">
+        <div class="popular-post-img">
+          <img
+            src="https://images.unsplash.com/photo-1590172205845-f4crop&w=100&q=80"
+            alt="Water Conservation"
+          />
+        </div>
+        <div class="popular-post-content">
+          <h4><a href="#">Water Conservation Techniques for Dry Regions</a></h4>
+          <span>May 28, 2023</span>
+        </div>
+      </div>
+      <div class="popular-post">
+        <div class="popular-post-img">
+          <img
+            src="https://images.unsplash.com/photo-1595245376869-189b4a57a2bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+            alt="Organic Pest Control"
+          />
+        </div>
+        <div class="popular-post-content">
+          <h4><a href="#">Organic Pest Control Methods That Work</a></h4>
+          <span>May 20, 2023</span>
+        </div>
+      </div>
+      <div class="popular-post">
+        <div class="popular-post-img">
+          <img
+            src="https://images.unsplash.com/photo-1625246339666-4c6f58bd8ea5?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"
+            alt="Crop Rotation"
+          />
+        </div>
+        <div class="popular-post-content">
+          <h4><a href="#">Maximizing Yield With Smart Crop Rotation</a></h4>
+          <span>May 15, 2023</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <h3>Tags</h3>
+      <div class="tags">
+        <span class="tag">Farming</span>
+        <span class="tag">Sustainability</span>
+        <span class="tag">Technology</span>
+        <span class="tag">Crops</span>
+        <span class="tag">Soil</span>
+        <span class="tag">Irrigation</span>
+        <span class="tag">Organic</span>
+        <span class="tag">Harvest</span>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- Newsletter -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>
+      Stay updated with the latest agricultural insights, tips, and news
+      delivered directly to your inbox.
+    </p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email address" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

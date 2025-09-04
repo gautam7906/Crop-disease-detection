@@ -1,0 +1,1447 @@
+{% extends "base.html" %} {% block title %}AI Plant Health System | AgriCare{%
+endblock %} {% block css %}
+<!-- Features page specific CSS -->
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/features.css') }}"
+/>
+{% endblock %} {% block styles %}
+<style>
+  /* Luxury Design System */
+  :root {
+    /* Luxury Colors */
+    --luxury-primary: #28a745;
+    --luxury-primary-dark: #1e7e34;
+    --luxury-secondary: #20c997;
+    --luxury-accent: #6f42c1;
+    --luxury-dark: #161b22;
+    --luxury-darker: #0d1117;
+    --luxury-light: #f8f9fa;
+    --luxury-lighter: #ffffff;
+    --luxury-gray: #6c757d;
+
+    /* Luxury Spacing */
+    --luxury-space-xs: 0.5rem;
+    --luxury-space-sm: 1rem;
+    --luxury-space-md: 1.5rem;
+    --luxury-space-lg: 2rem;
+    --luxury-space-xl: 3rem;
+    --luxury-space-2xl: 4rem;
+
+    /* Luxury Typography */
+    --luxury-text-sm: 0.875rem;
+    --luxury-text-base: 1rem;
+    --luxury-text-lg: 1.25rem;
+    --luxury-text-xl: 1.5rem;
+    --luxury-text-2xl: 2rem;
+    --luxury-text-3xl: 3rem;
+    --luxury-text-4xl: 3.5rem;
+
+    /* Luxury Shadows */
+    --luxury-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --luxury-shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --luxury-shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --luxury-shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.2);
+    --luxury-shadow-xxl: 0 30px 60px rgba(0, 0, 0, 0.3);
+
+    /* Luxury Transitions */
+    --luxury-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    --luxury-transition-slow: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Luxury Animations */
+  @keyframes luxury-float {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes luxury-pop-in {
+    0% {
+      transform: scale(0.5);
+      opacity: 0;
+    }
+    80% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes luxury-slide-up {
+    0% {
+      transform: translateY(100px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes luxury-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes luxury-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes luxury-rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes luxury-rotate-reverse {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(-360deg);
+    }
+  }
+
+  @keyframes luxury-bar-grow {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--height);
+    }
+  }
+
+  @keyframes luxury-circle-fill {
+    from {
+      stroke-dasharray: 0, 100;
+    }
+    to {
+      stroke-dasharray: var(--value), 100;
+    }
+  }
+
+  @keyframes luxury-scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+
+  @keyframes luxury-glow {
+    0% {
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 15px rgba(40, 167, 69, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(40, 167, 69, 0);
+    }
+  }
+
+  /* Animation Classes */
+  .animate-pop-in {
+    animation: luxury-pop-in 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+      forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .animate-float {
+    animation: luxury-float 1s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .animate-slide-up {
+    animation: luxury-slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .animate-fade-in {
+    animation: luxury-fade-in 1s ease-out forwards;
+    animation-delay: var(--delay);
+    opacity: 0;
+  }
+
+  .animate-rotate {
+    animation: luxury-rotate 20s linear infinite;
+  }
+
+  .animate-rotate-reverse {
+    animation: luxury-rotate-reverse 25s linear infinite;
+  }
+
+  /* Luxury Base Styles */
+  body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--luxury-dark);
+    line-height: 1.6;
+    margin: 0;
+    overflow-x: hidden;
+    background-color: #f8fafc;
+  }
+
+  /* Luxury Header */
+  .luxury-header {
+    position: relative;
+    height: 100vh;
+    min-height: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+    color: white;
+    overflow: hidden;
+    border-radius: 20px;
+  }
+
+  .luxury-header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+      circle at 20% 50%,
+      rgba(40, 167, 69, 0.15) 0%,
+      transparent 50%
+    );
+    animation: luxury-pulse 8s infinite alternate;
+  }
+
+  .luxury-header-content {
+    display: flex;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--luxury-space-2xl) var(--luxury-space-md);
+    position: relative;
+    z-index: 2;
+    align-items: center;
+  }
+
+  .luxury-tagline {
+    flex: 1;
+    padding-right: var(--luxury-space-xl);
+  }
+
+  .luxury-badge {
+    display: inline-block;
+    background: linear-gradient(
+      90deg,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    color: white;
+    padding: var(--luxury-space-xs) var(--luxury-space-md);
+    border-radius: 50px;
+    font-size: var(--luxury-text-sm);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: var(--luxury-space-md);
+    box-shadow: var(--luxury-shadow-md);
+  }
+
+  .luxury-title {
+    font-size: var(--luxury-text-4xl);
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: var(--luxury-space-md);
+  }
+
+  .luxury-highlight {
+    background: linear-gradient(
+      90deg,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+  }
+
+  .luxury-subtitle {
+    font-size: var(--luxury-text-xl);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin-bottom: var(--luxury-space-xl);
+  }
+
+  .luxury-scroll-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: var(--luxury-text-sm);
+    animation: luxury-scroll-bounce 2s infinite;
+  }
+
+  .luxury-mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    border-radius: 12px;
+    margin-bottom: var(--luxury-space-xs);
+    position: relative;
+  }
+
+  .luxury-scroller {
+    position: absolute;
+    width: 4px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 2px;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: luxury-scroll-bounce 2s infinite;
+    animation-delay: 0.2s;
+  }
+
+  .luxury-header-visual {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .luxury-particle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.7;
+  }
+
+  .luxury-particle-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, var(--luxury-primary), transparent 70%);
+    top: -50px;
+    left: 50px;
+  }
+
+  .luxury-particle-2 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+      circle,
+      var(--luxury-secondary),
+      transparent 70%
+    );
+    bottom: -30px;
+    right: 50px;
+  }
+
+  .luxury-particle-3 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, var(--luxury-accent), transparent 70%);
+    top: 50%;
+    right: 100px;
+  }
+
+  .luxury-hero-graphic {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .luxury-circle {
+    position: absolute;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  .luxury-circle-1 {
+    width: 100%;
+    height: 100%;
+    border-width: 2px;
+    border-left-color: var(--luxury-primary);
+    border-right-color: var(--luxury-secondary);
+  }
+
+  .luxury-circle-2 {
+    width: 80%;
+    height: 80%;
+    border-width: 1px;
+    border-top-color: var(--luxury-accent);
+    border-bottom-color: var(--luxury-secondary);
+  }
+
+  .luxury-hero-icon {
+    width: 120px;
+    height: 120px;
+    z-index: 2;
+  }
+
+  /* Luxury Features Section */
+  .luxury-features {
+    padding: var(--luxury-space-2xl) 0;
+    background-color: var(--luxury-lighter);
+    position: relative;
+  }
+
+  .luxury-features::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2328a745' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .luxury-feature-card {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--luxury-shadow-lg);
+    /* margin-bottom: var(--luxury-space-xl); */
+    transition: var(--luxury-transition-slow);
+    transform: translateY(100px);
+    opacity: 0;
+  }
+
+  .luxury-feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--luxury-shadow-xl);
+  }
+
+  .luxury-reverse {
+    flex-direction: row-reverse;
+  }
+
+  .luxury-feature-media {
+    flex: 1;
+    padding: var(--luxury-space-xl);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9f5f9 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .luxury-feature-media::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%2328a745' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  }
+
+  .luxury-feature-visual {
+    position: relative;
+    z-index: 2;
+  }
+
+  .luxury-stats-circle {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto var(--luxury-space-lg);
+  }
+
+  .luxury-circle-chart {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+
+  .luxury-circle-bg {
+    fill: none;
+    stroke: #e9ecef;
+    stroke-width: 3;
+  }
+
+  .luxury-circle-fill {
+    fill: none;
+    stroke: var(--luxury-primary);
+    stroke-width: 3;
+    stroke-linecap: round;
+    animation: luxury-circle-fill 1.5s ease-out forwards;
+    animation-delay: 0.5s;
+  }
+
+  .luxury-circle-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: var(--luxury-text-2xl);
+    font-weight: 700;
+    color: var(--luxury-primary);
+  }
+
+  .luxury-graph-animation {
+    display: flex;
+    height: 150px;
+    align-items: flex-end;
+    gap: var(--luxury-space-sm);
+  }
+
+  .luxury-graph-line {
+    flex: 1;
+    height: 0;
+    background: linear-gradient(
+      to top,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    border-radius: 4px;
+    animation: luxury-bar-grow 0.8s var(--delay) ease-out forwards;
+  }
+
+  .luxury-radar-chart {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .luxury-radar-axis {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    transform-origin: top center;
+  }
+
+  .luxury-radar-axis:nth-child(1) {
+    transform: rotate(0deg);
+  }
+  .luxury-radar-axis:nth-child(2) {
+    transform: rotate(72deg);
+  }
+  .luxury-radar-axis:nth-child(3) {
+    transform: rotate(144deg);
+  }
+  .luxury-radar-axis:nth-child(4) {
+    transform: rotate(216deg);
+  }
+
+  .luxury-radar-fill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(
+      135deg,
+      rgba(40, 167, 69, 0.2),
+      rgba(32, 201, 151, 0.2)
+    );
+    clip-path: polygon(
+      50% 0%,
+      80% 20%,
+      100% 50%,
+      80% 80%,
+      50% 100%,
+      20% 80%,
+      0% 50%,
+      20% 20%
+    );
+    animation: luxury-pulse 4s infinite alternate;
+  }
+
+  .luxury-real-time-badge {
+    position: absolute;
+    top: var(--luxury-space-md);
+    right: var(--luxury-space-md);
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: var(--luxury-space-xs) var(--luxury-space-sm);
+    border-radius: 50px;
+    box-shadow: var(--luxury-shadow-sm);
+    font-size: var(--luxury-text-sm);
+    color: var(--luxury-primary);
+  }
+
+  .luxury-pulse {
+    width: 12px;
+    height: 12px;
+    background: var(--luxury-primary);
+    border-radius: 50%;
+    margin-right: var(--luxury-space-xs);
+    animation: luxury-glow 2s infinite;
+  }
+
+  .luxury-crop-showcase {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--luxury-space-md);
+    margin-bottom: var(--luxury-space-lg);
+  }
+
+  .luxury-crop-item {
+    background: white;
+    border-radius: 12px;
+    padding: var(--luxury-space-md);
+    box-shadow: var(--luxury-shadow-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  .luxury-crop-item img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .luxury-crop-stats {
+    display: flex;
+    justify-content: center;
+    gap: var(--luxury-space-xl);
+  }
+
+  .luxury-stat-item {
+    text-align: center;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  .luxury-stat-value {
+    display: block;
+    font-size: var(--luxury-text-3xl);
+    font-weight: 700;
+    color: var(--luxury-primary);
+    line-height: 1;
+  }
+
+  .luxury-stat-label {
+    display: block;
+    font-size: var(--luxury-text-sm);
+    color: var(--luxury-gray);
+  }
+
+  .luxury-feature-content {
+    flex: 1;
+    padding: var(--luxury-space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .luxury-feature-header {
+    margin-bottom: var(--luxury-space-md);
+    position: relative;
+    padding-bottom: var(--luxury-space-md);
+  }
+
+  .luxury-feature-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(
+      90deg,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    border-radius: 3px;
+  }
+
+  .luxury-feature-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(
+      135deg,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--luxury-space-md);
+    box-shadow: var(--luxury-shadow-md);
+  }
+
+  .luxury-feature-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+  }
+
+  .luxury-feature-header h3 {
+    font-size: var(--luxury-text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--luxury-space-sm);
+    color: var(--luxury-dark);
+  }
+
+  .luxury-feature-stats {
+    display: flex;
+    gap: var(--luxury-space-md);
+    margin-bottom: var(--luxury-space-sm);
+  }
+
+  .luxury-feature-stats span {
+    font-size: var(--luxury-text-sm);
+    font-weight: 600;
+    color: var(--luxury-primary);
+    background: rgba(40, 167, 69, 0.1);
+    padding: var(--luxury-space-xs) var(--luxury-space-sm);
+    border-radius: 50px;
+  }
+
+  .luxury-feature-content p {
+    color: var(--luxury-gray);
+    margin-bottom: var(--luxury-space-md);
+    line-height: 1.7;
+  }
+
+  .luxury-tech-tags {
+    display: flex;
+    gap: var(--luxury-space-sm);
+    margin-top: auto;
+  }
+
+  .luxury-tech-tags span {
+    font-size: var(--luxury-text-sm);
+    font-weight: 600;
+    color: var(--luxury-dark);
+    background: #f8f9fa;
+    padding: var(--luxury-space-xs) var(--luxury-space-sm);
+    border-radius: 6px;
+  }
+
+  /* Luxury CTA Section */
+  .luxury-cta {
+    /* padding: var(--luxury-space-2xl) 0; */
+    background: linear-gradient(
+      135deg,
+      var(--luxury-dark),
+      var(--luxury-darker)
+    );
+    color: white;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    border-radius: 10px;
+  }
+
+  .luxury-cta::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      circle,
+      rgba(40, 167, 69, 0.1) 0%,
+      transparent 70%
+    );
+    animation: luxury-rotate 60s linear infinite;
+  }
+
+  .luxury-cta-container {
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--luxury-space-md);
+    position: relative;
+    z-index: 2;
+  }
+
+  .luxury-cta-card {
+    display: flex;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--luxury-shadow-xxl);
+    transform: translateY(50px);
+    margin: -31px 0px 70px 0px;
+  }
+
+  .luxury-cta-content {
+    flex: 1;
+    padding: var(--luxury-space-2xl);
+    background: linear-gradient(
+      135deg,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    color: white;
+  }
+
+  .luxury-cta-content h2 {
+    font-size: var(--luxury-text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--luxury-space-md);
+    line-height: 1.3;
+  }
+
+  .luxury-cta-content p {
+    font-size: var(--luxury-text-lg);
+    opacity: 0.9;
+    margin-bottom: var(--luxury-space-xl);
+  }
+
+  .luxury-cta-buttons {
+    display: flex;
+    gap: var(--luxury-space-md);
+  }
+
+  .luxury-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--luxury-space-sm) var(--luxury-space-md);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: var(--luxury-text-base);
+    transition: var(--luxury-transition);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .luxury-btn-primary {
+    background: white;
+    color: var(--luxury-primary);
+    box-shadow: var(--luxury-shadow-md);
+  }
+
+  .luxury-btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--luxury-shadow-lg);
+  }
+
+  .luxury-btn-primary svg {
+    margin-left: var(--luxury-space-xs);
+    transition: var(--luxury-transition);
+  }
+
+  .luxury-btn-primary:hover svg {
+    transform: translateX(5px);
+  }
+
+  .luxury-btn-outline {
+    background: transparent;
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+
+  .luxury-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: white;
+    transform: translateY(-3px);
+  }
+
+  .luxury-cta-visual {
+    flex: 1;
+    background: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: var(--luxury-space-xl);
+  }
+
+  .luxury-cta-graph {
+    display: flex;
+    height: 120px;
+    align-items: flex-end;
+    gap: var(--luxury-space-sm);
+    margin-bottom: var(--luxury-space-xl);
+  }
+
+  .luxury-cta-line {
+    flex: 1;
+    height: 0;
+    background: linear-gradient(
+      to top,
+      var(--luxury-primary),
+      var(--luxury-secondary)
+    );
+    border-radius: 4px;
+    animation: luxury-bar-grow 0.8s var(--delay) ease-out forwards;
+  }
+
+  .luxury-cta-stats {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .luxury-cta-stat {
+    text-align: center;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+
+  .luxury-cta-stat span {
+    display: block;
+    font-size: var(--luxury-text-2xl);
+    font-weight: 700;
+    color: var(--luxury-primary);
+    line-height: 1;
+  }
+
+  .luxury-cta-stat small {
+    display: block;
+    font-size: var(--luxury-text-sm);
+    color: var(--luxury-gray);
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 1200px) {
+    .luxury-header-content {
+      flex-direction: column;
+      text-align: center;
+      padding-top: var(--luxury-space-2xl);
+    }
+
+    .luxury-tagline {
+      padding-right: 0;
+      margin-bottom: var(--luxury-space-2xl);
+    }
+
+    .luxury-header-visual {
+      margin-top: var(--luxury-space-xl);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .luxury-feature-card,
+    .luxury-reverse,
+    .luxury-cta-card {
+      flex-direction: column;
+    }
+
+    .luxury-feature-media {
+      padding: var(--luxury-space-xl) var(--luxury-space-md);
+    }
+
+    .luxury-cta-content {
+      order: -1;
+    }
+
+    .luxury-title {
+      font-size: var(--luxury-text-3xl);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .luxury-header {
+      height: auto;
+      min-height: auto;
+      padding: var(--luxury-space-2xl) 0;
+    }
+
+    .luxury-title {
+      font-size: var(--luxury-text-2xl);
+    }
+
+    .luxury-subtitle {
+      font-size: var(--luxury-text-lg);
+    }
+
+    .luxury-feature-stats,
+    .luxury-tech-tags,
+    .luxury-cta-buttons {
+      flex-wrap: wrap;
+    }
+
+    .luxury-crop-stats {
+      flex-direction: column;
+      gap: var(--luxury-space-md);
+    }
+
+    .luxury-cta-stat {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .luxury-feature-card,
+    .luxury-cta-card {
+      margin-bottom: var(--luxury-space-lg);
+    }
+
+    .luxury-cta-buttons {
+      flex-direction: column;
+    }
+
+    .luxury-btn-outline {
+      margin-top: var(--luxury-space-sm);
+    }
+
+    .luxury-hero-graphic {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  .box-margin {
+    margin-bottom: 50px;
+  }
+</style>
+{% endblock %} {% block content %}
+
+<!-- Ultra Stylish Animated Header -->
+<main>
+  <section class="luxury-header">
+    <div class="luxury-header-bg"></div>
+    <div class="luxury-header-content">
+      <div class="luxury-tagline" data-aos="zoom-in">
+        <span class="luxury-badge animate-pop-in" style="--delay: 0.2s"
+          >Plant care</span
+        >
+        <h1 class="luxury-title animate-pop-in" style="--delay: 0.4s">
+          Next-Gen <span class="luxury-highlight">Crop Intelligence</span>
+        </h1>
+        <p class="luxury-subtitle animate-pop-in" style="--delay: 0.6s">
+          98.9% accurate AI-powered plant health analysis
+        </p>
+        <div
+          class="luxury-scroll-indicator animate-pop-in"
+          style="--delay: 0.8s"
+        >
+          <div class="luxury-mouse">
+            <div class="luxury-scroller"></div>
+          </div>
+        </div>
+      </div>
+      <div class="luxury-header-visual" data-aos="zoom-in">
+        <div
+          class="luxury-particle luxury-particle-1 animate-float"
+          style="--delay: 0.3s"
+        ></div>
+        <div
+          class="luxury-particle luxury-particle-2 animate-float"
+          style="--delay: 0.5s"
+        ></div>
+        <div
+          class="luxury-particle luxury-particle-3 animate-float"
+          style="--delay: 0.7s"
+        ></div>
+        <div class="luxury-hero-graphic">
+          <div class="luxury-circle luxury-circle-1 animate-rotate"></div>
+          <div
+            class="luxury-circle luxury-circle-2 animate-rotate-reverse"
+          ></div>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSJ3aGl0ZSIgZD0iTTI1NiA4QzExOSA4IDggMTE5IDggMjU2czExMSAyNDggMjQ4IDI0OCAyNDgtMTExIDI0OC0yNDhTMzkzIDggMjU2IDh6bTAgNDQ4Yy0xMTAuNSAwLTIwMC04OS41LTIwMC0yMDBTMTQ1LjUgNTYgMjU2IDU2czIwMCA4OS41IDIwMCAyMDAtODkuNSAyMDAtMjAwIDIwMHptNjEuOC0xMDQuNGwtODQuOS02MS43Yy0zLjEtMi4zLTQuOS01LjktNC45LTkuN1QxMTQgMjc2YzAgNi42IDUuNCAxMiAxMiAxMmgzMmM2LjYgMCAxMi01LjQgMTItMTJ2LTg0LjNsNjQgNDYuNWM1LjQgMy45IDYuNSAxMS40IDIuNiAxNi44TDMxOC42IDM0MmMtMy45IDUuMy0xMS40IDYuNS0xNi44IDIuNnoiLz48L3N2Zz4="
+            alt="AI Icon"
+            class="luxury-hero-icon animate-pop-in"
+            style="--delay: 1s"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury Feature Showcase -->
+  <section class="luxury-features">
+    <!-- Feature 1 -->
+    <div
+      class="luxury-feature-card animate-slide-up box-margin"
+      style="--delay: 0.2s"
+    >
+      <div class="luxury-feature-media">
+        <div class="luxury-feature-visual">
+          <div class="luxury-stats-circle">
+            <svg class="luxury-circle-chart" viewBox="0 0 36 36">
+              <path
+                class="luxury-circle-bg"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+              <path
+                class="luxury-circle-fill"
+                stroke-dasharray="0, 100"
+                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+              />
+            </svg>
+            <div class="luxury-circle-value">98.9%</div>
+          </div>
+          <div class="luxury-graph-animation">
+            <div
+              class="luxury-graph-line"
+              style="--height: 70%; --delay: 0.1s"
+            ></div>
+            <div
+              class="luxury-graph-line"
+              style="--height: 85%; --delay: 0.2s"
+            ></div>
+            <div
+              class="luxury-graph-line"
+              style="--height: 65%; --delay: 0.3s"
+            ></div>
+            <div
+              class="luxury-graph-line"
+              style="--height: 90%; --delay: 0.4s"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="luxury-feature-content">
+        <div class="luxury-feature-header">
+          <div class="luxury-feature-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,19.93C7.05,19.44 4,16.08 4,12C4,11.38 4.08,10.78 4.21,10.21L9,15V16.5C9,17.32 9.5,18 10.21,18.5L11,19.93M12.5,10A2.5,2.5 0 0,0 10,12.5A2.5,2.5 0 0,0 12.5,15A2.5,2.5 0 0,0 15,12.5A2.5,2.5 0 0,0 12.5,10M17,11.38V12.5C17,13.55 16.55,14.5 15.86,15.16L17.27,16.57C18.42,15.5 19,14 19,12.5C19,12.05 18.95,11.61 18.87,11.19L17,11.38M12.5,5C15.1,5 17.31,6.69 18.36,9H14.43C13.94,8.24 13.27,7.64 12.5,7.5V5M7.5,10.5V12H5.13C5.04,11.61 5,11.19 5,10.77C5,8.14 7.13,6 9.78,6L10.63,6.03L7.5,10.5Z"
+              />
+            </svg>
+          </div>
+          <h3>AI-Powered Analysis</h3>
+          <div class="luxury-feature-stats">
+            <span>98.9% Accuracy</span>
+            <span>39 Crops</span>
+            <span>142 Biomarkers</span>
+          </div>
+        </div>
+        <p>
+          Our deep learning models analyze visual patterns with unprecedented
+          precision, detecting diseases at early stages before visible symptoms
+          appear.
+        </p>
+        <div class="luxury-tech-tags">
+          <span>5 Neural Networks</span>
+          <span>Edge Computing</span>
+          <span>Real-time Processing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div
+      class="luxury-feature-card luxury-reverse animate-slide-up box-margin"
+      style="--delay: 0.4s"
+    >
+      <div class="luxury-feature-media">
+        <div class="luxury-feature-visual">
+          <div class="luxury-radar-chart">
+            <div class="luxury-radar-axis"></div>
+            <div class="luxury-radar-axis"></div>
+            <div class="luxury-radar-axis"></div>
+            <div class="luxury-radar-axis"></div>
+            <div class="luxury-radar-fill"></div>
+          </div>
+          <div class="luxury-real-time-badge">
+            <div class="luxury-pulse"></div>
+            <span>Live Analysis</span>
+          </div>
+        </div>
+      </div>
+      <div class="luxury-feature-content">
+        <div class="luxury-feature-header">
+          <div class="luxury-feature-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M13,2.03V2.05L13,4.05C17.39,4.59 20.5,8.58 19.96,12.97C19.5,16.61 16.64,19.5 13,19.93V21.93C18.5,21.38 22.5,16.5 21.95,11C21.5,6.25 17.73,2.5 13,2.03M11,2.06C9.05,2.25 7.19,3 5.67,4.26L7.1,5.74C8.22,4.84 9.57,4.26 11,4.06V2.06M4.26,5.67C3,7.19 2.25,9.04 2.05,11H4.05C4.24,9.58 4.8,8.23 5.69,7.1L4.26,5.67M2.06,13C2.26,14.96 3.03,16.81 4.27,18.33L5.69,16.9C4.81,15.77 4.24,14.42 4.06,13H2.06M7.1,18.37L5.67,19.74C7.18,21 9.04,21.79 11,22V20C9.58,19.82 8.23,19.25 7.1,18.37M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"
+              />
+            </svg>
+          </div>
+          <h3>Real-Time Field Processing</h3>
+          <div class="luxury-feature-stats">
+            <span>1.2s Response</span>
+            <span>98.2% Uptime</span>
+            <span>Offline Mode</span>
+          </div>
+        </div>
+        <p>
+          Edge computing architecture delivers instant analysis even in remote
+          field conditions with limited connectivity, processing data directly
+          on your device.
+        </p>
+        <div class="luxury-tech-tags">
+          <span>On-Device AI</span>
+          <span>Low Latency</span>
+          <span>Cloud Sync</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature 3 -->
+    <div
+      class="luxury-feature-card animate-slide-up box margin"
+      style="--delay: 0.6s"
+    >
+      <div class="luxury-feature-media">
+        <div class="luxury-feature-visual">
+          <div class="luxury-crop-showcase">
+            <div class="luxury-crop-item animate-pop-in" style="--delay: 0.1s">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjhhNzQ1IiBkPSJNMjU2IDhDMTE5IDggOCAxMTkgOCAyNTZzMTExIDI0OCAyNDggMjQ4IDI0OC0xMTEgMjQ4LTI0OFMzOTMgOCAyNTYgOHptMCA0NDhjLTExMC41IDAtMjAwLTg5LjUtMjAwLTIwMFMxNDUuNSA1NiAyNTYgNTZzMjAwIDg5LjUgMjAwIDIwMC04OS41IDIwMC0yMDAgMjAwem02MS44LTEwNC40bC04NC45LTYxLjdjLTMuMS0yLjMtNC45LTUuOS00LjktOS43VDExNCAyNzZjMCA2LjYgNS40IDEyIDEyIDEyaDMyYzYuNiAwIDEyLTUuNCAxMi0xMnYtODQuM2w2NCA0Ni41YzUuNCAzLjkgNi41IDExLjQgMi42IDE2LjhMMzE4LjYgMzQyYy0zLjkgNS4zLTExLjQgNi41LTE2LjggMi42eiIvPjwvc3ZnPg=="
+                alt="Wheat"
+              />
+            </div>
+            <div class="luxury-crop-item animate-pop-in" style="--delay: 0.2s">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMjBhYzk5IiBkPSJNNDY0IDI1NkEyMDggMjA4IDAgMSAwIDQ4IDI1NmEyMDggMjA4IDAgMSAwIDQxNiAwek0wIDI1NkEyNTYgMjU2IDAgMSAxIDUxMiAyNTZhMjU2IDI1NiAwIDEgMSAtNTEyIDB6Ii8+PC9zdmc+"
+                alt="Tomato"
+              />
+            </div>
+            <div class="luxury-crop-item animate-pop-in" style="--delay: 0.3s">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjMTdhMmI4IiBkPSJNNDk2IDI1NkEyNDAgMjQwIDAgMSAxIDE2IDI1NmEyNDAgMjQwIDAgMSAxIDQ4MCAwek0wIDI1NkEyNTYgMjU2IDAgMSAwIDUxMiAyNTZhMjU2IDI2IDAgMSAwIC01MTIgMHoiLz48L3N2Zz4="
+                alt="Corn"
+              />
+            </div>
+            <div class="luxury-crop-item animate-pop-in" style="--delay: 0.4s">
+              <img
+                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cGF0aCBmaWxsPSIjNmY0MmMxIiBkPSJNNDQ4IDI1NkEyNDAgMjQwIDAgMSAxIDMyIDI1NmEyNDAgMjQwIDAgMSAxIDQxNiAwek0wIDI1NkEyNTYgMjU2IDAgMSAwIDUxMiAyNTZhMjU2IDI1NiAwIDEgMCAtNTEyIDB6Ii8+PC9zdmc+"
+                alt="Grapes"
+              />
+            </div>
+          </div>
+          <div class="luxury-crop-stats">
+            <div class="luxury-stat-item animate-pop-in" style="--delay: 0.5s">
+              <span class="luxury-stat-value">39</span>
+              <span class="luxury-stat-label">Crop Varieties</span>
+            </div>
+            <div class="luxury-stat-item animate-pop-in" style="--delay: 0.6s">
+              <span class="luxury-stat-value">24</span>
+              <span class="luxury-stat-label">Growth Stages</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="luxury-feature-content">
+        <div class="luxury-feature-header">
+          <div class="luxury-feature-icon">
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12,3L2,12H5V20H19V12H22L12,3M12,7.7C14.1,7.7 15.8,9.4 15.8,11.5C15.8,14.5 12,18 12,18C12,18 8.2,14.5 8.2,11.5C8.2,9.4 9.9,7.7 12,7.7M12,10C11.17,10 10.5,10.67 10.5,11.5A1.5,1.5 0 0,0 12,13A1.5,1.5 0 0,0 13.5,11.5C13.5,10.67 12.83,10 12,10Z"
+              />
+            </svg>
+          </div>
+          <h3>Crop-Specific Intelligence</h3>
+          <div class="luxury-feature-stats">
+            <span>Custom Models</span>
+            <span>Growth Tracking</span>
+            <span>Regional Data</span>
+          </div>
+        </div>
+        <p>
+          Specialized AI models for each crop variety with growth stage
+          adaptation and regional disease pattern recognition for hyper-accurate
+          recommendations.
+        </p>
+        <div class="luxury-tech-tags">
+          <span>Variety-Specific</span>
+          <span>Stage-Aware</span>
+          <span>Location-Based</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Luxury CTA Section -->
+  <section class="luxury-cta animate-fade-in box-margin" style="--delay: 0.8s">
+    <div class="luxury-cta-container">
+      <div class="luxury-cta-card">
+        <div class="luxury-cta-content">
+          <h2>Ready to Revolutionize Your Agriculture?</h2>
+          <p>Join the elite farmers transforming their operations with AI</p>
+          <div class="luxury-cta-buttons">
+            <a href="#" class="luxury-btn luxury-btn-primary">
+              <span>Start Free Trial</span>
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path
+                  fill="currentColor"
+                  d="M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z"
+                />
+              </svg>
+            </a>
+            <a href="#" class="luxury-btn luxury-btn-outline">
+              <span>Schedule Demo</span>
+            </a>
+          </div>
+        </div>
+        <div class="luxury-cta-visual">
+          <div class="luxury-cta-graph">
+            <div class="luxury-cta-line" style="--delay: 0.1s"></div>
+            <div class="luxury-cta-line" style="--delay: 0.2s"></div>
+            <div class="luxury-cta-line" style="--delay: 0.3s"></div>
+            <div class="luxury-cta-line" style="--delay: 0.4s"></div>
+          </div>
+          <div class="luxury-cta-stats">
+            <div class="luxury-cta-stat animate-pop-in" style="--delay: 0.5s">
+              <span>98.9%</span>
+              <small>Accuracy</small>
+            </div>
+            <div class="luxury-cta-stat animate-pop-in" style="--delay: 0.6s">
+              <span>1.2s</span>
+              <small>Response Time</small>
+            </div>
+            <div class="luxury-cta-stat animate-pop-in" style="--delay: 0.7s">
+              <span>142</span>
+              <small>Crop Types</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %} {% block scripts %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize animations on scroll
+    const animateOnScroll = function () {
+      const elements = document.querySelectorAll(
+        ".animate-slide-up, .animate-fade-in, .luxury-cta"
+      );
+      const windowHeight = window.innerHeight;
+
+      elements.forEach((element) => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+
+        if (elementPosition < windowHeight - elementVisible) {
+          const delay =
+            element.getAttribute("style")?.match(/--delay: (\d\.\d)s/)?.[1] ||
+            "0";
+          element.style.animationDelay = delay + "s";
+          element.style.animationPlayState = "running";
+
+          // Animate child elements with pop-in effect
+          const popIns = element.querySelectorAll(".animate-pop-in");
+          popIns.forEach((popIn, index) => {
+            const popInDelay = parseFloat(
+              popIn.getAttribute("style")?.match(/--delay: (\d\.\d)s/)?.[1] ||
+                "0"
+            );
+            popIn.style.animationDelay = parseFloat(delay) + popInDelay + "s";
+            popIn.style.animationPlayState = "running";
+          });
+        }
+      });
+    };
+
+    // Initial check
+    animateOnScroll();
+
+    // Check on scroll with throttle
+    let isScrolling;
+    window.addEventListener(
+      "scroll",
+      function () {
+        window.clearTimeout(isScrolling);
+        isScrolling = setTimeout(function () {
+          animateOnScroll();
+        }, 66);
+      },
+      false
+    );
+
+    // Add hover effect for feature cards
+    const featureCards = document.querySelectorAll(".luxury-feature-card");
+    featureCards.forEach((card) => {
+      card.addEventListener("mouseenter", function () {
+        this.style.transform = "translateY(-10px)";
+        this.style.boxShadow = "0 25px 50px rgba(0,0,0,0.2)";
+      });
+
+      card.addEventListener("mouseleave", function () {
+        this.style.transform = "translateY(0)";
+        this.style.boxShadow = "0 10px 25px rgba(0,0,0,0.15)";
+      });
+    });
+
+    // Add click effect to buttons
+    const buttons = document.querySelectorAll(".luxury-btn");
+    buttons.forEach((button) => {
+      button.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        // Ripple effect
+        const ripple = document.createElement("span");
+        ripple.classList.add("luxury-ripple");
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + "px";
+        ripple.style.left = e.clientX - rect.left - size / 2 + "px";
+        ripple.style.top = e.clientY - rect.top - size / 2 + "px";
+        this.appendChild(ripple);
+
+        // Remove ripple after animation
+        setTimeout(() => {
+          ripple.remove();
+        }, 600);
+      });
+    });
+
+    // Animate circle chart
+    const circleFill = document.querySelector(".luxury-circle-fill");
+    if (circleFill) {
+      setTimeout(() => {
+        circleFill.style.strokeDasharray = "98.9, 100";
+      }, 500);
+    }
+  });
+</script>
+
+<script>
+  AOS.init({
+    duration: 1200,
+    once: false,
+    offset: 50,
+  });
+
+  // Add smooth scrolling to all links
+  document
+    .querySelectorAll('a[href^="#"], a[href^="mailto:"], a[href^="tel:"]')
+    .forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (this.getAttribute("href").startsWith("#")) {
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        } else {
+          window.location.href = this.getAttribute("href");
+        }
+      });
+    });
+</script>
+{% endblock %}
