@@ -7,9 +7,6 @@ from flask_bcrypt import Bcrypt
 from flask_dance.contrib.google import make_google_blueprint, google
 from flask_dance.contrib.github import make_github_blueprint, github
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
-from keras.models import load_model
-import tensorflow as tf
-import numpy as np
 import json
 import uuid
 from urllib.parse import urlparse
@@ -82,7 +79,35 @@ github_bp = make_github_blueprint(
 )
 app.register_blueprint(github_bp, url_prefix="/login")
 
-# ------------------ Model Download and Load Functions ------------------ #
+# ------------------ Global Variables for Lazy Loading ------------------ #
+model1 = None
+model2 = None
+plant_disease = []
+models_loaded = False
+
+# Load plant disease data immediately (lightweight)
+try:
+    with open("plant_disease.json") as f:
+        plant_disease = json.load(f)
+    print("✅ Plant disease data loaded successfully!")
+except Exception as e:
+    print(f"⚠️ Could not load plant disease data: {e}")
+    plant_disease = []
+
+class_names = [
+    'Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
+    'Background_without_leaves', 'Blueberry___healthy', 'Cherry___Powdery_mildew', 'Cherry___healthy',
+    'Corn___Cercospora_leaf_spot Gray_leaf_spot', 'Corn___Common_rust', 'Corn___Northern_Leaf_Blight', 'Corn___healthy',
+    'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy',
+    'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy',
+    'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy',
+    'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy',
+    'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot',
+    'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus',
+    'Tomato___Tomato_mosaic_virus', 'Tomato___healthy'
+]
+
+# ------------------ Lazy Model Loading Functions ------------------ #
 def download_model_from_drive(file_id, output_path):
     """Download model from Google Drive using file ID"""
     try:
@@ -103,10 +128,9 @@ def ensure_models_exist():
     model1_path = os.path.join(models_dir, "crop_disease_detection.keras")
     model2_path = os.path.join(models_dir, "crop_disease_detection1.keras")
     
-    # Google Drive file IDs for your models (you need to replace these with actual IDs)
-    # To get file ID: Share your file on Google Drive → Get shareable link → Extract ID from URL
-    MODEL1_DRIVE_ID = os.environ.get('MODEL1_DRIVE_ID', 'YOUR_MODEL1_FILE_ID_HERE')
-    MODEL2_DRIVE_ID = os.environ.get('MODEL2_DRIVE_ID', 'YOUR_MODEL2_FILE_ID_HERE')
+    # Use the actual Google Drive file IDs from the deployment logs
+    MODEL1_DRIVE_ID = os.environ.get('MODEL1_DRIVE_ID', '1Bgktu20eqkmOPkilaXOuT72K8m3acX-W')
+    MODEL2_DRIVE_ID = os.environ.get('MODEL2_DRIVE_ID', '1eq8kAgY719ZdwOCsVCq37GDJd-a169Ks')
     
     # Download model1 if not exists
     if not os.path.exists(model1_path):
@@ -124,50 +148,45 @@ def ensure_models_exist():
     
     return os.path.exists(model1_path), os.path.exists(model2_path)
 
-def load_models():
-    """Load ML models with automatic download if needed"""
+def load_models_lazy():
+    """Load ML models only when needed (lazy loading)"""
+    global model1, model2, models_loaded
+    
+    if models_loaded and model1 is not None and model2 is not None:
+        return True
+    
     try:
+        # Import TensorFlow only when needed to save memory
+        import tensorflow as tf
+        import numpy as np
+        
         # Ensure models exist (download if needed)
         model1_exists, model2_exists = ensure_models_exist()
         
         if not model1_exists or not model2_exists:
             print("Models could not be downloaded. Using fallback mode.")
-            return None, None, []
+            return False
         
-        # Load models
+        # Configure TensorFlow for memory efficiency
+        tf.config.threading.set_intra_op_parallelism_threads(1)
+        tf.config.threading.set_inter_op_parallelism_threads(1)
+        
+        # Load models with memory optimization
+        print("Loading Model 1...")
         model1 = tf.keras.models.load_model("models/crop_disease_detection.keras")
         model1.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
         
+        print("Loading Model 2...")
         model2 = tf.keras.models.load_model("models/crop_disease_detection1.keras")
         model2.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
         
-        # Load plant disease data
-        with open("plant_disease.json") as f:
-            plant_disease = json.load(f)
-        
+        models_loaded = True
         print("✅ Models loaded successfully!")
-        return model1, model2, plant_disease
+        return True
         
     except Exception as e:
         print(f"❌ Error loading models: {e}")
-        return None, None, []
-
-# ------------------ Models Load ------------------ #
-print("Initializing models...")
-model1, model2, plant_disease = load_models()
-
-class_names = [
-    'Apple___Apple_scab', 'Apple___Black_rot', 'Apple___Cedar_apple_rust', 'Apple___healthy',
-    'Background_without_leaves', 'Blueberry___healthy', 'Cherry___Powdery_mildew', 'Cherry___healthy',
-    'Corn___Cercospora_leaf_spot Gray_leaf_spot', 'Corn___Common_rust', 'Corn___Northern_Leaf_Blight', 'Corn___healthy',
-    'Grape___Black_rot', 'Grape___Esca_(Black_Measles)', 'Grape___Leaf_blight_(Isariopsis_Leaf_Spot)', 'Grape___healthy',
-    'Orange___Haunglongbing_(Citrus_greening)', 'Peach___Bacterial_spot', 'Peach___healthy',
-    'Pepper,_bell___Bacterial_spot', 'Pepper,_bell___healthy', 'Potato___Early_blight', 'Potato___Late_blight', 'Potato___healthy',
-    'Raspberry___healthy', 'Soybean___healthy', 'Squash___Powdery_mildew', 'Strawberry___Leaf_scorch', 'Strawberry___healthy',
-    'Tomato___Bacterial_spot', 'Tomato___Early_blight', 'Tomato___Late_blight', 'Tomato___Leaf_Mold', 'Tomato___Septoria_leaf_spot',
-    'Tomato___Spider_mites Two-spotted_spider_mite', 'Tomato___Target_Spot', 'Tomato___Tomato_Yellow_Leaf_Curl_Virus',
-    'Tomato___Tomato_mosaic_virus', 'Tomato___healthy'
-]
+        return False
 
 # ------------------ File Upload Config ------------------ #
 UPLOAD_FOLDER = 'static/uploadimages'
@@ -371,9 +390,12 @@ def whitepapers():
 
 # ------------------ Prediction Functions ------------------ #
 def extract_features(image_path):
-    if not model1 or not model2:
+    if not models_loaded or not model1 or not model2:
         return None
     try:
+        import tensorflow as tf
+        import numpy as np
+        
         image = tf.keras.utils.load_img(image_path, target_size=(160, 160))
         feature = tf.keras.utils.img_to_array(image)
         feature = np.array([feature])
@@ -389,7 +411,8 @@ def get_disease_info(class_name):
     return {'name': class_name, 'cause': 'Info not available', 'cure': 'Consult expert'}
 
 def ensemble_predict(image_path):
-    if not model1 or not model2:
+    # Load models only when prediction is needed
+    if not load_models_lazy():
         return {
             'name': 'Model Error', 
             'cause': 'Models are not loaded. Please try again later.', 
@@ -402,6 +425,9 @@ def ensemble_predict(image_path):
             'model2_confidence': 0
         }
         
+    import tensorflow as tf
+    import numpy as np
+    
     img = extract_features(image_path)
     if img is None:
         return {
@@ -501,7 +527,7 @@ def uploadimage():
 def health_check():
     return {
         'status': 'healthy', 
-        'models_loaded': model1 is not None and model2 is not None,
+        'models_loaded': models_loaded,
         'model1_status': 'loaded' if model1 else 'not loaded',
         'model2_status': 'loaded' if model2 else 'not loaded'
     }
@@ -509,10 +535,13 @@ def health_check():
 # Route to manually reload models (for debugging)
 @app.route('/reload_models')
 def reload_models():
-    global model1, model2, plant_disease
+    global model1, model2, models_loaded
     try:
-        model1, model2, plant_disease = load_models()
-        if model1 and model2:
+        models_loaded = False
+        model1 = None
+        model2 = None
+        
+        if load_models_lazy():
             return "✅ Models reloaded successfully!"
         else:
             return "❌ Failed to reload models"
