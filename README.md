@@ -12,10 +12,9 @@ A machine learning-powered web application for detecting diseases in crop images
 
 ## 🛠️ Technology Stack
 
-- **Frontend**: Streamlit
-- **Backend**: Python
-- **Machine Learning**: TensorFlow/Keras
-- **Image Processing**: OpenCV, PIL
+- **Frontend**: Html, CSS, JS
+- **Backend**: Python, Flask
+- **Machine Learning**: TensorFlow/Transfer-learning-fine-tune
 - **Deployment**: Render
 
 ## 📋 Prerequisites
@@ -45,14 +44,14 @@ A machine learning-powered web application for detecting diseases in crop images
 
 4. **Run the application**
    ```bash
-   streamlit run app.py
+    python app.py
    ```
 
 ## 📁 Project Structure
 
 ```
 Crop-disease-detection/
-├── app.py                 # Main Streamlit application
+├── app.py                 # Flask application
 ├── models/               # Trained ML models
 │   ├── model1.keras
 │   └── model2.keras
@@ -64,7 +63,7 @@ Crop-disease-detection/
 
 ## 🎯 Usage
 
-1. **Start the application**: Run `streamlit run app.py`
+1. **Start the application**: Run `python app.py`
 2. **Upload an image**: Use the file uploader to select a crop image
 3. **Get predictions**: The model will analyze the image and provide disease detection results
 4. **View results**: See the predicted disease class and confidence score
@@ -80,7 +79,7 @@ Both models are trained on comprehensive datasets and provide high accuracy in d
 
 ## 🌐 Live Demo
 
-The application is deployed on Render. [View Live Demo](#) *(Add your Render URL here after deployment)*
+The application is deployed on Render. [View Live Demo](https://crop-disease-detection-2auo.onrender.com) 
 
 ## 📊 Supported Crops & Diseases
 
@@ -99,7 +98,7 @@ The application is deployed on Render. [View Live Demo](#) *(Add your Render URL
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIET License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
