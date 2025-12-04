@@ -57,7 +57,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* position: relative; */
 
 }
 
@@ -106,7 +105,6 @@ form {
 .result-image {
   width: 100%;
   height: 100%;
-  /* border-radius: 50%; */
   border-radius: 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
 }
@@ -117,8 +115,6 @@ form {
 }
 
 
-/* deepseek */
-/* बेसिक स्टाइलिंग */
 input[type="file"] {
   padding: 10px 15px;
   cursor: pointer;
@@ -127,122 +123,20 @@ input[type="file"] {
   color: white;
 }
 
-/* हॉवर इफेक्ट */
 input[type="file"]:hover {
-
-  /* ज़ूम इफेक्ट */
   transform: scale(1.05);
   box-shadow: 0 0 10px rgba(0, 0, 255, 0.2);
 }
 
 
-/* 
-footer {
-    background-color: #2b2b2b;
-    color: white;
-    font-family: Arial, sans-serif;
-    /* margin-top: 1000px; 
-}    
-    
-
-.footer-top{
-    text-align: center;
-    background-color: #413b43;
-    padding: 15px 0px 1px 0px;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: start;
-    flex-wrap: wrap;
-    padding: 10px 0px 0px 0px;
-}
-
-.footer-left h2 {
-    margin: 0;
-    color: #4CAF50; 
-    padding-left: 5px;
-    font-size: 29px;
-    font-weight: 800;
-}
-
-.footer-links a {
-    color: white;
-    text-decoration: none;
-    margin: 5px 0;
-    display: block;
-}
-
-.footer-links a:hover {
-    text-decoration: underline;
-}
-
-.footer-contact p {
-    margin: 5px 0;
-}
-
-.footer-bottom {
-    text-align: center;
-    border-top: 1px solid #444;
-    padding: 10px;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #aaa;
-    background-color: #272525;
-}
-
-.footer-top {
-    background: #373434;
-    cursor: pointer; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-}
-.footer-top:hover {
-    background-color: #4c4848; 
-    color: white; 
-}
-
-.social-icon {
-  width: 50px;
-  height: 50px;
-  object-fit:contain ; 
-  border-radius: 13px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  background: rgb(255, 255, 255); 
-}
-
-.social-icon:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-  background: #f0f0f0;
-  box-shadow: 0 2px 5px rgb(255 255 255 / 37%);
-}
- */
 
 footer {
   background-color: #232f3e;
-  /* Darker background */
   color: #ddd;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 14px;
   line-height: 1.6;
 }
-
-/* .footer-top {
-  background-color: #37475a;
-  color: #bbb;
-  padding: 12px 0px 1px 0px;
-  text-align: center;
-  cursor: pointer;
-  font-weight: 600;
-  letter-spacing: 1.1px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  /* user-select: none; 
-} */
 
 .footer-top:hover {
   background-color: #485769;
@@ -331,12 +225,6 @@ footer {
   filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.15));
 }
 
-/* .social-icon:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.6);
-  background: #4CAF50;
-  filter: brightness(1.2);
-} */
 .social-icon-whatsapp:hover {
   transform: scale(1.15);
   box-shadow: 0 4px 12px rgba(76, 175, 79, 0.354);
@@ -365,16 +253,6 @@ footer {
   filter: brightness(1.2);
 }
 
-/* .footer-bottom {
-  background-color: #232f3e;
-  color: #ccc;
-  text-align: center;
-  padding: 7px 0px 1px 0px;
-  font-size: 13px;
-  border-top: 1px solid #444;
-  /* user-select: none; 
-} */
-
 
 @media (max-width: 768px) {
   .footer-container {
@@ -399,27 +277,20 @@ footer {
 
 
 .dropdown-menu {
-  background-color: rgba(255, 255, 255, 0.1) !important; /* White with transparency */
-  backdrop-filter: blur(8px); /* Glassmorphism effect */
-  border: none; /* Remove border */
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.3); /* Soft shadow */
+  background-color: rgba(255, 255, 255, 0.1) !important; 
+  backdrop-filter: blur(8px); 
+  border: none; 
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
 }
 
 .dropdown-menu .dropdown-item {
-  color: white; /* White text for contrast */
+  color: white;
 }
 
 .dropdown-menu .dropdown-item:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Light hover */
-  color: #ffd700; /* Gold hover text */
+  background-color: rgba(255, 255, 255, 0.2); 
+  color: #ffd700; 
 }
-
-
-
-
-
-
-
 
 
 
@@ -466,14 +337,11 @@ footer {
   font-size: 16px;
   padding-bottom: 5px;
   display: inline-block;
-  /* transform के लिए जरूरी */
   transition: transform 0.3s ease;
 }
 
 .footer-container.amazon-style .footer-column a:hover {
-  /* text-decoration: none; */
   transform: scale(1.1);
-  /* Text 10% बड़ा हो जाएगा */
   color: #2c72ff;
 }
 
@@ -518,7 +386,6 @@ footer {
   text-decoration: none;
   color: white;
   font-size: 16px;
-  /* transition: transform 0.3s ease; */
 }
 
 .nav-link:hover {
@@ -535,11 +402,9 @@ footer {
 
 
 
-/* deepseek */
-/* Features Page Specific Styles */
 .features-section {
   min-height: calc(100vh - 120px);
-  /* Adjust based on your header/footer height */
+  
 }
 
 .icon-box {
@@ -573,8 +438,6 @@ footer {
 
 
 
-
-/* 👇 Isko apne style.css ke end me daalo */
 .animate-once {
   animation: fadeIn 1s ease-in-out;
 }
@@ -590,10 +453,6 @@ footer {
 }
 
 
-
-
-
-/* 🔴 Global Focus Reset - Remove Blue Borders Everywhere */
 *:focus,
 *:focus-visible,
 *:focus-within {
@@ -601,7 +460,7 @@ footer {
   box-shadow: none !important;
 }
 
-/* 🔴 Bootstrap specific elements */
+
 a:focus,
 button:focus,
 .btn:focus,
@@ -616,7 +475,6 @@ button:focus,
   box-shadow: none !important;
 }
 
-/* Footer Links Focus/Click Blue Border Remove */
 footer a:focus,
 footer a:active,
 footer a:visited,
@@ -635,4 +493,3 @@ footer a:focus-visible {
 
 
 
-/* -------------------netflix design-------------------------- */
